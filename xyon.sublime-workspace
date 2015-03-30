@@ -1,0 +1,365 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"append",
+				"append"
+			],
+			[
+				"list",
+				"listdata	statement"
+			],
+			[
+				"appen",
+				"append_item	function"
+			],
+			[
+				"QObject",
+				"QObjectListModel	class"
+			],
+			[
+				"app",
+				"append"
+			],
+			[
+				"pyq",
+				"pyqtProperty	import"
+			],
+			[
+				"QQMl",
+				"QQmlListProperty	import"
+			],
+			[
+				"ancho",
+				"anchors.fill	fill"
+			],
+			[
+				"link",
+				"link_id	statement"
+			],
+			[
+				"writ",
+				"write	function"
+			],
+			[
+				"write",
+				"writelines	function"
+			],
+			[
+				"w",
+				"write	function"
+			],
+			[
+				"std",
+				"stdout	class"
+			],
+			[
+				"has",
+				"hasClient"
+			],
+			[
+				"pa",
+				"parse"
+			],
+			[
+				"wr",
+				"wrapped_fun"
+			],
+			[
+				"resu",
+				"results_dict"
+			],
+			[
+				"sea",
+				"search_results"
+			],
+			[
+				"res",
+				"results_dict"
+			],
+			[
+				"q",
+				"query_string"
+			],
+			[
+				"re",
+				"result"
+			],
+			[
+				"fin",
+				"findall"
+			],
+			[
+				"server",
+				"server"
+			],
+			[
+				"a",
+				"audio"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "xyon/main.py",
+			"settings":
+			{
+				"buffer_size": 1936,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xyon/ui/main.qml",
+			"settings":
+			{
+				"buffer_size": 260,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 75.0,
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Anaconda: Display object docs"
+			],
+			[
+				"install p",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/richard/Workspace/PyXyon/xyon",
+		"/home/richard/Workspace/PyXyon/xyon/ui"
+	],
+	"file_history":
+	[
+		"/home/richard/Workspace/PyQt-gpl-5.4.1/examples/qml/referenceexamples/properties.py",
+		"/home/richard/Workspace/PyXyon/xyon/ui/resources.py",
+		"/home/richard/Workspace/PyXyon/xyon/ui/main.qml",
+		"/home/richard/Workspace/PyXyon/xyon/__init__.py",
+		"/home/richard/Workspace/PyXyon/xyon/ui/TestRect.qml",
+		"/home/richard/Projects/xyon-server/xyon-server.py",
+		"/home/richard/Desktop/websites.html",
+		"/home/richard/ytlink.py",
+		"/home/richard/ytsearch.py",
+		"/home/richard/Desktop/A_websites.md",
+		"/home/richard/Projects/QProperties/QProperties/bin/Debug/icon.svg"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"lambda",
+			"maxlen",
+			"\n        ",
+			"lala",
+			"id",
+			"query",
+			"r",
+			"response",
+			"names",
+			"wrapped_fun"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "xyon/main.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1936,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1042,
+								1042
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python 3/Python3.tmLanguage",
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "xyon/ui/main.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 260,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								167,
+								167
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "xyon.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 190.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
