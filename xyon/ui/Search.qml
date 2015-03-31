@@ -68,7 +68,7 @@ Rectangle {
 
             ListView {
                 anchors.fill: parent
-                model: searchList
+                model: controller.searchlist
                 //spacing: 5
                 delegate: Item {
                     anchors.left: parent.left
@@ -78,6 +78,7 @@ Rectangle {
                     //clip: true
 
                     MarqueeText {
+                        id: marquee
                         anchors.left: addButton.right
                         anchors.leftMargin: hoverArea.containsMouse ? 5 : 0
                         anchors.top: parent.top
@@ -134,7 +135,7 @@ Rectangle {
                             anchors.fill: parent
                             onClicked: {
                                 console.log(object);
-                                controller.playlist.addYoutubeEntry(object);
+                                controller.playlist.addAudioEntry(object);
                             }
                         }
 
@@ -156,8 +157,10 @@ Rectangle {
                         anchors.fill: parent
                         hoverEnabled: true
                         onPressed: {
-                            mouse.accepted = false;
+                            marquee.displayDuration();
+                            mouse.accepted = false
                         }
+                        onExited: marquee.stopAnimation()
                     }
                 }
             }
@@ -170,7 +173,7 @@ Rectangle {
         height: 25
         width: parent.width
         text: "Load more"
-        visible: searchList.count > 0
+        visible: controller.searchlist.count > 0
         style: ButtonStyle {
             background: Rectangle {
                 implicitWidth: 100
@@ -191,7 +194,7 @@ Rectangle {
                 }
             }
         }
-        onClicked: controller.loadMore()
+        onClicked: controller.load_more()
     }
 
     //                    Rectangle {

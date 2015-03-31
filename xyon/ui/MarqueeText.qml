@@ -27,7 +27,13 @@ Item {
         running: isScrolling && scrollingText.width > marqueeText.width
         loops: Animation.Infinite
         alwaysRunToEnd: false
-        onStopped: console.log("animation stopped")
+        //onStopped: console.log("animation stopped")
+
+        PropertyAction {
+            target: scrollingText
+            property: "x"
+            value: 0
+        }
 
         PauseAnimation {
             duration: startPause
@@ -44,7 +50,7 @@ Item {
             properties: "x"
             from: 0
             to: -(scrollingText.width - width)
-            duration: scrollingText.text.length * 50//* 12 * 2
+            duration: scrollingText.text.length * 10 * 2//scrollingText.text.length * 50//* 12 * 2
             //loops: Animation.Infinite
         }
 
@@ -63,6 +69,18 @@ Item {
         }
     }
 
+    function stopAnimation() {
+        //console.log("stopping animation");
+        animateText.alwaysRunToEnd = false;
+        animateText.restart();
+        animateText.stop();
+    }
+
+    function displayDuration() {
+        console.log("text length", scrollingText.text.length)
+        console.log("animation duration", 520 * (scrollingText.text.length) / 520 * 10);
+    }
+    /*
     Component.onCompleted:  {
         console.log("length", scrollingText.text.length);
         console.log(500 / scrollingText.text.length);
@@ -70,5 +88,6 @@ Item {
         console.log("mwidth", width)
         console.log("delta width", scrollingText.width - width);
     }
+    */
 }
 

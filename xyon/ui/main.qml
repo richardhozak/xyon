@@ -16,6 +16,7 @@ Window {
     minimumHeight: height
     maximumWidth: width
     maximumHeight: height
+    title: "Xyon"
 
     Rectangle {
         anchors.fill: text
@@ -29,8 +30,6 @@ Window {
         width: 200
 
     }
-
-
 
     MainContent {
         width: parent.width
@@ -77,7 +76,7 @@ Window {
             width: 50
             height: 50
             //color: "white"
-            source: "images/diamond.png"
+            source: "/images/diamond.png"
             rotation: search.isExpanded ? 90 : -90
 
 
@@ -90,6 +89,13 @@ Window {
                 onClicked: search.isExpanded = !search.isExpanded
             }
         }
+    }
+
+    Component.onCompleted: {
+        console.log("main completed");
+        console.log("controller", controller);
+        console.log("controller.playlist", controller.playlist);
+        console.log("controller.playlist.items", controller.playlist.items);
     }
 
 //    Button {

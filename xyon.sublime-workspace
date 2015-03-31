@@ -4,6 +4,222 @@
 		"selected_items":
 		[
 			[
+				"url",
+				"urlResolved	function"
+			],
+			[
+				"reso",
+				"resolve_url	function"
+			],
+			[
+				"re",
+				"resolveUrl	function"
+			],
+			[
+				"curr",
+				"currentPlayingIndex	function"
+			],
+			[
+				"_curr",
+				"_currentIndex	statement"
+			],
+			[
+				"index",
+				"indexOf	function"
+			],
+			[
+				"_",
+				"_items	statement"
+			],
+			[
+				"pyqt",
+				"pyqtSignal	class"
+			],
+			[
+				"_cur",
+				"_currentPlayingIndex	statement"
+			],
+			[
+				"play",
+				"playCurrentIndex	function"
+			],
+			[
+				"count",
+				"count	function"
+			],
+			[
+				"endRemo",
+				"endRemoveRows	function"
+			],
+			[
+				"curre",
+				"currentPlayingIndexChanged"
+			],
+			[
+				"pyq",
+				"pyqtSlot	function"
+			],
+			[
+				"audio",
+				"audioentry	module"
+			],
+			[
+				"type",
+				"type	param"
+			],
+			[
+				"query",
+				"query_string	statement"
+			],
+			[
+				"QtQ",
+				"QtQuick	import"
+			],
+			[
+				"pyqts",
+				"pyqtSlot	import"
+			],
+			[
+				"Qu",
+				"QUrl	class"
+			],
+			[
+				"Pyq",
+				"PyQt5	module"
+			],
+			[
+				"QQ",
+				"QQmlApplicationEngine"
+			],
+			[
+				"py",
+				"pyqtSignal"
+			],
+			[
+				"Py",
+				"PyQt5	module"
+			],
+			[
+				"a",
+				"audioentry	module"
+			],
+			[
+				"aud",
+				"AudioEntry	class"
+			],
+			[
+				"playin",
+				"playingItem"
+			],
+			[
+				"PY",
+				"PyQt5	module"
+			],
+			[
+				"playi",
+				"playingItemChanged	statement"
+			],
+			[
+				"curren",
+				"currentPlayingIndex	function"
+			],
+			[
+				"cou",
+				"countChanged	statement"
+			],
+			[
+				"currei",
+				"currentIndexChanged	statement"
+			],
+			[
+				"canGoN",
+				"canGoNextPageChanged"
+			],
+			[
+				"cango",
+				"canGoPrevPage	function"
+			],
+			[
+				"canGoPre",
+				"canGoPrevPageChanged	statement"
+			],
+			[
+				"qmlRegi",
+				"qmlRegisterUncreatableType	function"
+			],
+			[
+				"qml",
+				"qmlRegisterType	function"
+			],
+			[
+				"se",
+				"setter"
+			],
+			[
+				"qo",
+				"QObjectListModel	class"
+			],
+			[
+				"_c",
+				"_currentIndex	statement"
+			],
+			[
+				"_ca",
+				"_canGoPrevPage"
+			],
+			[
+				"wr",
+				"write	function"
+			],
+			[
+				"resma",
+				"resman	statement"
+			],
+			[
+				"Resou",
+				"ResouceManager	class"
+			],
+			[
+				"wrie",
+				"writelines	function"
+			],
+			[
+				"w",
+				"writelines	function"
+			],
+			[
+				"root",
+				"root_path	statement"
+			],
+			[
+				"remove",
+				"remove_file_if_exists	function"
+			],
+			[
+				"qrc",
+				"qrc_path	param"
+			],
+			[
+				"pa",
+				"path	module"
+			],
+			[
+				"entry",
+				"entry_path	statement"
+			],
+			[
+				"tr",
+				"truncate	function"
+			],
+			[
+				"final",
+				"finalpath	statement"
+			],
+			[
+				"compi",
+				"compile_resource	function"
+			],
+			[
 				"append",
 				"append"
 			],
@@ -22,10 +238,6 @@
 			[
 				"app",
 				"append"
-			],
-			[
-				"pyq",
-				"pyqtProperty	import"
 			],
 			[
 				"QQMl",
@@ -48,24 +260,12 @@
 				"writelines	function"
 			],
 			[
-				"w",
-				"write	function"
-			],
-			[
 				"std",
 				"stdout	class"
 			],
 			[
 				"has",
 				"hasClient"
-			],
-			[
-				"pa",
-				"parse"
-			],
-			[
-				"wr",
-				"wrapped_fun"
 			],
 			[
 				"resu",
@@ -84,20 +284,12 @@
 				"query_string"
 			],
 			[
-				"re",
-				"result"
-			],
-			[
 				"fin",
 				"findall"
 			],
 			[
 				"server",
 				"server"
-			],
-			[
-				"a",
-				"audio"
 			]
 		]
 	},
@@ -107,25 +299,101 @@
 			"file": "xyon/main.py",
 			"settings":
 			{
-				"buffer_size": 1936,
-				"line_ending": "Unix"
+				"buffer_size": 840,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "xyon/model/controller.py",
+			"settings":
+			{
+				"buffer_size": 2155,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "xyon/model/qobjectlistmodel.py",
+			"settings":
+			{
+				"buffer_size": 1520,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "xyon/model/youtubeservice.py",
+			"settings":
+			{
+				"buffer_size": 2828,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "xyon/model/playlist.py",
+			"settings":
+			{
+				"buffer_size": 3146,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "xyon/model/audioentry.py",
+			"settings":
+			{
+				"buffer_size": 651,
+				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "xyon/ui/main.qml",
 			"settings":
 			{
-				"buffer_size": 260,
-				"line_ending": "Unix"
+				"buffer_size": 2460,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "xyon/ui/MainContent.qml",
+			"settings":
+			{
+				"buffer_size": 13608,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "xyon/ui/Search.qml",
+			"settings":
+			{
+				"buffer_size": 7926,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "xyon/ui/MarqueeText.qml",
+			"settings":
+			{
+				"buffer_size": 2297,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "xyon/ui/RoundButton.qml",
+			"settings":
+			{
+				"buffer_size": 1307,
+				"line_ending": "Windows"
 			}
 		}
 	],
-	"build_system": "",
+	"build_system": "Packages/User/xyon.sublime-build",
 	"command_palette":
 	{
-		"height": 75.0,
+		"height": 392.0,
 		"selected_items":
 		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
 			[
 				"install",
 				"Package Control: Install Package"
@@ -139,13 +407,15 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 449.0
+		"width": 400.0
 	},
 	"console":
 	{
 		"height": 139.0,
 		"history":
 		[
+			"sublime.log_commands(True)",
+			"import urllib.request,os,sys; exec(\"if sys.version_info < (3,) or os.name != 'nt': raise OSError('This code is for Windows ST3 only!')\"); pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')",
 			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
 		]
 	},
@@ -160,11 +430,37 @@
 	},
 	"expanded_folders":
 	[
-		"/home/richard/Workspace/PyXyon/xyon",
-		"/home/richard/Workspace/PyXyon/xyon/ui"
+		"/C/Users/Admin/Documents/Projects/xyon/xyon/xyon",
+		"/C/Users/Admin/Documents/Projects/xyon/xyon/xyon/model",
+		"/C/Users/Admin/Documents/Projects/xyon/xyon/xyon/ui"
 	],
 	"file_history":
 	[
+		"/C/Users/Admin/Desktop/sip-4.16.7/sipgen/Makefile",
+		"/C/Users/Admin/Desktop/PyQt-gpl-5.4.2-snapshot-d35996e57f02/configure.py",
+		"/C/Users/Admin/Desktop/sip-4.16.7/siplib/Makefile",
+		"/C/Users/Admin/Desktop/sip-4.16.7/Makefile",
+		"/C/Anaconda3/Lib/site-packages/PyQt5/examples/multimedia/audiooutput.py",
+		"/C/Anaconda3/Lib/site-packages/PyQt5/examples/multimedia/audiodevices/audiodevices.py",
+		"/C/Users/Admin/Documents/Projects/xyon/xyon/.gitignore",
+		"/C/Users/Admin/Documents/Projects/xyon/xyon/xyon/model/qobjectlistmodel.py",
+		"/C/Users/Admin/AppData/Roaming/Sublime Text 3/Packages/Anaconda/Anaconda.sublime-settings",
+		"/C/Users/Admin/AppData/Roaming/Sublime Text 3/Packages/User/Anaconda.sublime-settings",
+		"/C/Users/Admin/Documents/Projects/xyon/xyon/xyon/resource_manager.py",
+		"/C/Users/Admin/Documents/Projects/xyon/xyon/compile_resources.py",
+		"/C/Users/Admin/AppData/Roaming/Sublime Text 3/Packages/Anaconda/Default (Windows).sublime-keymap",
+		"/D/Projects/xyon/xyon/xyonplaylist.h",
+		"/C/Users/Admin/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/Admin/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/Admin/Documents/Projects/xyon/xyon/compile_resources_linux.sh",
+		"/C/Users/Admin/Documents/Projects/xyon/xyon/xyon.sublime-build",
+		"/C/Users/Admin/Documents/Projects/xyon/xyon/xyon.sublime-project",
+		"/C/Users/Admin/Documents/Projects/xyon/xyon/build_linux.sh",
+		"/C/Users/Admin/Documents/Projects/xyon/xyon/xyon/ui/resources.py",
+		"/C/Users/Admin/Documents/Projects/xyon/xyon/xyon/images/resources.py",
+		"/C/Users/Admin/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Admin/Documents/Projects/xyon/xyon/xyon/ui/MainContent.qml",
+		"/C/Users/Admin/Documents/Projects/xyon/xyon/xyon/ui/ui.qrc",
 		"/home/richard/Workspace/PyQt-gpl-5.4.1/examples/qml/referenceexamples/properties.py",
 		"/home/richard/Workspace/PyXyon/xyon/ui/resources.py",
 		"/home/richard/Workspace/PyXyon/xyon/ui/main.qml",
@@ -179,7 +475,7 @@
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -190,9 +486,32 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"console.log",
+			"platform",
+			"line",
+			"mediaPlayer",
+			"MediaPlayer",
+			"mediaPlayer",
+			"_mediaPlayer",
+			"searchlist",
+			"searchList",
+			"model.",
+			"null",
+			"items",
+			"_list",
+			"Prev",
+			"location",
+			"res_file",
+			"out_path",
+			"res_path",
+			"file",
+			"[",
+			"alt+[",
+			"ctrl+[",
+			"source:",
 			"lambda",
 			"maxlen",
 			"\n        ",
@@ -220,7 +539,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -229,56 +548,334 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1936,
+						"buffer_size": 840,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1042,
-								1042
+								484,
+								484
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python 3/Python3.tmLanguage",
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "xyon/ui/main.qml",
+					"file": "xyon/model/controller.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 260,
+						"buffer_size": 2155,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								167,
-								167
+								2154,
+								2154
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/QML/Support/QML.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 315.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "xyon/model/qobjectlistmodel.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1520,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1478,
+								1478
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "xyon/model/youtubeservice.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2828,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2675,
+								2675
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 679.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "xyon/model/playlist.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3146,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2322,
+								2322
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 795.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "xyon/model/audioentry.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 651,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								431,
+								431
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 6,
+					"file": "xyon/ui/main.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2460,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2073,
+								2084
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 964.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "xyon/ui/MainContent.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13608,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11394,
+								11405
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4647.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "xyon/ui/Search.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7926,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4646,
+								4657
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1594.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "xyon/ui/MarqueeText.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2297,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2293,
+								2293
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 540.0,
+						"zoom_level": 1.0
+					},
 					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "xyon/ui/RoundButton.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1307,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
 					"type": "text"
 				}
 			]
@@ -286,7 +883,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 25.0
+		"height": 34.0
 	},
 	"input":
 	{
@@ -301,11 +898,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.481879194631,
 			1.0
 		],
 		"rows":
@@ -315,6 +919,14 @@
 		]
 	},
 	"menu_visible": true,
+	"output.anaconda_documentation":
+	{
+		"height": 100.0
+	},
+	"output.exec":
+	{
+		"height": 137.0
+	},
 	"output.find_results":
 	{
 		"height": 0.0

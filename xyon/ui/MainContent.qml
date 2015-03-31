@@ -92,12 +92,13 @@ Item {
                         onClicked: {
                             if (controller.playlist.currentIndex === index)
                             {
-                                mediaPlayer.stop();
+                                controller.player.stop();
                             }
                             else
                             {
-                                controller.playlist.setCurrentIndex(index);
-                                mediaPlayer.play();
+                                //controller.playlist.setCurrentIndex(index);
+                                controller.playlist.currentIndex = index;
+                                controller.player.play();
                             }
                         }
                     }
@@ -110,7 +111,7 @@ Item {
                 Image {
                     id: playListButtonImage
                     anchors.fill: playListButton
-                    source: controller.playlist.currentPlayingIndex === index ? "images/stop.png" : "images/play.png"
+                    source: controller.playlist.currentPlayingIndex === index ? "/images/stop.png" : "/images/play.png"
                     fillMode: Image.PreserveAspectFit
                     smooth: true
                 }
@@ -135,7 +136,7 @@ Item {
                         anchors.fill: parent
                         onClicked: {
                             console.log("removing", index);
-                            controller.playlist.removeIndex(index);
+                            controller.playlist.removeAt(index);
                         }
                     }
 
@@ -149,7 +150,7 @@ Item {
                     width: removeFromListButton.width / 2
                     height: width
                     anchors.centerIn: removeFromListButton
-                    source: "images/delete.png"
+                    source: "/images/delete.png"
                     fillMode: Image.PreserveAspectFit
                     smooth: true
                 }
@@ -188,7 +189,7 @@ Item {
     }
 
     function updateText(textArea, total) {
-        //var total = mediaPlayer.duration;
+        //var total = controller.player.duration;
         var hours = Math.floor((total / (60 * 60 * 1000)));
         var minutes = Math.floor((total / (60 * 1000)) % 60).toString();
         var seconds = Math.floor((total / 1000) % 60).toString();
@@ -206,10 +207,10 @@ Item {
     }
 
     Connections {
-        target: mediaPlayer
-        onDurationChanged: updateText(durationText, mediaPlayer.duration)
-        onPositionChanged: updateText(positionText, mediaPlayer.position)
-        onStateChanged: console.log(mediaPlayer.state)
+        target: controller.player
+        onDurationChanged: updateText(durationText, controller.player.duration)
+        onPositionChanged: updateText(positionText, controller.player.position)
+        onStateChanged: console.log(controller.player.state)
     }
 
     Item {
@@ -225,14 +226,16 @@ Item {
             anchors.top: parent.top
             anchors.topMargin: 20
             anchors.horizontalCenter: parent.horizontalCenter
-            text: controller.playlist.playingTitle
+            text: controller.playlist.playingItem.title
             color: "white"
             font.pixelSize: 20
             elide: Text.ElideRight | Text.ElideLeft
             width: parent.width - 20
             anchors.left: parent.left
             anchors.leftMargin: 20
-
+            Component.onCompleted: {
+                console.log("controller.playlist.playingItem", controller.playlist.playingItem)
+            }
         }
 
         Slider {
@@ -244,14 +247,14 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             clip: true
 
-            maximumValue: mediaPlayer.duration
+            maximumValue: controller.player.duration
             minimumValue: 0
-            value: mediaPlayer.position
-            enabled: mediaPlayer.seekable
+            value: controller.player.position
+            enabled: controller.player.seekable
             onValueChanged: {
-                if (mediaPlayer.position > value + 25 || mediaPlayer.position < value - 25)
+                if (controller.player.position > value + 25 || controller.player.position < value - 25)
                 {
-                    mediaPlayer.setPosition(value)
+                    controller.player.setPosition(value)
                 }
             }
 
@@ -308,15 +311,15 @@ Item {
             RoundButton {
                 id: playButton
                 anchors.centerIn: parent
-                source: mediaPlayer.state == MediaPlayer.PlayingState ? "images/pause.png" : "images/play.png"
+                source: controller.player.state == MediaPlayer.PlayingState ? "/images/pause.png" : "/images/play.png"
                 onClicked: {
-                    if (mediaPlayer.state == MediaPlayer.PlayingState)
+                    if (controller.player.state == MediaPlayer.PlayingState)
                     {
-                        mediaPlayer.pause();
+                        controller.player.pause();
                     }
                     else
                     {
-                        mediaPlayer.play();
+                        controller.player.play();
                     }
                 }
             }
@@ -326,7 +329,7 @@ Item {
                 anchors.right: playButton.left
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.rightMargin: 15
-                source: "images/previous.png"
+                source: "/images/previous.png"
                 ratio: 0.4
                 enabled: controller.playlist.currentIndex > 0
                 onClicked: controller.playlist.currentIndex--
@@ -354,7 +357,7 @@ Item {
                 anchors.left: playButton.right
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.leftMargin: 15
-                source: "images/next.png"
+                source: "/images/next.png"
                 ratio: 0.4
                 enabled: controller.playlist.currentIndex !== -1 && controller.playlist.currentIndex < controller.playlist.items.count -1
                 onClicked: controller.playlist.currentIndex++
@@ -369,8 +372,8 @@ Item {
                 anchors.rightMargin: -width + 70
                 maximumValue: 100
                 minimumValue: 0
-                value: mediaPlayer.volume
-                onValueChanged: mediaPlayer.volume = value
+                value: controller.player.volume
+                onValueChanged: controller.player.volume = value
 
                 style: SliderStyle {
                     groove: Rectangle {
