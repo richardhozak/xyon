@@ -1,5 +1,0 @@
-{
-	"cmd": ["python", "-u", "compile_resources.py"],
-	"file_regex": "\\.(qml)$",
-	"working_dir": "${project_path:${folder}}",
-}
