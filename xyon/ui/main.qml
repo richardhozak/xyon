@@ -23,19 +23,10 @@ Window {
         color:"white"
     }
 
-    MarqueeText {
-        id: text
-        x: 50
-        text: "Start -- Lorem ipsum dolor sit amet. -- End"
-        width: 200
-
-    }
-
     MainContent {
         width: parent.width
         height: parent.height - 50
         anchors.bottom: parent.bottom
-        //color: "red"
     }
 
     Rectangle {
