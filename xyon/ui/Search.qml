@@ -8,6 +8,20 @@ Rectangle {
 
     //onPercentChanged: console.log("percentil", percent)
 
+    SuggestionBox {
+        id: searchField
+        width: parent.width - 20
+        height: 32
+
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.leftMargin: 10
+        anchors.topMargin: 10
+
+        onTextAccepted: controller.search(text)
+        onTextChanged: controller.query_completion(text)
+    }
+/*
     TextField {
         id: searchField
         width: parent.width - 20
@@ -35,7 +49,7 @@ Rectangle {
 
         onAccepted: controller.search(text)
     }
-
+*/
     Item {
         id: searchResultsContainer
         anchors.top: searchField.bottom

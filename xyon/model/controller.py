@@ -65,6 +65,10 @@ class Controller(QObject):
         print("loading more...")
         print("JK")
 
+    @pyqtSlot(str)
+    def query_completion(self, text):
+        print("Querying completion for", text)
+
     def resolveUrl(self, entry):
         print("resolving url for", entry.type, entry.title)
         url = self._ytService.resolve_url(entry.url)
