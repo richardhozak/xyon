@@ -55,3 +55,12 @@ class QObjectListModel(QAbstractListModel):
 
     def indexOf(self, item):
         return self.listdata.index(item)
+
+    def setObjectList(self, objects):
+        old_count = self.count
+        self.beginResetModel()
+        self.listdata = objects
+        self.endResetModel()
+        self.dataChanged.emit(self.index(0), self.index(self.count))
+        if self.count != old_count:
+            self.countChanged.emit()

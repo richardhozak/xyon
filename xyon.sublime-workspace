@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"le",
+				"leftMargin"
+			],
+			[
+				"url",
+				"urllib	module"
+			],
+			[
+				"loa",
+				"loads	function"
+			],
+			[
+				"reply",
+				"reply_finished	function"
+			],
+			[
+				"pyqtS",
+				"pyqtSlot	import"
+			],
+			[
+				"PYqt",
+				"PyQt5"
+			],
+			[
+				"pyq",
+				"pyqtSlot	import"
+			],
+			[
 				"PY",
 				"PyQt5"
 			],
@@ -26,10 +54,6 @@
 			[
 				"app",
 				"append"
-			],
-			[
-				"pyq",
-				"pyqtProperty	import"
 			],
 			[
 				"QQMl",
@@ -119,7 +143,55 @@
 			"file": "xyon/model/qobjectlistmodel.py",
 			"settings":
 			{
-				"buffer_size": 1520,
+				"buffer_size": 1824,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xyon/ui/SuggestionBox.qml",
+			"settings":
+			{
+				"buffer_size": 5138,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xyon/ui/Search.qml",
+			"settings":
+			{
+				"buffer_size": 8317,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xyon/model/controller.py",
+			"settings":
+			{
+				"buffer_size": 3384,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xyon/ui/main.qml",
+			"settings":
+			{
+				"buffer_size": 2229,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xyon/ui/MainContent.qml",
+			"settings":
+			{
+				"buffer_size": 13655,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xyon/ui/ui.qrc",
+			"settings":
+			{
+				"buffer_size": 271,
 				"line_ending": "Unix"
 			}
 		}
@@ -171,6 +243,7 @@
 	],
 	"file_history":
 	[
+		"/home/richard/Workspace/PyXyon/xyon/ui/SuggestionBox",
 		"/home/richard/.config/sublime-text-3/Packages/User/resource_build.sublime-build",
 		"/home/richard/Workspace/PyXyon/xyon.sublime-workspace",
 		"/home/richard/Workspace/PyXyon/xyon/ui/main.qml",
@@ -234,7 +307,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -263,7 +336,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -272,15 +345,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1520,
+						"buffer_size": 1824,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								55,
-								55
+								1711,
+								1711
 							]
 						],
 						"settings":
@@ -289,11 +362,189 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": -0.0,
-						"translation.y": 102.0,
+						"translation.x": 0.0,
+						"translation.y": 326.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "xyon/ui/SuggestionBox.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5138,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3013,
+								3013
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1683.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "xyon/ui/Search.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8317,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6479,
+								6479
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 2856.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "xyon/model/controller.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3384,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3189,
+								3189
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 867.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "xyon/ui/main.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2229,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								397,
+								397
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "xyon/ui/MainContent.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13655,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7902,
+								7902
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 3009.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "xyon/ui/ui.qrc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 271,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								246,
+								246
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
 					"type": "text"
 				}
 			]

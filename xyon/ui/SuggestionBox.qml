@@ -15,6 +15,11 @@ Item {
         property string lastInput: ""
         property int lastIndex: -1
         property bool ignoreTextChanged: false
+
+        function acceptText(text) {
+            root.textAccepted(text);
+            searchField.focus = false;
+        }
     }
 
     TextField {
@@ -34,14 +39,14 @@ Item {
             }
         }
 
-        onAccepted: root.textAccepted(text)
+        onAccepted: internal.acceptText(text)
 
         onTextChanged: {
             if (internal.ignoreTextChanged)
             {
                 return;
             }
-
+            root.currentIndex = -1;
             internal.lastInput = text;
             root.textChanged(text);
         }
@@ -104,7 +109,7 @@ Item {
         Rectangle {
             id: completionListContainer
             width: searchField.width
-            height: completionList.count * 25 > 400 ? 400 : completionList.count * 25
+            height: searchField.focus ? (completionList.count * 25 > 400 ? 400 : completionList.count * 25) : 0
             anchors.top: searchField.bottom
             anchors.left: searchField.left
 
@@ -136,25 +141,32 @@ Item {
                     currentIndex: root.currentIndex
 
                     delegate: Rectangle {
-                        property string text: object.text
+                        property string text: object
 
                         anchors.left: parent.left
-                        anchors.leftMargin: 10
                         height: 25
-                        width: parent.width - 20
-                        color: root.currentIndex == index ? "red" : "wheat"
+                        width: parent.width
+                        color: root.currentIndex == index ? "#d6d6d6" : "#dbdbdb"
 
                         Text {
-                            text: object.text
-                            anchors.fill: parent
+                            text: object
+                            width: parent.width
+                            anchors.verticalCenter: parent.verticalCenter
                         }
 
-                        Rectangle {
-                            anchors.bottom: parent.bottom
-                            width: parent.width
-                            height: 2
-                            color: "black"
+                        MouseArea {
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            onContainsMouseChanged: {
+                                if (containsMouse)
+                                {
+                                    root.currentIndex = index;
+                                }
+                            }
+                            onClicked: internal.acceptText(searchField.text)
                         }
+
+                        Component.onCompleted: console.log("object", object)
                     }
                 }
             }

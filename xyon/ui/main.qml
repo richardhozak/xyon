@@ -18,11 +18,6 @@ Window {
     maximumHeight: height
     title: "Xyon"
 
-    Rectangle {
-        anchors.fill: text
-        color:"white"
-    }
-
     MainContent {
         width: parent.width
         height: parent.height - 50

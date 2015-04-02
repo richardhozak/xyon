@@ -20,6 +20,9 @@ Rectangle {
 
         onTextAccepted: controller.search(text)
         onTextChanged: controller.query_completion(text)
+
+        model: controller.queryList
+        z: 1
     }
 /*
     TextField {

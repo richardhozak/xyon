@@ -226,7 +226,7 @@ Item {
             anchors.top: parent.top
             anchors.topMargin: 20
             anchors.horizontalCenter: parent.horizontalCenter
-            text: controller.playlist.playingItem.title
+            text: controller.playlist.playingItem != null ? controller.playlist.playingItem.title : ""
             color: "white"
             font.pixelSize: 20
             elide: Text.ElideRight | Text.ElideLeft
