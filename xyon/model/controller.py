@@ -23,6 +23,7 @@ class Controller(QObject):
         self._network_manager = QNetworkAccessManager(self)
         self._network_manager.finished.connect(self.reply_finished)
         self._queryList = model.qobjectlistmodel.QObjectListModel([])
+        self._loadedPage = 0
 
     canGoPrevPageChanged = pyqtSignal()
 
@@ -61,7 +62,7 @@ class Controller(QObject):
         return self._searchlist
 
     @pyqtSlot(str)
-    def search(self, query):
+    def search(self, query, page=1):
         results = self._ytService.search(query)
         self._searchlist.clear()
         for entry in results:
@@ -69,8 +70,8 @@ class Controller(QObject):
 
     @pyqtSlot()
     def load_more(self):
-        print("loading more...")
-        print("JK")
+        if self._loadedPage != 0:
+            self._loadedPage += 1
 
     @pyqtSlot(str)
     def query_completion(self, text):

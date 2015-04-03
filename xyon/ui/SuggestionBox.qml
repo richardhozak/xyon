@@ -100,12 +100,6 @@ Item {
         Keys.onUpPressed: decrementCurrentIndex()
         Keys.onDownPressed: incrementCurrentIndex()
 
-        Button {
-            anchors.right: parent.right
-            text: completionList.currentIndex
-            onClicked: console.log("completionlistindex", completionList.currentIndex)
-        }
-
         Rectangle {
             id: completionListContainer
             width: searchField.width

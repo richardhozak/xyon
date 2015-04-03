@@ -18,6 +18,8 @@ class YoutubeService():
 
     def __init__(self):
         self.dict = {}
+        self.last_page = 0
+        self.last_query = None
         for name in dir(self):
             attr = getattr(self, name)
             if callable(attr) and not name.startswith("__") and not name.endswith("__"):
@@ -38,6 +40,9 @@ class YoutubeService():
                 aid = href[26:] if is_list else href[9:]
                 url = "http://www.youtube.com/" + ("playlist?list=" if is_list else "watch?v=") + aid
                 atype = 'youtube_list' if is_list else 'youtube_audio'
+
+                self.last_page = page
+
                 return model.audioentry.AudioEntry(url, atype, time, result["title"])
                 '''
                 return {'type': 'youtube_list' if is_list else 'youtube_audio',
@@ -57,8 +62,10 @@ class YoutubeService():
         search_results = soup.find_all("a", {"class": "yt-uix-tile-link"})
         return list(map(create_query_object, search_results))
 
-    def load_more(self, query):
-        return self.search(query)
+    def load_more(self):
+        if self.last_query is not None:
+            return self.search(self.last_query, self.last_page + 1)
+        return None
 
     def resolve_url(self, vid):
         return self.get_stream_link(vid)
