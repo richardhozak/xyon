@@ -14,7 +14,7 @@ class Controller(QObject):
     def __init__(self, parent=None):
         super(Controller, self).__init__(parent)
         self._searchlist = model.qobjectlistmodel.QObjectListModel([])
-        self._player = QMediaPlayer(self)
+        self._player = QMediaPlayer(self, QMediaPlayer.StreamPlayback)
         self._playlist = model.playlist.Playlist(self._player)
         self._canGoPrevPage = False
         self._canGoNextPage = False
@@ -24,6 +24,7 @@ class Controller(QObject):
         self._network_manager.finished.connect(self.reply_finished)
         self._queryList = model.qobjectlistmodel.QObjectListModel([])
         self._loadedPage = 0
+        self._player.mediaStatusChanged.connect(self.playerStatusChanged)
 
     canGoPrevPageChanged = pyqtSignal()
 
@@ -63,8 +64,9 @@ class Controller(QObject):
 
     @pyqtSlot(str)
     def search(self, query, page=1):
-        results = self._ytService.search(query)
-        self._searchlist.clear()
+        results = self._ytService.search(query, page)
+        if page == 1:
+            self._searchlist.clear()
         for entry in results:
             self._searchlist.append(entry)
 
@@ -72,6 +74,7 @@ class Controller(QObject):
     def load_more(self):
         if self._loadedPage != 0:
             self._loadedPage += 1
+            self.search()
 
     @pyqtSlot(str)
     def query_completion(self, text):
@@ -103,3 +106,8 @@ class Controller(QObject):
         print("resolving url for", entry.type, entry.title)
         url = self._ytService.resolve_url(entry.url)
         self._playlist.urlResolved(entry, url)
+
+    @pyqtSlot(QMediaPlayer.MediaStatus)
+    def playerStatusChanged(self, status):
+        if status == QMediaPlayer.EndOfMedia:
+            self._playlist.currentIndex += 1
