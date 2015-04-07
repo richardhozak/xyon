@@ -6,6 +6,11 @@ Rectangle {
 
     property real percent: 1 - (x / -width)
 
+    MouseArea {
+        anchors.fill: parent
+        hoverEnabled: true
+    }
+
     //onPercentChanged: console.log("percentil", percent)
 
     SuggestionBox {
@@ -105,17 +110,6 @@ Rectangle {
                         isScrolling: hoverArea.containsMouse
                     }
 
-//                    Text {
-//                        anchors.left: addButton.right
-//                        anchors.leftMargin: hoverArea.containsMouse ? 5 : 0
-//                        anchors.top: parent.top
-//                        anchors.topMargin: 5
-//                        text: object.title
-//                        color: "#dbdbdb"
-//                        font.pixelSize: 16
-//                        elide: Text.ElideRight
-//                        width: parent.width - addButton.width - (hoverArea.containsMouse ? 5 : 0)
-//                    }
                     Text {
                         anchors.right: parent.right
                         anchors.bottom: parent.bottom
@@ -195,8 +189,6 @@ Rectangle {
             background: Rectangle {
                 implicitWidth: 100
                 implicitHeight: 25
-                //border.width: control.activeFocus ? 2 : 1
-                //border.color: loadMoreButton.pressed ? "#dbdbdb" : "#494949"
                 color: loadMoreButton.pressed ? Qt.lighter("#494949"): "#494949"
             }
             label: Component {
@@ -214,42 +206,11 @@ Rectangle {
         onClicked: controller.load_more()
     }
 
-    //                    Rectangle {
-    //                        width: 30
-    //                        height: 30
-    //                        anchors.left: parent.left
-    //                        anchors.bottom: parent.bottom
-    //                        color: "transparent"
-
-    //                        Text {
-    //                            text: "+"
-    //                            font.pixelSize: parent.width * 0.75
-    //                            color: "white"
-    //                            anchors.centerIn: parent
-    //                        }
-    //                    }
-
-
-
-    //    Rectangle {
-    //        anchors.top: parent.top
-    //        anchors.left: parent.left
-    //        anchors.topMargin: 10
-    //        anchors.leftMargin: 10
-    //        color: "black"
-    //        width: parent.width - 20
-    //        height: 25
-
-    //        TextInput {
-    //            id: input
-    //            anchors.fill: parent
-    //            clip: true
-    //            color: "white"
-    //            height: parent.height
-    //            anchors.verticalCenter: parent.verticalCenter
-    //        }
-    //    }
-
-
+    MouseArea {
+        enabled: searchField.isExpanded
+        width: parent.width + 100
+        height: parent.height
+        onClicked: searchField.isExpanded = false
+    }
 }
 

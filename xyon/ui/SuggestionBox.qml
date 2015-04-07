@@ -7,6 +7,7 @@ Item {
     property int currentIndex: -1
     signal textChanged(string text)
     signal textAccepted(string text)
+    property alias isExpanded: searchField.focus
 
     property alias model: completionList.model
 
@@ -19,6 +20,30 @@ Item {
         function acceptText(text) {
             root.textAccepted(text);
             searchField.focus = false;
+        }
+
+        function setCurrentIndex(index) {
+            if (index === root.currentIndex)
+            {
+                return;
+            }
+
+            internal.ignoreTextChanged = true;
+
+            internal.lastIndex = root.currentIndex;
+            currentIndex = index;
+
+            if (root.currentIndex == -1)
+            {
+                searchField.text = internal.lastInput;
+            }
+            else
+            {
+                searchField.text = completionList.currentItem.text;
+            }
+
+
+            internal.ignoreTextChanged = false;
         }
     }
 
@@ -51,49 +76,25 @@ Item {
             root.textChanged(text);
         }
 
-        function setCurrentIndex(index) {
-            if (index === currentIndex)
-            {
-                return;
-            }
-
-            internal.ignoreTextChanged = true;
-
-            internal.lastIndex = currentIndex;
-            currentIndex = index;
-
-            if (currentIndex == -1)
-            {
-                searchField.text = internal.lastInput;
-            }
-            else
-            {
-                searchField.text = completionList.currentItem.text;
-            }
-
-
-            internal.ignoreTextChanged = false;
-        }
-
         function incrementCurrentIndex() {
             if (currentIndex >= completionList.count - 1)
             {
-                setCurrentIndex(-1);
+                internal.setCurrentIndex(-1);
             }
             else
             {
-                setCurrentIndex(currentIndex + 1);
+                internal.setCurrentIndex(currentIndex + 1);
             }
         }
 
         function decrementCurrentIndex() {
             if (currentIndex - 1 < -1)
             {
-                setCurrentIndex(completionList.count - 1);
+                internal.setCurrentIndex(completionList.count - 1);
             }
             else
             {
-                setCurrentIndex(currentIndex - 1);
+                internal.setCurrentIndex(currentIndex - 1);
             }
         }
 
@@ -106,11 +107,14 @@ Item {
             height: searchField.focus ? (completionList.count * 25 > 400 ? 400 : completionList.count * 25) : 0
             anchors.top: searchField.bottom
             anchors.left: searchField.left
+            visible: height != 0
 
             ScrollView {
                 anchors.fill: parent
+                visible: parent.visible
                 style: ScrollViewStyle {
                     handle: Item {
+                        visible: parent.visible
                         implicitWidth: 14
                         implicitHeight: 26
                         Rectangle {
@@ -154,7 +158,8 @@ Item {
                             onContainsMouseChanged: {
                                 if (containsMouse)
                                 {
-                                    root.currentIndex = index;
+                                    internal.setCurrentIndex(index);
+                                    //root.currentIndex = index;
                                 }
                             }
                             onClicked: internal.acceptText(searchField.text)
