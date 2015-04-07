@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"Las",
+				"last_query	statement"
+			],
+			[
+				"last_",
+				"last_query	statement"
+			],
+			[
 				"le",
 				"leftMargin"
 			],
@@ -151,7 +159,7 @@
 			"file": "xyon/ui/SuggestionBox.qml",
 			"settings":
 			{
-				"buffer_size": 5138,
+				"buffer_size": 4937,
 				"line_ending": "Unix"
 			}
 		},
@@ -164,10 +172,21 @@
 			}
 		},
 		{
+			"contents": "import model.qobjectlistmodel\nimport model.youtubeservice\n\nimport json\nimport urllib.parse\n\nfrom PyQt5.QtCore import QObject, pyqtSignal, pyqtProperty, pyqtSlot, QUrl\nfrom PyQt5.QtMultimedia import QMediaPlayer\nfrom PyQt5.QtNetwork import *\n\n\nclass Controller(QObject):\n\n    def __init__(self, parent=None):\n        super(Controller, self).__init__(parent)\n        self._searchlist = model.qobjectlistmodel.QObjectListModel([])\n        self._player = QMediaPlayer(self)\n        self._playlist = model.playlist.Playlist(self._player)\n        self._canGoPrevPage = False\n        self._canGoNextPage = False\n        self._ytService = model.youtubeservice.YoutubeService()\n        self._playlist.resolveUrl.connect(self.resolveUrl)\n        self._network_manager = QNetworkAccessManager(self)\n        self._network_manager.finished.connect(self.reply_finished)\n        self._queryList = model.qobjectlistmodel.QObjectListModel([])\n        self._loadedPage = 0\n\n    canGoPrevPageChanged = pyqtSignal()\n\n    @pyqtProperty(bool, notify=canGoPrevPageChanged)\n    def canGoPrevPage(self):\n        return self._canGoPrevPage\n\n    @canGoPrevPage.setter\n    def canGoPrevPage(self, value):\n        if self._canGoPrevPage != value:\n            self._canGoPrevPage = value\n            self.canGoPrevPage.emit()\n\n    canGoNextPageChanged = pyqtSignal()\n\n    @pyqtProperty(bool)\n    def canGoNextPage(self):\n        return self._canGoNextPage\n\n    @canGoNextPage.setter\n    def canGoNextPage(self, value):\n        if self._canGoNextPage != value:\n            self._canGoNextPage = value\n            self.canGoNextPageChanged.emit()\n\n    @pyqtProperty(model.playlist.Playlist, constant=True)\n    def playlist(self):\n        return self._playlist\n\n    @pyqtProperty(QMediaPlayer, constant=True)\n    def player(self):\n        return self._player\n\n    @pyqtProperty(model.qobjectlistmodel.QObjectListModel, constant=True)\n    def searchlist(self):\n        return self._searchlist\n\n    @pyqtSlot(str)\n    def search(self, query, page=1):\n        results = self._ytService.search(query, page)\n        if page == 1:\n            self._searchlist.clear()\n        for entry in results:\n            self._searchlist.append(entry)\n\n    @pyqtSlot()\n    def load_more(self):\n        if self._loadedPage != 0:\n            self._loadedPage += 1\n            self.search()\n\n    @pyqtSlot(str)\n    def query_completion(self, text):\n        if text is None or text == \"\":\n            print(\"Empty query\")\n            self.reply_finished(None)\n        else:\n            print(\"Querying completion for\", text)\n            self._network_manager.get(QNetworkRequest(QUrl(\"http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&\" + urllib.parse.urlencode({\"q\": text}))))\n\n    @pyqtProperty(model.qobjectlistmodel.QObjectListModel, constant=True)\n    def queryList(self):\n        return self._queryList\n\n    @pyqtSlot(QNetworkReply)\n    def reply_finished(self, reply):\n        if reply is None:\n            self._queryList.clear()\n        else:\n            data_str = reply.readAll().data().decode(\"utf-8\")\n            obj = json.loads(data_str)\n            if len(obj) == 2:\n                print(\"reply\", obj[1])\n                self._queryList.setObjectList(obj[1])\n            else:\n                self._queryList.clear()\n\n    def resolveUrl(self, entry):\n        print(\"resolving url for\", entry.type, entry.title)\n        url = self._ytService.resolve_url(entry.url)\n        self._playlist.urlResolved(entry, url)\n",
 			"file": "xyon/model/controller.py",
+			"file_size": 3436,
+			"file_write_time": 130725189078001099,
 			"settings":
 			{
-				"buffer_size": 3384,
+				"buffer_size": 3494,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xyon/model/youtubeservice.py",
+			"settings":
+			{
+				"buffer_size": 3013,
 				"line_ending": "Unix"
 			}
 		},
@@ -280,6 +299,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"acceptText",
+			"incrementCurrentIndex",
 			"lambda",
 			"maxlen",
 			"\n        ",
@@ -307,7 +328,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -336,7 +357,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -366,7 +387,7 @@
 						"translation.y": 326.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -375,15 +396,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5138,
+						"buffer_size": 4937,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3013,
-								3013
+								257,
+								257
 							]
 						],
 						"settings":
@@ -393,10 +414,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1683.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -422,7 +443,7 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": -0.0,
+						"translation.x": 0.0,
 						"translation.y": 2856.0,
 						"zoom_level": 1.0
 					},
@@ -435,15 +456,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3384,
+						"buffer_size": 3494,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3189,
-								3189
+								2336,
+								2336
 							]
 						],
 						"settings":
@@ -453,7 +474,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 867.0,
+						"translation.y": 459.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -461,6 +482,36 @@
 				},
 				{
 					"buffer": 5,
+					"file": "xyon/model/youtubeservice.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3013,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2426,
+								2426
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 918.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
 					"file": "xyon/ui/main.qml",
 					"semi_transient": false,
 					"settings":
@@ -486,11 +537,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 7,
 					"file": "xyon/ui/MainContent.qml",
 					"semi_transient": false,
 					"settings":
@@ -516,11 +567,11 @@
 						"translation.y": 3009.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 8,
 					"file": "xyon/ui/ui.qrc",
 					"semi_transient": false,
 					"settings":
@@ -544,7 +595,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 8,
 					"type": "text"
 				}
 			]
