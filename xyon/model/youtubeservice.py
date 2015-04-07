@@ -5,6 +5,7 @@ import sys
 import pafy
 import os
 import model.audioentry
+import platform
 
 
 def print_error_info(info=""):
@@ -73,7 +74,7 @@ class YoutubeService():
     def get_stream_link(self, vid):
         video = pafy.new(vid)
         print("Getting audio stream link", vid)
-        audio = video.getbestaudio(preftype="m4a")
+        audio = video.getbestaudio(preftype=("ogg" if platform.system() == "Linux" else "m4a"))
         if hasattr(audio, 'url_https'):
             print("has attribute")
             print(audio.url_https)
