@@ -6,6 +6,16 @@ import QtMultimedia 5.0
 
 Item {
 
+    Button {
+        width: 50
+        height: 50
+        onClicked: {
+            console.log("testattach", controller.testattach)
+            controller.test();
+        }
+        text: controller.testattach
+    }
+
     ScrollView {
         id: playlist
         anchors.left: parent.left
@@ -135,7 +145,7 @@ Item {
                         id: removeFromListArea
                         anchors.fill: parent
                         onClicked: {
-                            console.log("removing", index);
+                            //console.log("removing", index);
                             controller.playlist.removeAt(index);
                         }
                     }
@@ -210,7 +220,7 @@ Item {
         target: controller.player
         onDurationChanged: updateText(durationText, controller.player.duration)
         onPositionChanged: updateText(positionText, controller.player.position)
-        onStateChanged: console.log(controller.player.state)
+        //onStateChanged: console.log(controller.player.state)
     }
 
     Item {
@@ -233,9 +243,6 @@ Item {
             width: parent.width - 20
             anchors.left: parent.left
             anchors.leftMargin: 20
-            Component.onCompleted: {
-                console.log("controller.playlist.playingItem", controller.playlist.playingItem)
-            }
         }
 
         Slider {
@@ -347,9 +354,7 @@ Item {
 
             Connections {
                 target: controller.playlist
-                onCurrentPlayingIndexChanged: {
-                    console.log("current playing index", controller.playlist.currentPlayingIndex);
-                }
+                onCurrentPlayingIndexChanged: console.log("current playing index", controller.playlist.currentPlayingIndex)
             }
 
             RoundButton {

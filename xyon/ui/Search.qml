@@ -145,7 +145,7 @@ Rectangle {
                             id: addMouseArea
                             anchors.fill: parent
                             onClicked: {
-                                console.log(object);
+                                //console.log(object);
                                 controller.playlist.addAudioEntry(object);
                             }
                         }

@@ -1,8 +1,14 @@
 import model.qobjectlistmodel
 import model.audioentry
-from PyQt5.QtCore import *
+
 from PyQt5.QtQuick import *
 from PyQt5.QtMultimedia import QMediaContent
+from PyQt5.QtCore import \
+    QObject, \
+    pyqtProperty, \
+    pyqtSignal, \
+    pyqtSlot, \
+    QUrl
 
 
 class Playlist(QObject):

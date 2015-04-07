@@ -4,9 +4,14 @@ import model.youtubeservice
 import json
 import urllib.parse
 
-from PyQt5.QtCore import QObject, pyqtSignal, pyqtProperty, pyqtSlot, QUrl
-from PyQt5.QtMultimedia import QMediaPlayer
 from PyQt5.QtNetwork import *
+from PyQt5.QtMultimedia import QMediaPlayer
+from PyQt5.QtCore import \
+    QObject, \
+    pyqtSignal, \
+    pyqtProperty, \
+    pyqtSlot, \
+    QUrl
 
 
 class Controller(QObject):
@@ -14,19 +19,24 @@ class Controller(QObject):
     def __init__(self, parent=None):
         super(Controller, self).__init__(parent)
         self._searchlist = model.qobjectlistmodel.QObjectListModel([])
-        self._player = QMediaPlayer(self, QMediaPlayer.StreamPlayback)
-        self._playlist = model.playlist.Playlist(self._player)
-        self._canGoPrevPage = False
-        self._canGoNextPage = False
-        self._ytService = model.youtubeservice.YoutubeService()
-        self._playlist.resolveUrl.connect(self.resolveUrl)
-        self._network_manager = QNetworkAccessManager(self)
-        self._network_manager.finished.connect(self.reply_finished)
         self._queryList = model.qobjectlistmodel.QObjectListModel([])
-        self._loadedPage = 0
+
+        self._player = QMediaPlayer(self, QMediaPlayer.StreamPlayback)
         self._player.mediaStatusChanged.connect(self.playerStatusChanged)
 
+        self._playlist = model.playlist.Playlist(self._player)
+        self._playlist.resolveUrl.connect(self.resolveUrl)
+
+        self._canGoPrevPage = False
+        self._canGoNextPage = False
+
+        self._ytService = model.youtubeservice.YoutubeService(self.search_callback)
+
+        self._network_manager = QNetworkAccessManager(self)
+        self._network_manager.finished.connect(self.reply_finished)
+
     canGoPrevPageChanged = pyqtSignal()
+    canGoNextPageChanged = pyqtSignal()
 
     @pyqtProperty(bool, notify=canGoPrevPageChanged)
     def canGoPrevPage(self):
@@ -37,8 +47,6 @@ class Controller(QObject):
         if self._canGoPrevPage != value:
             self._canGoPrevPage = value
             self.canGoPrevPage.emit()
-
-    canGoNextPageChanged = pyqtSignal()
 
     @pyqtProperty(bool)
     def canGoNextPage(self):
@@ -63,18 +71,17 @@ class Controller(QObject):
         return self._searchlist
 
     @pyqtSlot(str)
-    def search(self, query, page=1):
-        results = self._ytService.search(query, page)
-        if page == 1:
-            self._searchlist.clear()
+    def search(self, query):
+        self._searchlist.clear()
+        self._ytService.search(query)
+
+    def search_callback(self, results):
         for entry in results:
             self._searchlist.append(entry)
 
     @pyqtSlot()
     def load_more(self):
-        if self._loadedPage != 0:
-            self._loadedPage += 1
-            self.search()
+        self._ytService.load_more()
 
     @pyqtSlot(str)
     def query_completion(self, text):
@@ -97,7 +104,7 @@ class Controller(QObject):
             data_str = reply.readAll().data().decode("utf-8")
             obj = json.loads(data_str)
             if len(obj) == 2:
-                print("reply", obj[1])
+                # print("reply", obj[1])
                 self._queryList.setObjectList(obj[1])
             else:
                 self._queryList.clear()
@@ -111,3 +118,9 @@ class Controller(QObject):
     def playerStatusChanged(self, status):
         if status == QMediaPlayer.EndOfMedia:
             self._playlist.currentIndex += 1
+
+    @pyqtSlot()
+    def test(self):
+        print("hola")
+        self.testattach = pyqtProperty('QString')
+        self.testattach = "Hello"

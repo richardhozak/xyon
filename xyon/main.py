@@ -1,16 +1,18 @@
 import model.qobjectlistmodel
 import model.playlist
 import model.controller
+import model
 import resource_manager
 import sys
 
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QGuiApplication
-from PyQt5.QtQml import QQmlApplicationEngine, qmlRegisterUncreatableType
+from PyQt5.QtQml import QQmlApplicationEngine, \
+                        qmlRegisterUncreatableType
 
 
 def register_type(rtype, name):
-    qmlRegisterUncreatableType(rtype, "Xyon", 1, 0, name, name + " could not be created.")
+    qmlRegisterUncreatableType(rtype, "Xyon", 1, 0, name, name + " could not be registered.")
 
 if __name__ == "__main__":
 

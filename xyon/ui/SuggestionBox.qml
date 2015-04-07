@@ -148,8 +148,11 @@ Item {
 
                         Text {
                             text: object
-                            width: parent.width
+                            width: parent.width - 5
                             anchors.verticalCenter: parent.verticalCenter
+                            font.pixelSize: parent.height * 0.65
+                            anchors.left: parent.left
+                            anchors.leftMargin: 5
                         }
 
                         MouseArea {
@@ -159,13 +162,12 @@ Item {
                                 if (containsMouse)
                                 {
                                     internal.setCurrentIndex(index);
-                                    //root.currentIndex = index;
                                 }
                             }
                             onClicked: internal.acceptText(searchField.text)
                         }
 
-                        Component.onCompleted: console.log("object", object)
+                        //Component.onCompleted: console.log("object", object)
                     }
                 }
             }

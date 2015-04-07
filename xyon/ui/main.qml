@@ -5,12 +5,11 @@ import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
 
 Window {
+    id: window
     visible: true
-    //title: "AudioTest"
     width: 400
     height: 500
-    id: window
-    //flags: Qt.Drawer
+    flags: Qt.Drawer
     color: "dodgerblue"
     minimumWidth: width
     minimumHeight: height
@@ -79,9 +78,11 @@ Window {
 
     Component.onCompleted: {
         console.log("main completed");
+        /*
         console.log("controller", controller);
         console.log("controller.playlist", controller.playlist);
         console.log("controller.playlist.items", controller.playlist.items);
+        */
     }
 
 //    Button {
