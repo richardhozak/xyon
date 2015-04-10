@@ -6,16 +6,6 @@ import QtMultimedia 5.0
 
 Item {
 
-    Button {
-        width: 50
-        height: 50
-        onClicked: {
-            console.log("testattach", controller.testattach)
-            controller.test();
-        }
-        text: controller.testattach
-    }
-
     ScrollView {
         id: playlist
         anchors.left: parent.left
@@ -50,39 +40,43 @@ Item {
             model: controller.playlist.items
             delegate: Item {
                 anchors.left: parent.left
-                height: 50
+                height: 25
                 width: parent.width
                 //clip: true
+
+                Rectangle {
+                    anchors.fill: parent
+                    color: index % 2 != 0 ? "white" : "transparent"
+                    opacity: 0.25
+                }
 
                 property bool containsMouseOrIsPlaying: hoverArea.containsMouse || controller.playlist.currentPlayingIndex === index
 
                 Text {
                     anchors.left: playListButton.right
                     anchors.leftMargin: containsMouseOrIsPlaying ? 5 : 0
-                    anchors.top: parent.top
-                    anchors.topMargin: 5
+                    //anchors.top: parent.top
+                    //anchors.topMargin: 5
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.right: timeText.left
+
                     text: object.title
                     color: "white"
                     elide: Text.ElideRight
-                    width: parent.width - playListButton.width - (containsMouseOrIsPlaying ? 5 : 0) - removeFromListButton.width
+                    //width: parent.width - playListButton.width - (containsMouseOrIsPlaying ? 5 : 0) - removeFromListButton.width
                     font.pixelSize: 16
                 }
 
                 Text {
+                    id: timeText
                     anchors.right: removeFromListButton.left
-                    anchors.bottom: parent.bottom
-                    anchors.bottomMargin: 5
+                    anchors.rightMargin: deleteHoverArea.containsMouse ? 5 : 0
+                    //anchors.bottom: parent.bottom
+                    //anchors.bottomMargin: 5
+                    anchors.verticalCenter: parent.verticalCenter
                     text: object.time
                     color: "white"
                     font.pixelSize: 16
-
-                    Rectangle {
-                        width: parent.width
-                        height: 5
-                        color: "white"
-                        anchors.bottom: parent.bottom
-                        anchors.bottomMargin: -5
-                    }
                 }
 
                 Rectangle {
@@ -157,7 +151,7 @@ Item {
 
                 Image {
                     id: removeFromListButtonImage
-                    width: removeFromListButton.width / 2
+                    width: removeFromListButton.width * 0.25
                     height: width
                     anchors.centerIn: removeFromListButton
                     source: "/images/delete.png"
@@ -171,12 +165,12 @@ Item {
                     color: "#343434"
                 }
 
-                Rectangle {
+                /*Rectangle {
                     width: parent.width
                     height: 1
                     color: "white"
                     anchors.bottom: parent.bottom
-                }
+                }*/
 
                 MouseArea {
                     id: hoverArea

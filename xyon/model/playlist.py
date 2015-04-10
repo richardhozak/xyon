@@ -81,6 +81,12 @@ class Playlist(QObject):
             self.player.setMedia(QMediaContent(QUrl(url)))
             self.player.play()
 
+    def load_playlist(self, playlist):
+        self._items.clear()
+        self.currentPlayingIndex = -1
+        self.currentIndex = -1
+        self._items.setObjectList(playlist)
+
     def playCurrentIndex(self):
         print("play current index")
         print("currentIndex", self._currentIndex)
@@ -97,9 +103,9 @@ class Playlist(QObject):
 
             entry = self._items.at(self._currentIndex)
 
-            if entry.type == "youtube_audio":
+            if entry.type == "youtube_audio" or entry.type == "soundcloud_audio":
                 print("resolving url")
                 self.player.setMedia(QMediaContent())
                 self.resolveUrl.emit(entry)
             else:
-                print("type is not youtube audio")
+                print("type is not audio")

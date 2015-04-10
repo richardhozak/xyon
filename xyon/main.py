@@ -6,7 +6,7 @@ import resource_manager
 import sys
 
 from PyQt5.QtCore import QUrl
-from PyQt5.QtGui import QGuiApplication
+from PyQt5.QtWidgets import QApplication
 from PyQt5.QtQml import QQmlApplicationEngine, \
                         qmlRegisterUncreatableType
 
@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
     resource_manager.init_resources()
 
-    app = QGuiApplication(sys.argv)
+    app = QApplication(sys.argv)
 
     register_type(model.playlist.Playlist, "Playlist")
     register_type(model.audioentry.AudioEntry, "AudioEntry")

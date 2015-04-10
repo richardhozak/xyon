@@ -64,3 +64,9 @@ class QObjectListModel(QAbstractListModel):
         self.dataChanged.emit(self.index(0), self.index(self.count))
         if self.count != old_count:
             self.countChanged.emit()
+
+    def raw_data(self):
+        return self.listdata
+
+    def __iter__(self):
+        return self.listdata.__iter__()

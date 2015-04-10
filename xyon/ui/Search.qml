@@ -3,7 +3,7 @@ import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
 
 Rectangle {
-
+    id: root
     property real percent: 1 - (x / -width)
 
     MouseArea {
@@ -11,11 +11,14 @@ Rectangle {
         hoverEnabled: true
     }
 
+    property bool isDisabled: false
+    signal loadPlaylistClicked
+
     //onPercentChanged: console.log("percentil", percent)
 
     SuggestionBox {
         id: searchField
-        width: parent.width - 20
+        width: parent.width - 20 - switchButton.width
         height: 32
 
         anchors.left: parent.left
@@ -29,7 +32,29 @@ Rectangle {
         model: controller.queryList
         z: 1
     }
-/*
+
+    Button {
+        id: switchButton
+        anchors.left: searchField.right
+        anchors.verticalCenter: searchField.verticalCenter
+        
+        height: 32
+        width: height
+        text: controller.selectedService == "youtube" ? "YT" : "SC"
+        tooltip: "Switch search engine"
+
+        onClicked: {
+            if (controller.selectedService == "youtube")
+            {
+                controller.selectedService = "soundcloud";
+            }
+            else
+            {
+                controller.selectedService = "youtube";
+            }
+        }
+    }
+    /*
     TextField {
         id: searchField
         width: parent.width - 20
@@ -57,7 +82,7 @@ Rectangle {
 
         onAccepted: controller.search(text)
     }
-*/
+    */
     Item {
         id: searchResultsContainer
         anchors.top: searchField.bottom
@@ -68,6 +93,7 @@ Rectangle {
             anchors.fill: parent
             anchors.topMargin: 10
             anchors.bottomMargin: 10
+            enabled: !root.isDisabled
 
             style: ScrollViewStyle {
                 handle: Item {
@@ -91,89 +117,14 @@ Rectangle {
             ListView {
                 anchors.fill: parent
                 model: controller.searchlist
-                //spacing: 5
-                delegate: Item {
+                delegate: Entry {
                     anchors.left: parent.left
                     anchors.leftMargin: 10
                     height: 50
                     width: parent.width - 20
-                    //clip: true
-
-                    MarqueeText {
-                        id: marquee
-                        anchors.left: addButton.right
-                        anchors.leftMargin: hoverArea.containsMouse ? 5 : 0
-                        anchors.top: parent.top
-                        anchors.topMargin: 5
-                        text: object.title
-                        width: parent.width - (hoverArea.containsMouse ? 45 : 0)
-                        isScrolling: hoverArea.containsMouse
-                    }
-
-                    Text {
-                        anchors.right: parent.right
-                        anchors.bottom: parent.bottom
-                        anchors.bottomMargin: 5
-                        text: object.time
-                        color: "#dbdbdb"
-                        font.pixelSize: 16
-
-                        Rectangle {
-                            width: parent.width
-                            height: 5
-                            color: "#494949"
-                            anchors.bottom: parent.bottom
-                            anchors.bottomMargin: -5
-                        }
-                    }
-
-                    Rectangle {
-                        id: addButton
-                        width: hoverArea.containsMouse ? 40 : 0
-                        height: parent.height
-                        color: addMouseArea.pressed ? Qt.lighter("#494949") : "#494949"
-                        clip: true
-
-                        Text {
-                            text: "+"
-                            font.pixelSize: parent.height / 2
-                            anchors.centerIn: parent
-                            color: "#dbdbdb"
-                        }
-
-                        MouseArea {
-                            id: addMouseArea
-                            anchors.fill: parent
-                            onClicked: {
-                                //console.log(object);
-                                controller.playlist.addAudioEntry(object);
-                            }
-                        }
-
-                        Behavior on width {
-                            id: addBehavior
-                            NumberAnimation { duration: 50 }
-                        }
-                    }
-
-                    Rectangle {
-                        width: parent.width
-                        height: 1
-                        color: "#494949"
-                        anchors.bottom: parent.bottom
-                    }
-
-                    MouseArea {
-                        id: hoverArea
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onPressed: {
-                            marquee.displayDuration();
-                            mouse.accepted = false
-                        }
-                        onExited: marquee.stopAnimation()
-                    }
+                    entry: object
                 }
+                onCountChanged: console.log("search list count changed", count)
             }
         }
     }
@@ -208,6 +159,7 @@ Rectangle {
 
     MouseArea {
         enabled: searchField.isExpanded
+        hoverEnabled: enabled
         width: parent.width + 100
         height: parent.height
         onClicked: searchField.isExpanded = false

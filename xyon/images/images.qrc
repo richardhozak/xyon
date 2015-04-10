@@ -7,5 +7,6 @@
         <file>play.png</file>
         <file>previous.png</file>
         <file>stop.png</file>
+        <file>gradient.png</file>
     </qresource>
 </RCC>

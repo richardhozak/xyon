@@ -11,9 +11,19 @@ Item {
     property bool isScrolling
 
     Text {
-        id:scrollingText
+        id: scrollingText
         color: "#dbdbdb"
         font.pixelSize: 16
+    }
+
+    Image {
+        source: "/images/gradient.png"
+        height: parent.height
+        width: height
+        anchors.right: parent.right
+        rotation: 180
+        anchors.verticalCenter: parent.verticalCenter
+        visible: scrollingText.width > parent.width
     }
 
 //    MouseArea {
@@ -49,7 +59,7 @@ Item {
             target: scrollingText
             properties: "x"
             from: 0
-            to: -(scrollingText.width - width)
+            to: -(scrollingText.width - width) - 10
             duration: scrollingText.text.length * 10 * 2//scrollingText.text.length * 50//* 12 * 2
             //loops: Animation.Infinite
         }

@@ -21,13 +21,8 @@ class YoutubeService():
         if not callable(callback):
             raise TypeError("Passed parameter 'callback' is not callable.")
         self.callback = callback
-        self.dict = {}
         self.last_page = 0
         self.last_query = None
-        for name in dir(self):
-            attr = getattr(self, name)
-            if callable(attr) and not name.startswith("__") and not name.endswith("__"):
-                self.dict[name] = attr
 
     def search(self, query, page=1):
         def create_query_object(result):
@@ -35,14 +30,19 @@ class YoutubeService():
                 time_element = result.parent.parent.parent.find("span", {"class": "video-time"})
                 time = time_element.text if time_element is not None else ""
 
-                print(time, result["title"].encode("utf-8"))
+                # print("href", result["href"])
+                # print(time, result["title"].encode("utf-8"))
+
                 href = result['href']
                 is_list = 'list' in href
-                aid = href[26:] if is_list else href[9:]
-                url = "http://www.youtube.com/" + ("playlist?list=" if is_list else "watch?v=") + aid
-                atype = 'youtube_list' if is_list else 'youtube_audio'
+                video_id = href[9:20]
+                playlist_id = href[26:]
 
-                return model.audioentry.AudioEntry(url, atype, time, result["title"])
+                url = "https://www.youtube.com/" + ("playlist?list=" + playlist_id if is_list else "watch?v=" + video_id)
+                audio_type = 'youtube_list' if is_list else 'youtube_audio'
+                img = "https://img.youtube.com/vi/" + video_id + "/default.jpg"
+
+                return model.audioentry.AudioEntry(url, audio_type, time, result["title"], img)
             except:
                 print_error_info("Error while creating query object")
 
@@ -50,7 +50,7 @@ class YoutubeService():
         self.last_query = query
         print("search query", query)
         query_string = urllib.parse.urlencode({"search_query": query, "page": page})
-        print("query_string", query_string)
+        # print("query_string", query_string)
 
         html_content = urllib.request.urlopen("http://www.youtube.com/results?" + query_string)
         soup = bs4.BeautifulSoup(html_content.read().decode())
@@ -61,10 +61,7 @@ class YoutubeService():
         if self.last_query is not None:
             self.search(self.last_query, self.last_page + 1)
 
-    def resolve_url(self, vid, callback):
-        return self.get_stream_link(vid)
-
-    def get_stream_link(self, vid):
+    def resolve_url(self, vid):
         video = pafy.new(vid)
         print("Getting audio stream link", vid)
         audio = video.getbestaudio(preftype=("ogg" if platform.system() == "Linux" else "m4a"))
@@ -78,5 +75,18 @@ class YoutubeService():
 
         return audio.url_https
 
-    def get_playlist_items(self, pid):
-        pass
+    def get_playlist_items(self, list_url):
+        def get_entry_info(entry):
+            title = entry["data-title"]
+            vid = entry["data-video-id"]
+            time = entry.find("div", {"class": "timestamp"}).span.text
+            url = "https://www.youtube.com/watch?v=" + vid
+            img = "https://img.youtube.com/vi/" + vid + "/default.jpg"
+            print(time, vid, title)
+            return model.audioentry.AudioEntry(url, "youtube_audio", time, title, img)
+
+        print(list_url)
+        html_content = urllib.request.urlopen(list_url)
+        soup = bs4.BeautifulSoup(html_content.read().decode())
+        entries = soup.find_all("tr", {"class": "pl-video"})
+        return list(map(get_entry_info, entries))

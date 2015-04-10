@@ -6,5 +6,7 @@
         <file>RoundButton.qml</file>
         <file>MarqueeText.qml</file>
         <file>SuggestionBox.qml</file>
+        <file>EntryPlaylist.qml</file>
+        <file>Entry.qml</file>
     </qresource>
 </RCC>
