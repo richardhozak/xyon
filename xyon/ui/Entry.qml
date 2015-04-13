@@ -7,7 +7,6 @@ Item {
         id: typeStripe
         width: 5
         height: parent.height
-        color: entry.type == "youtube_list" ? "crimson" : "dodgerblue"
 
         Component.onCompleted: {
             if (entry.type == "youtube_list") 
@@ -58,7 +57,7 @@ Item {
                         controller.load_playlist(entry);
                         root.loadPlaylistClicked();
                     }
-                    else if (entry.type == "youtube_audio")
+                    else if (entry.type == "youtube_audio" || entry.type == "soundcloud_audio")
                     {
                         controller.playlist.addAudioEntry(entry);    
                     }

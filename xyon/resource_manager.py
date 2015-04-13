@@ -1,7 +1,7 @@
-import ui.resources
 import images.resources
+import ui.resources
 
 
 def init_resources():
-    ui.resources.qInitResources()
     images.resources.qInitResources()
+    ui.resources.qInitResources()

@@ -103,7 +103,10 @@ class Controller(QObject):
 
     @pyqtSlot()
     def load_more(self):
-        self._ytService.load_more()
+        if self.selectedService == "youtube":
+            self._ytService.load_more()
+        elif self.selectedService == "soundcloud":
+            self._scService.load_more()
 
     @pyqtSlot(str)
     def query_completion(self, text):

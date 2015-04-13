@@ -13,9 +13,8 @@ class SoundcloudService():
         self.last_page = None
 
     def search(self, query, page=1):
-        page -= 1
-        if page < 0:
-            page = 0
+        if page < 1:
+            page = 1
 
         self.last_query = query
         self.last_page = page
@@ -37,7 +36,7 @@ class SoundcloudService():
 
             return model.audioentry.AudioEntry(url, atype, time, title, img)
 
-        results = self._client.get("/tracks", q=query, limit=20, offset=page * 20)
+        results = self._client.get("/tracks", q=query, limit=20, offset=(page - 1) * 20)
         self.callback(list(map(create_query_object, results)))
 
     def load_more(self):
@@ -45,7 +44,9 @@ class SoundcloudService():
             self.search(self.last_query, self.last_page + 1)
 
     def resolve_url(self, url):
-        return self._client.get(url, allow_redirects=False)
+        location = self._client.get(url, allow_redirects=False).location
+        print(location)
+        return location
 
     def get_playlist_items(self):
         pass
