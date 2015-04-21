@@ -46,6 +46,7 @@ class Playlist(QObject):
         if self._currentPlayingIndex != value:
             self._currentPlayingIndex = value
             self.currentPlayingIndexChanged.emit()
+            self.playingItemChanged.emit()
 
     @pyqtProperty(model.qobjectlistmodel.QObjectListModel, constant=True)
     def items(self):
@@ -55,13 +56,10 @@ class Playlist(QObject):
 
     @pyqtProperty(model.audioentry.AudioEntry, notify=playingItemChanged)
     def playingItem(self):
-        return self._playingItem
+        if self._currentPlayingIndex < 0:
+            return None
 
-    @playingItem.setter
-    def playingItem(self, value):
-        if self._playingItem != value:
-            self._playingItem = value
-            self.playingItemChanged.emit()
+        return self._items.at(self._currentPlayingIndex)
 
     @pyqtSlot(model.audioentry.AudioEntry)
     def addAudioEntry(self, entry):
@@ -103,7 +101,7 @@ class Playlist(QObject):
 
             entry = self._items.at(self._currentIndex)
 
-            if entry.type == "youtube_audio" or entry.type == "soundcloud_audio":
+            if entry.type.endswith("track"):
                 print("resolving url")
                 self.player.setMedia(QMediaContent())
                 self.resolveUrl.emit(entry)

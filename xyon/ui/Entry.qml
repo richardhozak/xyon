@@ -13,7 +13,7 @@ Item {
             {
                 color = "crimson";
             }
-            else if (entry.type == "youtube_audio" || entry.type == "soundcloud_audio")
+            else if (entry.type == "youtube_track" || entry.type == "soundcloud_track")
             {
                 color = "dodgerblue";
             }
@@ -22,12 +22,11 @@ Item {
                 color = "pink";
             }
         }
-
     }
 
     Image {
         id: thumbnailImage
-        source: entry.img
+        source: entry != null ? entry.img : ""
         height: parent.height
         fillMode: Image.PreserveAspectFit
         anchors.left: typeStripe.right
@@ -39,7 +38,7 @@ Item {
 
             Text {
                 visible: thumbnailMouseArea.containsMouse
-                text: entry.type == "youtube_list" ? "<" : "+"
+                text: entry != null ? (entry.type == "youtube_list" ? "<" : "+") : ""
                 font.pixelSize: parent.height * 0.65
                 anchors.centerIn: parent
                 color: thumbnailMouseArea.pressed ? "black" : "white"
@@ -57,7 +56,7 @@ Item {
                         controller.load_playlist(entry);
                         root.loadPlaylistClicked();
                     }
-                    else if (entry.type == "youtube_audio" || entry.type == "soundcloud_audio")
+                    else if (entry.type == "youtube_track" || entry.type == "soundcloud_track")
                     {
                         controller.playlist.addAudioEntry(entry);    
                     }
@@ -76,17 +75,15 @@ Item {
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.topMargin: 5
-        text: entry.title
+        text: entry != null ? entry.title : ""
         isScrolling: hoverArea.containsMouse
     }
-
-
 
     Text {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 5
-        text: entry.type == "youtube_list" ? "Playlist" : entry.time
+        text: entry != null ? (entry.type == "youtube_list" ? "Playlist" : entry.time) : ""
         color: "#dbdbdb"
         font.pixelSize: 16
 

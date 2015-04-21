@@ -8,5 +8,11 @@
         <file>SuggestionBox.qml</file>
         <file>EntryPlaylist.qml</file>
         <file>Entry.qml</file>
+        <file>SearchSwitch.qml</file>
+        <file>SearchResults.qml</file>
+        <file>ServiceSwitch.qml</file>
+        <file>ControlButton.qml</file>
+        <file>VolumeSlider.qml</file>
+        <file>SimpleButton.qml</file>
     </qresource>
 </RCC>

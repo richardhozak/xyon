@@ -57,7 +57,7 @@ Rectangle {
         height: 25
         width: parent.width
         text: "Add all"
-        visible: controller.searchlist.count > 0
+        //visible: controller.searchlist.count > 0
         style: ButtonStyle {
             background: Rectangle {
                 implicitWidth: 100

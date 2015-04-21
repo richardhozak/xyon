@@ -4,6 +4,7 @@ import sys
 import pafy
 import os
 import model.audioentry
+import model.abstractservice
 import platform
 import bs4
 
@@ -15,23 +16,27 @@ def print_error_info(info=""):
     print(exc_type, fname, exc_tb.tb_lineno)
 
 
-class YoutubeService():
+class YoutubeService(model.abstractservice.AbstractService):
 
     def __init__(self, callback):
-        if not callable(callback):
-            raise TypeError("Passed parameter 'callback' is not callable.")
+        super().__init__(callback)
         self.callback = callback
-        self.last_page = 0
-        self.last_query = None
 
-    def search(self, query, page=1):
+        self.options = {
+            "tracks": model.abstractservice.ServiceOptions(),
+            "playlists": model.abstractservice.ServiceOptions()
+        }
+
+        self.query_filter = None
+
+    def search(self, query, page=1, query_filter="tracks"):
+        if not (query_filter == "tracks" or query_filter == "playlists"):
+            raise TypeError("Filter is not valid, valid options are 'tracks' or 'playlists'")
+
         def create_query_object(result):
             try:
                 time_element = result.parent.parent.parent.find("span", {"class": "video-time"})
                 time = time_element.text if time_element is not None else ""
-
-                # print("href", result["href"])
-                # print(time, result["title"].encode("utf-8"))
 
                 href = result['href']
                 is_list = 'list' in href
@@ -39,29 +44,35 @@ class YoutubeService():
                 playlist_id = href[26:]
 
                 url = "https://www.youtube.com/" + ("playlist?list=" + playlist_id if is_list else "watch?v=" + video_id)
-                audio_type = 'youtube_list' if is_list else 'youtube_audio'
+                audio_type = 'youtube_list' if is_list else 'youtube_track'
                 img = "https://img.youtube.com/vi/" + video_id + "/default.jpg"
 
                 return model.audioentry.AudioEntry(url, audio_type, time, result["title"], img)
             except:
                 print_error_info("Error while creating query object")
 
-        self.last_page = page
-        self.last_query = query
-        print("search query", query)
-        query_string = urllib.parse.urlencode({"search_query": query, "page": page})
-        # print("query_string", query_string)
+        self.query_filter = query_filter
+        option = self.options[query_filter]
+        option.page = page
+        option.query = query
+
+        query_string = urllib.parse.urlencode({"search_query": query,
+                                               "page": page,
+                                               "filters": "playlist" if query_filter == "playlists" else "video"})
 
         html_content = urllib.request.urlopen("http://www.youtube.com/results?" + query_string)
         soup = bs4.BeautifulSoup(html_content.read().decode())
         search_results = soup.find_all("a", {"class": "yt-uix-tile-link"})
+
         self.callback(list(map(create_query_object, search_results)))
 
-    def load_more(self):
-        if self.last_query is not None:
-            self.search(self.last_query, self.last_page + 1)
+    def load_more(self, query_filter=None):
+        if self.query_filter is not None:
+            query_filter = self.query_filter if query_filter is None else query_filter
+            option = self.options[query_filter]
+            self.search(option.query, option.page + 1, query_filter)
 
-    def resolve_url(self, vid):
+    def resolve_track_url(self, vid):
         video = pafy.new(vid)
         print("Getting audio stream link", vid)
         audio = video.getbestaudio(preftype=("ogg" if platform.system() == "Linux" else "m4a"))
@@ -75,18 +86,26 @@ class YoutubeService():
 
         return audio.url_https
 
-    def get_playlist_items(self, list_url):
+    def get_playlist_entries(self, list_url):
         def get_entry_info(entry):
+            timestamp_element = entry.find("div", {"class": "timestamp"})
+            if hasattr(timestamp_element, "span"):
+                time = timestamp_element.span.text
+            else:
+                return None
+
             title = entry["data-title"]
             vid = entry["data-video-id"]
-            time = entry.find("div", {"class": "timestamp"}).span.text
             url = "https://www.youtube.com/watch?v=" + vid
             img = "https://img.youtube.com/vi/" + vid + "/default.jpg"
             print(time, vid, title)
-            return model.audioentry.AudioEntry(url, "youtube_audio", time, title, img)
+            return model.audioentry.AudioEntry(url, "youtube_track", time, title, img)
 
         print(list_url)
         html_content = urllib.request.urlopen(list_url)
         soup = bs4.BeautifulSoup(html_content.read().decode())
         entries = soup.find_all("tr", {"class": "pl-video"})
-        return list(map(get_entry_info, entries))
+        return list(filter(lambda e: e is not None, map(get_entry_info, entries)))
+
+    def can_load_more(self):
+        pass

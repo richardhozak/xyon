@@ -2,14 +2,14 @@ import model.qobjectlistmodel
 import model.youtubeservice
 import model.soundcloudservice
 
+# import subprocess
 import json
 import urllib.parse
 import pickle
+import os
 
 from PyQt5.QtNetwork import *
-from PyQt5.QtMultimedia import \
-    QMediaPlayer, \
-    QAudioBuffer
+from PyQt5.QtMultimedia import QMediaPlayer
 from PyQt5.QtCore import \
     QObject, \
     pyqtSignal, \
@@ -25,8 +25,7 @@ class Controller(QObject):
     def __init__(self, parent=None):
         super(Controller, self).__init__(parent)
 
-        self._searchlist = model.qobjectlistmodel.QObjectListModel([], self)
-        self._queryList = model.qobjectlistmodel.QObjectListModel([], self)
+        self._suggestionList = model.qobjectlistmodel.QObjectListModel([], self)
 
         self._player = QMediaPlayer(self, QMediaPlayer.StreamPlayback)
         self._player.mediaStatusChanged.connect(self.playerStatusChanged)
@@ -34,48 +33,76 @@ class Controller(QObject):
         self._playlist = model.playlist.Playlist(self._player)
         self._playlist.resolveUrl.connect(self.resolveUrl)
 
-        self._canGoPrevPage = False
-        self._canGoNextPage = False
+        self.services = {
+            "youtube": model.youtubeservice.YoutubeService(self.search_callback),
+            "soundcloud": model.soundcloudservice.SoundcloudService(self.search_callback)
+        }
 
-        self._scService = model.soundcloudservice.SoundcloudService(self.search_callback)
-        self._ytService = model.youtubeservice.YoutubeService(self.search_callback)
+        self._trackResults = model.qobjectlistmodel.QObjectListModel([], self)
+        self._playlistResults = model.qobjectlistmodel.QObjectListModel([], self)
+
+        # self._scService = model.soundcloudservice.SoundcloudService(self.search_callback)
+        # self._ytService = model.youtubeservice.YoutubeService(self.search_callback)
 
         self._network_manager = QNetworkAccessManager(self)
         self._network_manager.finished.connect(self.reply_finished)
 
         self._entryPlaylist = model.qobjectlistmodel.QObjectListModel([], self)
 
+        self._searchOption = "tracks"
         self._selectedService = "youtube"
+        self._canLoadMore = True
 
-        '''
-        self._probe = QAudioProbe(self)
-        self._probe.setSource(self._player)
-        self._probe.audioBufferProbed.connect(self.process_buffer)
-        '''
+        self.searchOptionChanged.connect(self.on_search_option_changed)
 
-    canGoPrevPageChanged = pyqtSignal()
-    canGoNextPageChanged = pyqtSignal()
+    searchOptionChanged = pyqtSignal()
     selectedServiceChanged = pyqtSignal()
+    canLoadMoreChanged = pyqtSignal()
 
-    @pyqtProperty(bool, notify=canGoPrevPageChanged)
-    def canGoPrevPage(self):
-        return self._canGoPrevPage
+    @property
+    def service(self):
+        return self.services[self._selectedService]
 
-    @canGoPrevPage.setter
-    def canGoPrevPage(self, value):
-        if self._canGoPrevPage != value:
-            self._canGoPrevPage = value
-            self.canGoPrevPage.emit()
+    @pyqtSlot()
+    def on_search_option_changed(self):
+        if self.service.query_filter is None:
+            return
+        last_query = self.service.options[self.service.query_filter].query
+        print("search:", "option =", self.searchOption, "query =", last_query)
+        if last_query is None:
+            return
+        if self.searchOption == "tracks" and self.trackResults.count == 0:
+            self.service.search(query=last_query, query_filter="tracks")
+        elif self.searchOption == "playlists" and self.playlistResults.count == 0:
+            self.service.search(query=last_query, query_filter="playlists")
 
-    @pyqtProperty(bool)
-    def canGoNextPage(self):
-        return self._canGoNextPage
+    @pyqtProperty(model.qobjectlistmodel.QObjectListModel, constant=True)
+    def trackResults(self):
+        return self._trackResults
 
-    @canGoNextPage.setter
-    def canGoNextPage(self, value):
-        if self._canGoNextPage != value:
-            self._canGoNextPage = value
-            self.canGoNextPageChanged.emit()
+    @pyqtProperty(model.qobjectlistmodel.QObjectListModel, constant=True)
+    def playlistResults(self):
+        return self._playlistResults
+
+    @pyqtProperty(str, notify=searchOptionChanged)
+    def searchOption(self):
+        return self._searchOption
+
+    @searchOption.setter
+    def searchOption(self, value):
+        if self._searchOption != value:
+            self._searchOption = value
+            self.searchOptionChanged.emit()
+
+    @pyqtProperty(bool, notify=canLoadMoreChanged)
+    def canLoadMore(self):
+        return self._canLoadMore
+
+    @canLoadMore.setter
+    def canLoadMore(self, value):
+        if self._canLoadMore != value:
+            self._canLoadMore = value
+            self.canLoadMoreChanged.emit()
 
     @pyqtProperty(model.playlist.Playlist, constant=True)
     def playlist(self):
@@ -85,28 +112,22 @@ class Controller(QObject):
     def player(self):
         return self._player
 
-    @pyqtProperty(model.qobjectlistmodel.QObjectListModel, constant=True)
-    def searchlist(self):
-        return self._searchlist
-
     @pyqtSlot(str)
     def search(self, query):
-        self._searchlist.clear()
-        if self.selectedService == "youtube":
-            self._ytService.search(query)
-        else:
-            self._scService.search(query)
+        self.trackResults.clear()
+        self.playlistResults.clear()
+        print("searching for", query, "with filter", self.searchOption)
+        self.service.search(query=query, query_filter=self.searchOption)
 
     def search_callback(self, results):
-        for entry in results:
-            self._searchlist.append(entry)
+        if self.service.query_filter == "tracks":
+            self.trackResults.extend(results)
+        elif self.service.query_filter == "playlists":
+            self.playlistResults.extend(results)
 
     @pyqtSlot()
     def load_more(self):
-        if self.selectedService == "youtube":
-            self._ytService.load_more()
-        elif self.selectedService == "soundcloud":
-            self._scService.load_more()
+        self.service.load_more(self.searchOption)
 
     @pyqtSlot(str)
     def query_completion(self, text):
@@ -115,11 +136,12 @@ class Controller(QObject):
             self.reply_finished(None)
         else:
             print("Querying completion for", text)
-            self._network_manager.get(QNetworkRequest(QUrl("http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&" + urllib.parse.urlencode({"q": text}))))
+            self._network_manager.get(QNetworkRequest(QUrl("http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&"
+                                                           + urllib.parse.urlencode({"q": text}))))
 
     @pyqtProperty(model.qobjectlistmodel.QObjectListModel, constant=True)
-    def queryList(self):
-        return self._queryList
+    def suggestionList(self):
+        return self._suggestionList
 
     @pyqtProperty(model.qobjectlistmodel.QObjectListModel, constant=True)
     def entryPlaylist(self):
@@ -139,26 +161,39 @@ class Controller(QObject):
     @pyqtSlot(QNetworkReply)
     def reply_finished(self, reply):
         if reply is None:
-            self._queryList.clear()
+            self._suggestionList.clear()
         else:
             data_str = reply.readAll().data().decode("utf-8")
             obj = json.loads(data_str)
             if len(obj) == 2:
                 # print("reply", obj[1])
-                self._queryList.setObjectList(obj[1])
+                self._suggestionList.setObjectList(obj[1])
             else:
-                self._queryList.clear()
+                self._suggestionList.clear()
 
     def resolveUrl(self, entry):
         print("resolving url for", entry.type, entry.title)
-        url = ""
-        if entry.type == "youtube_audio":
-            url = self._ytService.resolve_url(entry.url)
-        elif entry.type == "soundcloud_audio":
-            url = self._scService.resolve_url(entry.url)
+        if entry.type.endswith("track"):
+            url = self.service.resolve_track_url(entry.url)
+            self._playlist.urlResolved(entry, url)
+            return
         else:
             return
-        self._playlist.urlResolved(entry, url)
+
+        url = ""
+        filename = os.getcwd() + os.sep + "out.mp3"
+
+        if os.path.exists(filename):
+            os.remove(filename)
+
+        if url.startswith("https"):
+            url = "http" + url[5:]
+
+        # print("repaired url:", url)
+
+        # subprocess.Popen(["ffmpeg", "-i", url, "-ab", "128k", "-vn", "-ar", "44100", "out.mp3"])
+
+        self._playlist.urlResolved(entry, "http://127.0.0.1:2000")  # "file://" + filename
 
     @pyqtSlot(QMediaPlayer.MediaStatus)
     def playerStatusChanged(self, status):
@@ -167,9 +202,9 @@ class Controller(QObject):
 
     @pyqtSlot(model.audioentry.AudioEntry)
     def load_playlist(self, entry):
-        if entry.type == "youtube_list":
+        if entry.type.endswith("list"):
             print("Getting playlist for", entry.title)
-            entries = self._ytService.get_playlist_items(entry.url)
+            entries = self.service.get_playlist_entries(entry.url)
             self.entryPlaylist.setObjectList(entries)
         else:
             print("Entry is not playlist")
@@ -199,16 +234,13 @@ class Controller(QObject):
 
     @pyqtSlot()
     def open_playlist(self):
-        def deserialize(entry):
-            return model.audioentry.AudioEntry.deserialize(entry)
-
         print("Loading playlist")
         file_name = QFileDialog.getOpenFileName(QWidget(), "Open playlist", "", "Xyon Playlist (*.xyp)")[0]
         print(file_name)
         playlist_file = open(file_name, "rb")
         data = pickle.load(playlist_file)
 
-        self._playlist.load_playlist(list(map(deserialize, data)))
+        self._playlist.load_playlist(list(map(lambda e: model.audioentry.AudioEntry.deserialize(e, self), data)))
 
         playlist_file.close()
 
@@ -217,65 +249,3 @@ class Controller(QObject):
     @pyqtSlot()
     def test(self):
         pass
-
-    def calculate_window(self):
-        self.window = []
-        for i in range(4096 * 2):
-            self.window[i] = 0.5 * ()
-
-    @pyqtSlot(QAudioBuffer)
-    def process_buffer(self, buffer):
-
-        if hasattr(self, "doit") and self.doit:
-            self.doit = False
-            print("Plotting...")
-
-            import matplotlib.pyplot as plt
-            from numpy.fft import fft, fftfreq
-            from numpy import arange
-
-            # print("Buffer probed")
-            # print(type(buffer.constData()))
-            array = buffer.constData()  # .asarray(buffer.byteCount())
-            array.setsize(buffer.byteCount())
-
-            inp = []
-            i = 0
-            while i < buffer.byteCount():
-                number = int.from_bytes(array[i:i + 2].asstring(2), byteorder="little", signed=True) / 32768
-                i += 2
-                # print(number)
-                inp.append(number)
-                # print(array.__getitem__(slice(i, i+2, None)))
-
-            t = arange(44100)
-            sp = fft(inp)
-            # freq = fftfreq(t.shape[-1])
-
-            print(sp)
-            print(len(sp))
-
-            # plt.plot(freq, sp.real, freq, sp.imag)
-            # pl.show()
-
-            '''
-            N = buffer.sampleCount()
-            T = 44100
-            yf = scipy.fftpack.fft(inp)
-            xf = np.linspace(0.0, 1.0 / (2.0 * T), N / 2)
-
-            fix, ax = plt.subplots()
-            ax.plot(xf, 2.0 / N * np.abs(yf[0:N / 2]))
-            ax.show()
-            '''
-            # for i in range(len(array)):
-            #    print(i)
-            # print(len(array))
-            # for i in array:
-            #    print(i)
-
-            # print("")
-            # print(buffer.constData().getsize())
-            # buffer.constData().setsize(buffer.byteCount())
-            # print(buffer.constData())
-            # print(buffer.constData() / 32768)

@@ -3,13 +3,15 @@ import QtQuick.Window 2.2
 import QtMultimedia 5.0
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
+import QtGraphicalEffects 1.0
 
 Window {
     id: window
     visible: true
     width: 400
     height: 500
-    flags: Qt.Drawer
+    flags: Qt.Dialog | Qt.CustomizeWindowHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMinimizeButtonHint
+    //flags: Qt.Dialog
     color: "dodgerblue"
     minimumWidth: width
     minimumHeight: height
@@ -17,33 +19,61 @@ Window {
     maximumHeight: height
     title: "Xyon"
 
-    Row {
-        anchors.right: parent.right
-
-        Button {
-            enabled: controller.playlist.items.count > 0
-            width: 25
-            height: 25
-            text: "▼"
-            tooltip: "Save playlist"
-            onClicked: controller.save_playlist()
-        }
-
-        Button {
-            width: 25
-            height: 25
-            text: "▲"
-            tooltip: "Load playlist"
-            onClicked: controller.open_playlist()
-        }
-    }
-
     MainContent {
+        anchors.top: parent.top
         width: parent.width
-        height: parent.height - 50
+        //height: parent.height - 50
         anchors.bottom: parent.bottom
         anchors.left: search.right
     }
+    
+    /*
+    Rectangle {
+        anchors.left: parent.left
+        anchors.leftMargin: 50
+        anchors.right: parent.right
+        anchors.rightMargin: 50
+        height: 100
+        color: "transparent"
+
+        Item {
+            id: nextSelected
+            width: 120
+            height: 96
+            //color: "transparent"
+            opacity: 0
+
+            Rectangle {
+                width: parent.width / 2
+                height: parent.height
+                color: "#faba00"
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: console.log("clicked")
+            }
+        }
+
+        Image {
+            id: mask
+            source: "/images/volume.png"
+            width: 120
+            height: 96
+            opacity: 0
+        }
+        
+        OpacityMask {
+            anchors.fill: nextSelected
+            source: nextSelected
+            maskSource: mask
+        }
+
+        VolumeSlider {
+            anchors.right: parent.right
+        }
+    }
+    */
 
     Rectangle {
         anchors.fill: parent
@@ -56,10 +86,7 @@ Window {
             enabled: playlistView.state != "content"
             hoverEnabled: enabled
 
-            onClicked: {
-                //mouse.accepted = false;
-                playlistView.state = "content";
-            }
+            onClicked: playlistView.state = "content"
         }
     }
 
@@ -99,14 +126,8 @@ Window {
         source: "/images/diamond.png"
         property real angle: -(90 - search.percent * 180)
 
-        rotation: angle//playlistView.state != "content" ? 90 : -90
+        rotation: angle
         
-        //onAngleChanged: console.log("angle", angle)
-        /*
-        Behavior on rotation {
-            NumberAnimation { duration: 500 }
-        }
-        */
         MouseArea {
             anchors.fill: parent
             onClicked: playlistView.state = (playlistView.state == "content" ? "search" : "content")
@@ -148,18 +169,5 @@ Window {
 
     Component.onCompleted: {
         console.log("main completed");
-        /*
-        console.log("controller", controller);
-        console.log("controller.playlist", controller.playlist);
-        console.log("controller.playlist.items", controller.playlist.items);
-        */
     }
-
-//    Button {
-//        width: 25
-//        height: 25
-//        anchors.right: parent.right
-//        text: "X"
-//        onClicked: window.close()
-//    }
 }

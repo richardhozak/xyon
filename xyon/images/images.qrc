@@ -2,11 +2,19 @@
     <qresource prefix="/images">
         <file>delete.png</file>
         <file>diamond.png</file>
-        <file>next.png</file>
-        <file>pause.png</file>
-        <file>play.png</file>
-        <file>previous.png</file>
-        <file>stop.png</file>
         <file>gradient.png</file>
+        <file>icon.png</file>
+        <file>next.png</file>
+        <file>next_selected.png</file>
+        <file>pause.png</file>
+        <file>pause_selected.png</file>
+        <file>play.png</file>
+        <file>play_selected.png</file>
+        <file>previous.png</file>
+        <file>previous_selected.png</file>
+        <file>stop.png</file>
+        <file>play_small.png</file>
+        <file>background.png</file>
+        <file>volume.png</file>
     </qresource>
 </RCC>

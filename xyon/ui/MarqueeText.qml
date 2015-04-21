@@ -21,7 +21,6 @@ Item {
         height: parent.height
         width: height
         anchors.right: parent.right
-        rotation: 180
         anchors.verticalCenter: parent.verticalCenter
         visible: scrollingText.width > parent.width
     }

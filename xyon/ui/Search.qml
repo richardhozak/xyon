@@ -14,8 +14,6 @@ Rectangle {
     property bool isDisabled: false
     signal loadPlaylistClicked
 
-    //onPercentChanged: console.log("percentil", percent)
-
     SuggestionBox {
         id: searchField
         width: parent.width - 20 - switchButton.width
@@ -29,10 +27,24 @@ Rectangle {
         onTextAccepted: controller.search(text)
         onTextChanged: controller.query_completion(text)
 
-        model: controller.queryList
+        model: controller.suggestionList
         z: 1
     }
 
+    ServiceSwitch {
+        id: switchButton
+        anchors.left: searchField.right
+        anchors.verticalCenter: searchField.verticalCenter
+        height: 32
+        width: height
+        border.color: "#494949"
+        border.width: 1
+        color: "#dbdbdb"
+        radius: 2
+        items: ["YT", "SC"]
+        
+    }
+    /*
     Button {
         id: switchButton
         anchors.left: searchField.right
@@ -54,88 +66,69 @@ Rectangle {
             }
         }
     }
-    /*
-    TextField {
-        id: searchField
-        width: parent.width - 20
-        height: 32
-        font.pixelSize: 20
-
+    */
+    SearchSwitch {
+        id: searchSwitch
+        anchors.top: searchField.bottom
         anchors.left: parent.left
-        anchors.top: parent.top
+        anchors.right: parent.right
         anchors.leftMargin: 10
+        anchors.rightMargin: 10
         anchors.topMargin: 10
+        height: 25
+        color: root.color
+        search: controller.searchOption
+        onSearchChanged: controller.searchOption = search
+    }
+    
+    Item {
+        id: searchResultsContainer
+        anchors.top: searchSwitch.bottom
+        anchors.bottom: loadMoreButton.top
+        anchors.topMargin: 10
+        anchors.bottomMargin: 10
+        
+        width: parent.width
+        clip: true
 
-        placeholderText: "Search..."
+        SearchResults {
+            id: trackSearchResults
+            x: controller.searchOption == "tracks" ? 0 : -width
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: parent.width
 
-        style: TextFieldStyle {
-            textColor: "black"
-            background: Rectangle {
-                radius: 2
-                implicitWidth: 100
-                implicitHeight: 24
-                border.color: "#494949"
-                border.width: 1
-                color: "#dbdbdb"
+            interactive: !root.isDisabled
+            model: controller.trackResults
+
+            Behavior on x {
+                NumberAnimation { duration: 100 }
+            }
+
+            Component.onCompleted: {
+                console.log("x", x);
+                console.log("width", width);
             }
         }
 
-        onAccepted: controller.search(text)
-    }
-    */
-    Item {
-        id: searchResultsContainer
-        anchors.top: searchField.bottom
-        width: parent.width
-        height: parent.height - searchField.height - 10 - loadMoreButton.height
-
-        ScrollView {
-            anchors.fill: parent
-            anchors.topMargin: 10
-            anchors.bottomMargin: 10
-            enabled: !root.isDisabled
-
-            style: ScrollViewStyle {
-                handle: Item {
-                    implicitWidth: 14
-                    implicitHeight: 26
-                    Rectangle {
-                        color: "#494949"
-                        anchors.fill: parent
-                        anchors.leftMargin: 4
-                        anchors.rightMargin: 4
-                    }
-                }
-                scrollBarBackground: Item {
-                    implicitWidth: 14
-                    implicitHeight: 26
-                }
-                decrementControl: Item{}
-                incrementControl: Item{}
-            }
-
-            ListView {
-                anchors.fill: parent
-                model: controller.searchlist
-                delegate: Entry {
-                    anchors.left: parent.left
-                    anchors.leftMargin: 10
-                    height: 50
-                    width: parent.width - 20
-                    entry: object
-                }
-                onCountChanged: console.log("search list count changed", count)
-            }
+        SearchResults {
+            anchors.left: trackSearchResults.right
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: parent.width
+            
+            interactive: !root.isDisabled
+            model: controller.playlistResults
         }
     }
 
     Button {
         id: loadMoreButton
-        anchors.top: searchResultsContainer.bottom
+        anchors.bottom: parent.bottom
         height: 25
         width: parent.width
         text: "Load more"
-        visible: controller.searchlist.count > 0
+        visible: true//TODO    //controller.searchlist.count > 0
         style: ButtonStyle {
             background: Rectangle {
                 implicitWidth: 100
@@ -165,4 +158,3 @@ Rectangle {
         onClicked: searchField.isExpanded = false
     }
 }
-

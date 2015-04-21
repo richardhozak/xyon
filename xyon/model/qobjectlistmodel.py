@@ -27,14 +27,20 @@ class QObjectListModel(QAbstractListModel):
             return QVariant()
 
     def append(self, item):
-        self.beginInsertRows(
-            QModelIndex(), len(self.listdata), len(self.listdata))
+        self.beginInsertRows(QModelIndex(), len(self.listdata), len(self.listdata))
         self.listdata.append(item)
         self.endInsertRows()
         self.countChanged.emit()
 
+    def extend(self, items):
+        self.beginInsertRows(QModelIndex(), len(self.listdata), len(self.listdata) + len(items) - 1)
+        for item in items:
+            self.listdata.append(item)
+        self.endInsertRows()
+        self.countChanged.emit()
+
     def clear(self):
-        if len(self.listdata) is 0:
+        if len(self.listdata) == 0:
             return
         self.beginRemoveRows(QModelIndex(), 0, len(self.listdata) - 1)
         self.listdata = []
