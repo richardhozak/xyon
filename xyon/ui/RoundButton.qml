@@ -41,7 +41,6 @@ Rectangle {
         anchors.fill: parent
         onClicked: button.clicked()
         hoverEnabled: true
-        //onContainsMouseChanged: console.log("contains", contains(mouseX, mouseY))
 
         function contains(x, y) {
             var area = buttonArea;

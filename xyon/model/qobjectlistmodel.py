@@ -1,4 +1,5 @@
 from PyQt5.QtCore import *
+from PyQt5.QtQml import QQmlEngine
 
 
 class QObjectListModel(QAbstractListModel):
@@ -28,14 +29,23 @@ class QObjectListModel(QAbstractListModel):
 
     def append(self, item):
         self.beginInsertRows(QModelIndex(), len(self.listdata), len(self.listdata))
+        '''
+        if item is not str:
+            QQmlEngine.setObjectOwnership(item, QQmlEngine.CppOwnership)
+        '''
         self.listdata.append(item)
         self.endInsertRows()
         self.countChanged.emit()
 
     def extend(self, items):
         self.beginInsertRows(QModelIndex(), len(self.listdata), len(self.listdata) + len(items) - 1)
+        '''
         for item in items:
+            if item is not str:
+                QQmlEngine.setObjectOwnership(item, QQmlEngine.CppOwnership)
             self.listdata.append(item)
+        '''
+        self.listdata.extend(items)
         self.endInsertRows()
         self.countChanged.emit()
 
@@ -59,12 +69,21 @@ class QObjectListModel(QAbstractListModel):
     def at(self, index):
         return self.listdata[index]
 
+    @pyqtSlot(int, result=QObject)
+    def get(self, index):
+        return self.listdata[index]
+
     def indexOf(self, item):
         return self.listdata.index(item)
 
     def setObjectList(self, objects):
         old_count = self.count
         self.beginResetModel()
+        '''
+        for item in objects:
+            if item is not str:
+                QQmlEngine.setObjectOwnership(item, QQmlEngine.CppOwnership)
+        '''
         self.listdata = objects
         self.endResetModel()
         self.dataChanged.emit(self.index(0), self.index(self.count))

@@ -3,8 +3,38 @@ import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
 
 Item {
+    id: root
     property alias interactive: scrollView.enabled
     property alias model: resultsList.model
+
+    signal contentScrolled()
+
+    function resetViewLocation() {
+        scrollView.flickableItem.contentY = 0
+    }
+
+    property int count: model.count
+    property int maxContentY: count * 50 - height
+    property int threshold: 5 * 50
+    property real contentY: scrollView.flickableItem.contentY
+
+    QtObject {
+        id: internal
+        property bool loading: false
+    }
+
+    onContentYChanged: {
+        if (contentY > maxContentY - threshold && !internal.loading) {
+            internal.loading = true
+            console.log("loading more...")
+            root.contentScrolled()
+        }
+    }
+
+    onCountChanged: {
+        console.log("count", count)
+        internal.loading = false
+    }
 
     ScrollView {
         id: scrollView

@@ -1,5 +1,7 @@
 import abc
 
+from PyQt5.QtCore import QObject
+
 
 class ServiceOptions:
 
@@ -8,13 +10,11 @@ class ServiceOptions:
         self.query = None
 
 
-class AbstractService:
+class AbstractService(QObject):
     __metaclass__ = abc.ABCMeta
 
-    def __init__(self, callback):
-        if not callable(callback):
-            raise TypeError("Passed parameter 'callback' is not callable.")
-        print("abstract service init call")
+    def __init__(self):
+        super().__init__()
 
     @abc.abstractmethod
     def search(self, query, page, query_filter):

@@ -2,6 +2,8 @@ from PyQt5.QtCore import \
     QObject, \
     pyqtProperty
 
+from PyQt5.QtQml import QQmlEngine
+
 
 class AudioEntry(QObject):
 
@@ -12,6 +14,7 @@ class AudioEntry(QObject):
         self._time = time
         self._title = title
         self._img = img
+        QQmlEngine.setObjectOwnership(self, QQmlEngine.CppOwnership)
 
     @pyqtProperty(type=str, constant=True)
     def url(self):

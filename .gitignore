@@ -59,6 +59,19 @@ docs/_build/
 # PyBuilder
 target/
 
-#Windows thumbs
+# User defined ignore rules
+
+# SublimeText specific files
+*.sublime-project
+*.sublime-workspace
+
+# Project specific files
+resources.py
+resouce_manager.py
+
+# Xyon playlists
+*.xyp
+
+# Windows thumbs
 Thumbs.db
 

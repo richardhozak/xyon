@@ -4,7 +4,7 @@ import QtQuick 2.4
 Item {
 	id: root
 
-	property string search: "tracks"
+	property string filter: "tracks"
 
 	property color color: "black"
 	property color selectedColor: Qt.lighter(color)
@@ -26,7 +26,7 @@ Item {
 		anchors.bottom: parent.bottom
 		
 		width: parent.width / 2
-		color: root.search == "tracks" ? root.selectedColor : root.color
+		color: root.filter == "tracks" ? root.selectedColor : root.color
 		radius: parent.radius
 
 		Rectangle {
@@ -42,12 +42,12 @@ Item {
 	    	font.pixelSize: parent.height * 0.65
 	    	anchors.centerIn: parent
 	    	text: "Tracks"
-	    	color: root.search == "tracks" ? root.selectedFontColor : root.fontColor
+	    	color: root.filter == "tracks" ? root.selectedFontColor : root.fontColor
 	    }
 
 	    MouseArea {
 	        anchors.fill: parent
-	        onClicked: root.search = "tracks"
+	        onClicked: root.filter = "tracks"
 	    }
 	}
 	
@@ -57,7 +57,7 @@ Item {
 		anchors.bottom: parent.bottom
 		
 		width: parent.width / 2
-		color: root.search == "playlists" ? root.selectedColor : root.color
+		color: root.filter == "playlists" ? root.selectedColor : root.color
 		radius: parent.radius
 
 		Rectangle {
@@ -73,12 +73,12 @@ Item {
 	    	font.pixelSize: parent.height * 0.65
 	    	anchors.centerIn: parent
 	    	text: "Playlists"
-	    	color: root.search == "playlists" ? root.selectedFontColor : root.fontColor
+	    	color: root.filter == "playlists" ? root.selectedFontColor : root.fontColor
 	    }
 
 	    MouseArea {
 	        anchors.fill: parent
-	        onClicked: root.search = "playlists"
+	        onClicked: root.filter = "playlists"
 	    }
 	}
 

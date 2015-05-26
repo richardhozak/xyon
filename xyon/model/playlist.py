@@ -1,109 +1,128 @@
-import model.qobjectlistmodel
 import model.audioentry
 
-from PyQt5.QtQuick import *
-from PyQt5.QtMultimedia import QMediaContent
-from PyQt5.QtCore import \
-    QObject, \
-    pyqtProperty, \
-    pyqtSignal, \
-    pyqtSlot, \
-    QUrl
+from PyQt5.QtCore import *
+from PyQt5.QtQml import QQmlEngine
 
+class Playlist(QAbstractListModel):
 
-class Playlist(QObject):
-
-    def __init__(self, player):
-        super(Playlist, self).__init__(player)
+    def __init__(self, datain, parent=None, *args):
+        QAbstractListModel.__init__(self, parent, *args)
+        self.listdata = datain
         self._currentIndex = -1
-        self._currentPlayingIndex = -1
-        self._items = model.qobjectlistmodel.QObjectListModel([])
-        self._playingItem = None
-        self.player = player
-        self._resolvingEntry = None
 
-    currentIndexChanged = pyqtSignal()
+    ObjectRole = Qt.UserRole + 1
 
-    @pyqtProperty(int, notify=currentIndexChanged)
+    _roles = {ObjectRole: "track"}
+
+    countChanged = pyqtSignal()
+    current_index_changed = pyqtSignal(name="currentIndexChanged")
+
+    @pyqtProperty(int, notify=current_index_changed)
     def currentIndex(self):
         return self._currentIndex
 
     @currentIndex.setter
-    def currentIndex(self, value):
-        if self._currentIndex != value:
-            self._currentIndex = value
-            self.currentIndexChanged.emit()
-            self.playCurrentIndex()
+    def currentIndex(self, index):
+        if self._currentIndex != index:
+            self._currentIndex = index
+            self.current_index_changed.emit()
 
-    currentPlayingIndexChanged = pyqtSignal()
+    @pyqtProperty(int, notify=countChanged)
+    def count(self):
+        return len(self.listdata)
 
-    @pyqtProperty(int, notify=currentPlayingIndexChanged)
-    def currentPlayingIndex(self):
-        return self._currentPlayingIndex
+    def rowCount(self, parent=QModelIndex()):
+        return len(self.listdata)
 
-    @currentPlayingIndex.setter
-    def currentPlayingIndex(self, value):
-        if self._currentPlayingIndex != value:
-            self._currentPlayingIndex = value
-            self.currentPlayingIndexChanged.emit()
-            self.playingItemChanged.emit()
+    def data(self, index, role):
+        if index.isValid() and role == self.ObjectRole:
+            return QVariant(self.listdata[index.row()])
+        else:
+            return QVariant()
 
-    @pyqtProperty(model.qobjectlistmodel.QObjectListModel, constant=True)
-    def items(self):
-        return self._items
+    def append(self, item):
+        self.beginInsertRows(QModelIndex(), len(self.listdata), len(self.listdata))
+        QQmlEngine.setObjectOwnership(item, QQmlEngine.CppOwnership)
+        self.listdata.append(item)
+        self.endInsertRows()
+        self.countChanged.emit()
 
-    playingItemChanged = pyqtSignal()
+    def extend(self, items):
+        self.beginInsertRows(QModelIndex(), len(self.listdata), len(self.listdata) + len(items) - 1)
+        for item in items:
+            QQmlEngine.setObjectOwnership(item, QQmlEngine.CppOwnership)
+            self.listdata.append(item)
+        self.endInsertRows()
+        self.countChanged.emit()
 
-    @pyqtProperty(model.audioentry.AudioEntry, notify=playingItemChanged)
-    def playingItem(self):
-        if self._currentPlayingIndex < 0:
-            return None
+    def clear(self):
+        if len(self.listdata) == 0:
+            return
+        self.beginRemoveRows(QModelIndex(), 0, len(self.listdata) - 1)
+        self.listdata = []
+        self.endRemoveRows()
+        self.countChanged.emit()
 
-        return self._items.at(self._currentPlayingIndex)
+    def roleNames(self):
+        return self._roles
+
+    def removeAt(self, index):
+        self.beginRemoveRows(QModelIndex(), index, index)
+        del self.listdata[index]
+        self.endRemoveRows()
+        self.countChanged.emit()
+
+    def at(self, index):
+        return self.listdata[index]
+
+    @pyqtSlot(int, result=QObject)
+    def get(self, index):
+        return self.listdata[index]
+
+    def indexOf(self, item):
+        return self.listdata.index(item)
+
+    def setObjectList(self, objects):
+        old_count = self.count
+        self.beginResetModel()
+        for item in objects:
+            QQmlEngine.setObjectOwnership(item, QQmlEngine.CppOwnership)
+        self.listdata = objects
+        self.endResetModel()
+        self.dataChanged.emit(self.index(0), self.index(self.count))
+        if self.count != old_count:
+            self.countChanged.emit()
+
+    def raw_data(self):
+        return self.listdata
+
+    def __iter__(self):
+        return self.listdata.__iter__()
 
     @pyqtSlot(model.audioentry.AudioEntry)
-    def addAudioEntry(self, entry):
-        self._items.append(entry)
-
+    def add(self, entry):
+        self.append(entry)
+    
     @pyqtSlot(int)
-    def removeAt(self, index):
-        self._items.removeAt(index)
+    def remove_at(self, index):
+        self.removeAt(index)
 
-    resolveUrl = pyqtSignal(model.audioentry.AudioEntry)
+    @pyqtSlot(model.audioentry.AudioEntry)
+    def remove(self, entry):
+        index = self.indexOf(entry)
+        if index != -1: # check whether indexOf returns -1 when it can't find the entry
+            self.remove_at(index)
+            if index == self.currentIndex:
+                self.currentIndex = -1
 
-    def urlResolved(self, entry, url):
-        if self._currentIndex == self._items.indexOf(entry):
-            print("entries match")
-            print("playing url")
-            self.currentPlayingIndex = self._currentIndex
-            self.player.setMedia(QMediaContent(QUrl(url)))
-            self.player.play()
+    @pyqtSlot()
+    def clear(self):
+        self.clear()
 
-    def load_playlist(self, playlist):
-        self._items.clear()
-        self.currentPlayingIndex = -1
-        self.currentIndex = -1
-        self._items.setObjectList(playlist)
+    def load(self, data):
+        entry_list = list(map(lambda e: model.audioentry.AudioEntry.deserialize(e, self), data))
+        self.setObjectList(entry_list)
 
-    def playCurrentIndex(self):
-        print("play current index")
-        print("currentIndex", self._currentIndex)
-        print("items count", self._items.count)
-        print("currentPlayingIndex", self._currentPlayingIndex)
+    def save(self):
+        return list(map(model.audioentry.AudioEntry.serialize, self.listdata))
 
-        # self.player.setMedia(QMediaContent(QUrl("videoplayback.mp4")))
-        # self.player.play()
-        # return
-
-        if ((self._currentIndex != -1 and
-             self._currentIndex < self._items.count and
-             self._currentPlayingIndex != self._currentIndex)):
-
-            entry = self._items.at(self._currentIndex)
-
-            if entry.type.endswith("track"):
-                print("resolving url")
-                self.player.setMedia(QMediaContent())
-                self.resolveUrl.emit(entry)
-            else:
-                print("type is not audio")

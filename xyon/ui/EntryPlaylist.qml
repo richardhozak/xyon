@@ -10,8 +10,9 @@ Rectangle {
     }
 
     Item {
-        height: parent.height - addAllButton.height
+        height: parent.height - addAllButton.height - 30
         width: parent.width
+        anchors.bottom: addAllButton.top
 
         ScrollView {
             anchors.fill: parent
@@ -39,7 +40,7 @@ Rectangle {
 
             ListView {
                 anchors.fill: parent
-                model: controller.entryPlaylist
+                model: controller.serviceManager.playlistList
                 delegate: Entry {
                     anchors.left: parent.left
                     anchors.leftMargin: 10
@@ -57,7 +58,6 @@ Rectangle {
         height: 25
         width: parent.width
         text: "Add all"
-        //visible: controller.searchlist.count > 0
         style: ButtonStyle {
             background: Rectangle {
                 implicitWidth: 100
@@ -73,9 +73,10 @@ Rectangle {
                     horizontalAlignment: Text.AlignHCenter
                     anchors.fill: parent
                     color: addAllButton.pressed ? "black" : "#dbdbdb"
+                    font.pixelSize: addAllButton.height * 0.75
                 }
             }
         }
-        onClicked: controller.add_playlist();
+        onClicked: controller.player.addPlaylist(controller.serviceManager.playlistList)
     }
 }

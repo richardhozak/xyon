@@ -14,5 +14,7 @@
         <file>ControlButton.qml</file>
         <file>VolumeSlider.qml</file>
         <file>SimpleButton.qml</file>
+        <file>PlaylistEntry.qml</file>
+        <file>ColorImage.qml</file>
     </qresource>
 </RCC>

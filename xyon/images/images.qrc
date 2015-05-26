@@ -16,5 +16,7 @@
         <file>play_small.png</file>
         <file>background.png</file>
         <file>volume.png</file>
+        <file>title.png</file>
+        <file>title_small.png</file>
     </qresource>
 </RCC>

@@ -8,6 +8,7 @@ import model.abstractservice
 import platform
 import bs4
 
+from PyQt5.QtCore import pyqtSignal, pyqtSlot
 
 def print_error_info(info=""):
     print(info)
@@ -18,9 +19,12 @@ def print_error_info(info=""):
 
 class YoutubeService(model.abstractservice.AbstractService):
 
-    def __init__(self, callback):
-        super().__init__(callback)
-        self.callback = callback
+    search_completed = pyqtSignal(list, name="searchCompleted")
+    track_resolved = pyqtSignal(str, str, name="trackResolved")
+    playlist_entries_fetched = pyqtSignal(str, list, name="playlistEntriesFetched")
+
+    def __init__(self):
+        super().__init__()
 
         self.options = {
             "tracks": model.abstractservice.ServiceOptions(),
@@ -29,6 +33,7 @@ class YoutubeService(model.abstractservice.AbstractService):
 
         self.query_filter = None
 
+    @pyqtSlot(str, int, str, name="search")
     def search(self, query, page=1, query_filter="tracks"):
         if not (query_filter == "tracks" or query_filter == "playlists"):
             raise TypeError("Filter is not valid, valid options are 'tracks' or 'playlists'")
@@ -64,14 +69,16 @@ class YoutubeService(model.abstractservice.AbstractService):
         soup = bs4.BeautifulSoup(html_content.read().decode())
         search_results = soup.find_all("a", {"class": "yt-uix-tile-link"})
 
-        self.callback(list(map(create_query_object, search_results)))
+        self.search_completed.emit(list(map(create_query_object, search_results)))
 
+    @pyqtSlot(str, name="loadMore")
     def load_more(self, query_filter=None):
         if self.query_filter is not None:
             query_filter = self.query_filter if query_filter is None else query_filter
             option = self.options[query_filter]
             self.search(option.query, option.page + 1, query_filter)
 
+    @pyqtSlot(str, name="resolveTrackUrl")
     def resolve_track_url(self, vid):
         video = pafy.new(vid)
         print("Getting audio stream link", vid)
@@ -84,8 +91,9 @@ class YoutubeService(model.abstractservice.AbstractService):
         print(audio.url_https)
         print(audio.extension)
 
-        return audio.url_https
+        self.track_resolved.emit(vid, audio.url_https)
 
+    @pyqtSlot(str, name="getPlaylistEntries")
     def get_playlist_entries(self, list_url):
         def get_entry_info(entry):
             timestamp_element = entry.find("div", {"class": "timestamp"})
@@ -105,7 +113,8 @@ class YoutubeService(model.abstractservice.AbstractService):
         html_content = urllib.request.urlopen(list_url)
         soup = bs4.BeautifulSoup(html_content.read().decode())
         entries = soup.find_all("tr", {"class": "pl-video"})
-        return list(filter(lambda e: e is not None, map(get_entry_info, entries)))
+        
+        self.playlist_entries_fetched.emit(list_url, list(filter(lambda e: e is not None, map(get_entry_info, entries))))
 
     def can_load_more(self):
         pass

@@ -4,12 +4,196 @@
 		"selected_items":
 		[
 			[
-				"sea",
-				"search"
+				"left",
+				"leftMargin"
+			],
+			[
+				"QMe",
+				"QMediaContent"
+			],
+			[
+				"QMedi",
+				"QMediaPlayer"
+			],
+			[
+				"currentText",
+				"currentTextOpacity"
+			],
+			[
+				"backgrou",
+				"backgroundColor"
+			],
+			[
+				"right",
+				"right"
+			],
+			[
+				"ri",
+				"right"
+			],
+			[
+				"on",
+				"on_url_resolved"
+			],
+			[
+				"test_se",
+				"test_service2"
+			],
+			[
+				"print_",
+				"print_progress"
+			],
+			[
+				"test",
+				"test_service"
+			],
+			[
+				"text",
+				"textMouseOverColor"
+			],
+			[
+				"con",
+				"containsMouse"
+			],
+			[
+				"buttonMou",
+				"buttonMouseArea"
+			],
+			[
+				"buttonMouse",
+				"buttonMouseOverColor"
+			],
+			[
+				"loadPlayl",
+				"loadPlaylistClicked"
+			],
+			[
+				"xPos",
+				"xPosition"
+			],
+			[
+				"xPosit",
+				"xPositionChanged"
+			],
+			[
+				"pyqtS",
+				"pyqtSignal"
+			],
+			[
+				"hover",
+				"hoverEnabled"
+			],
+			[
+				"resove",
+				"resolve_url"
+			],
+			[
+				"QM",
+				"QMediaPlayer"
+			],
+			[
+				"print",
+				"print_info"
+			],
+			[
+				"ho",
+				"horizontalCenter"
+			],
+			[
+				"reso",
+				"resolve_url"
+			],
+			[
+				"query_f",
+				"query_filter"
+			],
+			[
+				"QMedia",
+				"QMediaContent"
+			],
+			[
+				"statu",
+				"statuses"
+			],
+			[
+				"audioe",
+				"audioentry"
+			],
+			[
+				"Qobj",
+				"QObjectListModel"
+			],
+			[
+				"resolv",
+				"resolve_url"
+			],
+			[
+				"controller",
+				"controller2"
+			],
+			[
+				"query_filte",
+				"query_filter_changed"
+			],
+			[
+				"_service",
+				"_serviceDict"
+			],
+			[
+				"__",
+				"__main__"
+			],
+			[
+				"med",
+				"media_status_changed_handler"
+			],
+			[
+				"curre",
+				"currentIndex"
+			],
+			[
+				"resol",
+				"resolve_url"
+			],
+			[
+				"playlist",
+				"playlist"
+			],
+			[
+				"le",
+				"leftMargin"
+			],
+			[
+				"righ",
+				"rightMargin"
+			],
+			[
+				"top",
+				"topMargin"
+			],
+			[
+				"remov",
+				"remove_at"
+			],
+			[
+				"cl",
+				"clear"
+			],
+			[
+				"_reso",
+				"_resolving_entry"
 			],
 			[
 				"sele",
-				"selectedService	function"
+				"selected_index_changed"
+			],
+			[
+				"QObj",
+				"QObjectListModel"
+			],
+			[
+				"sea",
+				"search"
 			],
 			[
 				"search",
@@ -18,10 +202,6 @@
 			[
 				"selecte",
 				"selectedServiceChanged	statement"
-			],
-			[
-				"__",
-				"__init__"
 			],
 			[
 				"soundcloud",
@@ -34,10 +214,6 @@
 			[
 				"clien",
 				"client_id"
-			],
-			[
-				"curre",
-				"currentIndex	function"
 			],
 			[
 				"seria",
@@ -56,10 +232,6 @@
 				"playlist_file"
 			],
 			[
-				"playlist",
-				"playlist_file	statement"
-			],
-			[
 				"fil",
 				"file_name	statement"
 			],
@@ -70,10 +242,6 @@
 			[
 				"Pyq",
 				"PyQt5"
-			],
-			[
-				"ri",
-				"rightMargin"
 			],
 			[
 				"dele",
@@ -116,10 +284,6 @@
 				"hoverEnabled"
 			],
 			[
-				"Qobj",
-				"QObjectListModel	class"
-			],
-			[
 				"audioE",
 				"audioentry	module"
 			],
@@ -128,16 +292,8 @@
 				"playlistView"
 			],
 			[
-				"test",
-				"testattach"
-			],
-			[
 				"QAudio",
 				"QAudioBuffer"
-			],
-			[
-				"le",
-				"left"
 			],
 			[
 				"pla",
@@ -150,14 +306,6 @@
 			[
 				"sear",
 				"search_callback	function"
-			],
-			[
-				"QMedia",
-				"QMediaStatus"
-			],
-			[
-				"ho",
-				"hoverEnabled"
 			],
 			[
 				"Las",
@@ -178,10 +326,6 @@
 			[
 				"reply",
 				"reply_finished	function"
-			],
-			[
-				"pyqtS",
-				"pyqtSlot	import"
 			],
 			[
 				"PYqt",
@@ -280,18 +424,148 @@
 	"buffers":
 	[
 		{
+			"file": "xyon/model/youtubeservice.py",
+			"settings":
+			{
+				"buffer_size": 4686,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "xyon/model/controller.py",
 			"settings":
 			{
-				"buffer_size": 8835,
+				"buffer_size": 4314,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "xyon/ui/SearchResults.qml",
+			"settings":
+			{
+				"buffer_size": 1857,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xyon/ui/SearchSwitch.qml",
+			"settings":
+			{
+				"buffer_size": 1970,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xyon/model/servicemanager.py",
+			"settings":
+			{
+				"buffer_size": 6104,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "xyon/ui/PlaylistEntry.qml",
+			"settings":
+			{
+				"buffer_size": 2658,
+				"line_ending": "Windows",
+				"name": "PlaylistEntry.qml"
+			}
+		},
+		{
+			"file": "xyon/ui/RoundButton.qml",
+			"settings":
+			{
+				"buffer_size": 1223,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xyon/ui/SimpleButton.qml",
+			"settings":
+			{
+				"buffer_size": 1817,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xyon/ui/SuggestionBox.qml",
+			"settings":
+			{
+				"buffer_size": 5259,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xyon/ui/MainContent.qml",
+			"settings":
+			{
+				"buffer_size": 10302,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xyon/ui/VolumeSlider.qml",
+			"settings":
+			{
+				"buffer_size": 1087,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "xyon/ui/main.qml",
 			"settings":
 			{
-				"buffer_size": 4096,
+				"buffer_size": 8261,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xyon/images/images.qrc",
+			"settings":
+			{
+				"buffer_size": 747,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xyon/ui/MarqueeText.qml",
+			"settings":
+			{
+				"buffer_size": 1949,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xyon/ui/ColorImage.qml",
+			"settings":
+			{
+				"buffer_size": 290,
+				"line_ending": "Windows",
+				"name": "ColorImage.qml"
+			}
+		},
+		{
+			"file": "xyon/ui/Entry.qml",
+			"settings":
+			{
+				"buffer_size": 3060,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "xyon/ui/EntryPlaylist.qml",
+			"settings":
+			{
+				"buffer_size": 2443,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xyon/ui/ui.qrc",
+			"settings":
+			{
+				"buffer_size": 647,
 				"line_ending": "Unix"
 			}
 		},
@@ -299,7 +573,15 @@
 			"file": "xyon/ui/Search.qml",
 			"settings":
 			{
-				"buffer_size": 4625,
+				"buffer_size": 4155,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "xyon/model/player.py",
+			"settings":
+			{
+				"buffer_size": 4807,
 				"line_ending": "Windows"
 			}
 		},
@@ -307,31 +589,7 @@
 			"file": "xyon/model/playlist.py",
 			"settings":
 			{
-				"buffer_size": 3434,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "xyon/model/youtubeservice.py",
-			"settings":
-			{
-				"buffer_size": 3457,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "xyon/model/soundcloudservice.py",
-			"settings":
-			{
-				"buffer_size": 1634,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/D/zaloha disk/Data/ADOBE.CREATIVE.SUITE.6.0.MASTER.COLLECTION.LS16.ESD-ISO/nfo.nfo",
-			"settings":
-			{
-				"buffer_size": 649,
+				"buffer_size": 3800,
 				"line_ending": "Windows"
 			}
 		},
@@ -339,25 +597,42 @@
 			"file": "xyon/model/audioentry.py",
 			"settings":
 			{
-				"buffer_size": 1767,
+				"buffer_size": 1411,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "xyon/ui/Entry.qml",
+			"file": "xyon/model/qobjectlistmodel.py",
 			"settings":
 			{
-				"buffer_size": 3251,
-				"line_ending": "Windows"
+				"buffer_size": 2778,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "xyon/main.py",
+			"settings":
+			{
+				"buffer_size": 1798,
+				"line_ending": "Unix"
 			}
 		}
 	],
 	"build_system": "Xyon Resource Compiler",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
 	"command_palette":
 	{
-		"height": 75.0,
+		"height": 81.0,
+		"last_filter": "Install",
 		"selected_items":
 		[
+			[
+				"Install",
+				"Package Control: Install Package"
+			],
 			[
 				"install",
 				"Package Control: Install Package"
@@ -371,7 +646,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 449.0
+		"width": 400.0
 	},
 	"console":
 	{
@@ -392,11 +667,57 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/Admin/Documents/Projects/xyon/xyon/xyon",
-		"/C/Users/Admin/Documents/Projects/xyon/xyon/xyon/ui"
+		"/C/Users/Richard/Desktop/xyon-master/xyon",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/images",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/model",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/ui"
 	],
 	"file_history":
 	[
+		"/C/Users/Richard/Desktop/xyon-master/xyon/dnb.xyp",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/ui/EntryPlaylist.qml",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/model/qobjectlistmodel.py",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/model/abstractservice.py",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/ui/test.qml",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/model/controller.py",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/model/testservice.py",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/ui/ui.qrc",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/model/youtubeservice.py",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/model/playlist.py",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/main.py",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/model/servicemanager.py",
+		"/C/Users/Richard/Desktop/pyqtasync/main.py",
+		"/C/Users/Richard/Desktop/xyon_old/controller_old.py",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/ui/Entry.qml",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/ui/Search.qml",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/ui/main.qml",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/ui/SearchResults.qml",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/ui/SimpleButton.qml",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/ui/MainContent.qml",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/model/player.py",
+		"/C/Users/Richard/Desktop/pafytest/main.py",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/images/images.qrc",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/model/soundcloudservice.py",
+		"/C/Users/Richard/Desktop/vlctest/main.py",
+		"/C/Users/Richard/Desktop/mpd-0.17.4-win32/bin/mpd.conf",
+		"/C/Python34/Scripts/mpsyt.exe",
+		"/C/Python34/Scripts/ytdl",
+		"/C/Users/Richard/Desktop/mpd-0.17.4-win32/doc/README",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/model/controller_old.py",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/ui/SearchSwitch.qml",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/model/playlist2.py",
+		"/C/Users/Richard/Desktop/xyon-master/xyon/model/audioentry.py",
+		"/C/Users/Richard/Desktop/asynctest/main.py",
+		"/C/Users/Richard/AppData/Roaming/Sublime Text 3/Packages/User/SublimeOnSaveBuild.sublime-settings",
+		"/C/Users/Richard/AppData/Roaming/Sublime Text 3/Packages/SublimeOnSaveBuild/SublimeOnSaveBuild.sublime-settings",
+		"/C/Users/Richard/Desktop/pymp/player.py",
+		"/C/Users/Richard/Desktop/history_page_layout.txt",
+		"/C/Users/Richard/Desktop/vlctest/vlc.py",
+		"/C/Users/Richard/Desktop/vlc-2.2.0/src/stream_output/stream_output.c",
+		"/C/Users/Richard/Desktop/vlctest/plugins.dat",
+		"/C/Users/Richard/Desktop/pymp/main.py",
+		"/C/Users/Richard/Desktop/mpv/mpv.com",
+		"/D/zaloha disk/Data/ADOBE.CREATIVE.SUITE.6.0.MASTER.COLLECTION.LS16.ESD-ISO/nfo.nfo",
 		"/home/richard/Workspace/PyXyon/xyon/model/audioentry.py",
 		"/home/richard/Workspace/PyXyon/xyon/model/qobjectlistmodel.py",
 		"/home/richard/Workspace/PyXyon/xyon/model/youtubeservice.py",
@@ -435,7 +756,7 @@
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -446,9 +767,47 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"closClicked",
+			"30",
+			"Text",
+			"text",
+			"button",
+			"Button",
+			"button",
+			"Background",
+			"Color",
+			"positionText",
+			"entry",
+			"position",
+			"xPosition",
+			"status",
+			".statuses",
+			"statuses",
+			"self.entry",
+			"trackResults",
+			"entryPlaylist",
+			"playlist.index",
+			"controller.player.index",
+			"searchOption",
+			"service",
+			"search",
+			"Component.onCompleted",
+			"controller.player.playlist.index",
+			"track.",
+			"object.",
+			"_items",
+			"_selected_index",
+			"selected_index_changed",
+			"selectedIndex",
+			"cac",
+			"buffer",
+			"Instance",
+			"buffer",
+			"sec_forward",
+			"plugin_path",
 			"self",
 			"serialized_entry",
 			"object",
@@ -484,6 +843,12 @@
 		"regex": false,
 		"replace_history":
 		[
+			"yPosition",
+			"playlist.currentIndex",
+			"controller.player.playlist.index",
+			"controller.player.index",
+			"track.",
+			"track"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -494,24 +859,24 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 9,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "xyon/model/controller.py",
+					"file": "xyon/model/youtubeservice.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8835,
+						"buffer_size": 4686,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3211,
-								3211
+								3668,
+								3668
 							]
 						],
 						"settings":
@@ -520,28 +885,58 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 988.0,
+						"translation.x": -0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "xyon/ui/main.qml",
+					"file": "xyon/model/controller.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4096,
+						"buffer_size": 4314,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								416,
-								416
+								2158,
+								2158
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 675.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "xyon/ui/SearchResults.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1857,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								316,
+								316
 							]
 						],
 						"settings":
@@ -551,19 +946,19 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 153.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 18,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "xyon/ui/Search.qml",
+					"buffer": 3,
+					"file": "xyon/ui/SearchSwitch.qml",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4625,
+						"buffer_size": 1970,
 						"regions":
 						{
 						},
@@ -577,178 +972,89 @@
 						"settings":
 						{
 							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 17,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "xyon/model/servicemanager.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6104,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3225,
+								3225
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 900.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "xyon/model/playlist.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3434,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3166,
-								3166
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 315.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "xyon/model/youtubeservice.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3457,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 51.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
 					"buffer": 5,
-					"file": "xyon/model/soundcloudservice.py",
+					"file": "xyon/ui/PlaylistEntry.qml",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1634,
+						"buffer_size": 2658,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1484,
-								1484
+								2257,
+								2257
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 45.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "/D/zaloha disk/Data/ADOBE.CREATIVE.SUITE.6.0.MASTER.COLLECTION.LS16.ESD-ISO/nfo.nfo",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 649,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"auto_name": "PlaylistEntry.qml",
+							"syntax": "Packages/QML/Support/QML.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 20,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "xyon/model/audioentry.py",
+					"buffer": 6,
+					"file": "xyon/ui/RoundButton.qml",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1767,
+						"buffer_size": 1223,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1456,
-								1456
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 19.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "xyon/ui/Entry.qml",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3251,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1232,
-								1232
+								962,
+								962
 							]
 						],
 						"settings":
@@ -758,10 +1064,518 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 315.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 19,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "xyon/ui/SimpleButton.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1817,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								334,
+								334
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "xyon/ui/SuggestionBox.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5259,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5208,
+								5208
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 1530.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 16,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "xyon/ui/MainContent.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10302,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9053,
+								9053
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3150.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "xyon/ui/VolumeSlider.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1087,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								772,
+								772
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "xyon/ui/main.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8261,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5784,
+								5784
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1035.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "xyon/images/images.qrc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 747,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								722,
+								722
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "xyon/ui/MarqueeText.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1949,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1945,
+								1945
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 21,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "xyon/ui/ColorImage.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 290,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								131,
+								131
+							]
+						],
+						"settings":
+						{
+							"auto_name": "ColorImage.qml",
+							"syntax": "Packages/QML/Support/QML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 22,
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "xyon/ui/Entry.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3060,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1925,
+								1925
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "xyon/ui/EntryPlaylist.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2443,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								269,
+								269
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"file": "xyon/ui/ui.qrc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 647,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								622,
+								622
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 15,
+					"type": "text"
+				},
+				{
+					"buffer": 18,
+					"file": "xyon/ui/Search.qml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4155,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								671,
+								671
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/QML/Support/QML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 19,
+					"file": "xyon/model/player.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4807,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1911,
+								1911
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 855.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 20,
+					"file": "xyon/model/playlist.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3800,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3798,
+								3798
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 495.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 21,
+					"file": "xyon/model/audioentry.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1411,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								441,
+								441
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 22,
+					"file": "xyon/model/qobjectlistmodel.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2778,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1376,
+								1376
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 23,
+					"file": "xyon/main.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1798,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1193,
+								1193
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 23,
 					"type": "text"
 				}
 			]
@@ -769,11 +1583,11 @@
 	],
 	"incremental_find":
 	{
-		"height": 25.0
+		"height": 23.0
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 31.0
 	},
 	"layout":
 	{
@@ -806,15 +1620,17 @@
 	{
 		"height": 0.0
 	},
+	"pinned_build_system": "Xyon Resource Compiler",
 	"project": "xyon.sublime-project",
 	"replace":
 	{
-		"height": 46.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],
@@ -823,6 +1639,7 @@
 	"select_project":
 	{
 		"height": 500.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],
@@ -831,6 +1648,7 @@
 	"select_symbol":
 	{
 		"height": 392.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -856,7 +1674,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 190.0,
+	"side_bar_width": 193.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

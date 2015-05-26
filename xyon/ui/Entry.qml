@@ -53,25 +53,21 @@ Item {
                     console.log("clicked", entry.type, entry.url);
                     if (entry.type == "youtube_list")
                     {
-                        controller.load_playlist(entry);
-                        root.loadPlaylistClicked();
+                        controller.serviceManager.loadPlaylist(entry);
                     }
                     else if (entry.type == "youtube_track" || entry.type == "soundcloud_track")
                     {
-                        controller.playlist.addAudioEntry(entry);    
+                        controller.player.addTrack(entry);
                     }
                 }
             }
         }
     }
 
-
-
     MarqueeText {
         id: marquee
         anchors.left: thumbnailImage.right
         anchors.leftMargin: 5
-        //width: parent.width - thumbnail.width - 5
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.topMargin: 5
@@ -109,11 +105,6 @@ Item {
         height: parent.height
         width: parent.width - thumbnailImage.width
         hoverEnabled: true
-        onPressed: {
-            //marquee.displayDuration();
-            mouse.accepted = false;
-            console.log("thumbnail width", thumbnailImage.width)
-        }
         onExited: marquee.stopAnimation()
     }
 }

@@ -166,8 +166,6 @@ Item {
                             }
                             onClicked: internal.acceptText(searchField.text)
                         }
-
-                        //Component.onCompleted: console.log("object", object)
                     }
                 }
             }
