@@ -67,7 +67,7 @@ target/
 
 # Project specific files
 resources.py
-resouce_manager.py
+resource_manager.py
 
 # Xyon playlists
 *.xyp
