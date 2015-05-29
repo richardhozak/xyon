@@ -8,11 +8,11 @@ from PyQt5.QtCore import \
     pyqtProperty, \
     pyqtSignal, \
     pyqtSlot, \
-    QUrl, \
     QThread, \
     QMetaObject, \
     Qt, \
     Q_ARG
+
 
 class ServiceManager(QObject):
 
@@ -20,7 +20,7 @@ class ServiceManager(QObject):
         super().__init__(parent)
 
         self._serviceDict = {
-            "youtube": model.youtubeservice.YoutubeService()# ,
+            "youtube": model.youtubeservice.YoutubeService()  # ,
             # "soundcloud": model.soundcloudservice.SoundcloudService(self.query_callback)
         }
 
@@ -30,7 +30,7 @@ class ServiceManager(QObject):
         self._services = model.qobjectlistmodel.QObjectListModel(list(self._serviceDict.values()), self)
 
         thread = QThread(self)
-        #for service in self._serviceDict.values():
+        # for service in self._serviceDict.values():
         service = self._serviceDict["youtube"]
         service.search_completed.connect(self.query_callback)
         service.playlist_entries_fetched.connect(self.on_playlist_entries_fetched)
@@ -43,6 +43,7 @@ class ServiceManager(QObject):
         self._playlistResults = model.qobjectlistmodel.QObjectListModel([], self)
         self._playlistList = model.qobjectlistmodel.QObjectListModel([], self)
 
+    # pyqtSignals
     can_load_more_changed = pyqtSignal(name="canLoadMoreChanged")
     service_changed = pyqtSignal(name="serviceChanged")
     query_filter_changed = pyqtSignal(name="queryFilterChanged")
@@ -101,7 +102,6 @@ class ServiceManager(QObject):
         elif self._query_filter == "playlists" and self.playlistResults.count == 0:
             self.service.search(query=self._last_query, query_filter="playlists")
 
-
     @pyqtProperty(model.abstractservice.AbstractService, notify=service_changed)
     def service(self):
         return self._service
@@ -118,7 +118,6 @@ class ServiceManager(QObject):
             self.trackResults.clear()
             self.playlistResults.clear()
             self.on_query_filter_changed()
-
 
     @pyqtProperty(model.qobjectlistmodel.QObjectListModel, constant=True)
     def services(self):
@@ -143,7 +142,7 @@ class ServiceManager(QObject):
 
     @pyqtSlot(str, name="resolveTrackUrl")
     def resolve_track_url(self, service_name, track_url):
-        service = self._serviceDict[service_name] # .resolve_track_url(track_url)
+        service = self._serviceDict[service_name]  # .resolve_track_url(track_url)
         QMetaObject.invokeMethod(service, "resolveTrackUrl", Qt.QueuedConnection, Q_ARG(str, track_url))
 
     @pyqtSlot(str, name="getPlaylistEntries")

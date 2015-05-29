@@ -1,5 +1,4 @@
 from PyQt5.QtCore import *
-from PyQt5.QtQml import QQmlEngine
 
 
 class QObjectListModel(QAbstractListModel):

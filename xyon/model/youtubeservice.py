@@ -10,6 +10,7 @@ import bs4
 
 from PyQt5.QtCore import pyqtSignal, pyqtSlot
 
+
 def print_error_info(info=""):
     print(info)
     exc_type, exc_obj, exc_tb = sys.exc_info()
@@ -113,7 +114,7 @@ class YoutubeService(model.abstractservice.AbstractService):
         html_content = urllib.request.urlopen(list_url)
         soup = bs4.BeautifulSoup(html_content.read().decode())
         entries = soup.find_all("tr", {"class": "pl-video"})
-        
+
         self.playlist_entries_fetched.emit(list_url, list(filter(lambda e: e is not None, map(get_entry_info, entries))))
 
     def can_load_more(self):

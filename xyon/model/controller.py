@@ -17,10 +17,7 @@ from PyQt5.QtCore import \
     pyqtProperty, \
     pyqtSlot, \
     QUrl, \
-    QPoint, \
-    QThread, \
-    QMetaObject, \
-    Qt
+    QPoint
 
 from PyQt5.QtWidgets import QFileDialog, QWidget
 from PyQt5.QtGui import QCursor
@@ -42,6 +39,9 @@ class Controller(QObject):
         self._yPosition = 200
         self._xPosition = 200
 
+    # pyqtSignals
+    xPositionChanged = pyqtSignal()
+    yPositionChanged = pyqtSignal()
 
     @pyqtSlot()
     def tstarted(self):
@@ -55,9 +55,6 @@ class Controller(QObject):
     def print_progress(self, number):
         print("Progress:", number)
 
-
-    xPositionChanged = pyqtSignal()
-
     @pyqtProperty(int, notify=xPositionChanged)
     def xPosition(self):
         return self._xPosition
@@ -68,9 +65,6 @@ class Controller(QObject):
             self._xPosition = value
             self.xPositionChanged.emit()
 
-
-    yPositionChanged = pyqtSignal()
-
     @pyqtProperty(int, notify=yPositionChanged)
     def yPosition(self):
         return self._yPosition
@@ -80,7 +74,6 @@ class Controller(QObject):
         if self._yPosition != value:
             self._yPosition = value
             self.yPositionChanged.emit()
-
 
     @pyqtProperty(model.servicemanager.ServiceManager, constant=True)
     def serviceManager(self):
@@ -122,7 +115,7 @@ class Controller(QObject):
 
         file_name = QFileDialog.getSaveFileName(QWidget(), "Save playlist", "", "Xyon Playlist (*.xyp)")[0]
         print(file_name)
-        
+
         serialized_entries = self.player.playlist.save()
 
         playlist_file = open(file_name, "wb+")
@@ -134,10 +127,10 @@ class Controller(QObject):
     @pyqtSlot(name="openPlaylist")
     def open_playlist(self):
         print("Loading playlist")
-        
+
         file_name = QFileDialog.getOpenFileName(QWidget(), "Open playlist", "", "Xyon Playlist (*.xyp)")[0]
         print(file_name)
-        
+
         playlist_file = open(file_name, "rb")
         data = pickle.load(playlist_file)
         playlist_file.close()
@@ -148,17 +141,17 @@ class Controller(QObject):
 
     @pyqtSlot(QPoint, name="changePosition")
     def change_position(self, area_point):
-        print("before")
+        # print("before")
         if os.name == "nt":
             import win32con
             import win32gui
             hwnd = win32gui.GetForegroundWindow()
             if win32gui.GetWindowText(hwnd) == "Xyon":
-                print("is xyon")
+                # print("is xyon")
                 win32gui.SendMessage(hwnd, win32con.WM_SYSCOMMAND, 61458)
                 win32gui.SendMessage(hwnd, win32con.WM_LBUTTONUP)
         else:
             point = QCursor.pos()
             self.xPosition = point.x() - area_point.x()
             self.yPosition = point.y() - area_point.y()
-        print("after")
+        # print("after")

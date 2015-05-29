@@ -3,6 +3,7 @@ import model.audioentry
 from PyQt5.QtCore import *
 from PyQt5.QtQml import QQmlEngine
 
+
 class Playlist(QAbstractListModel):
 
     def __init__(self, datain, parent=None, *args):
@@ -14,6 +15,7 @@ class Playlist(QAbstractListModel):
 
     _roles = {ObjectRole: "track"}
 
+    # pyqtSignals
     countChanged = pyqtSignal()
     current_index_changed = pyqtSignal(name="currentIndexChanged")
 
@@ -55,6 +57,7 @@ class Playlist(QAbstractListModel):
         self.endInsertRows()
         self.countChanged.emit()
 
+    @pyqtSlot()
     def clear(self):
         if len(self.listdata) == 0:
             return
@@ -102,7 +105,7 @@ class Playlist(QAbstractListModel):
     @pyqtSlot(model.audioentry.AudioEntry)
     def add(self, entry):
         self.append(entry)
-    
+
     @pyqtSlot(int)
     def remove_at(self, index):
         self.removeAt(index)
@@ -110,14 +113,10 @@ class Playlist(QAbstractListModel):
     @pyqtSlot(model.audioentry.AudioEntry)
     def remove(self, entry):
         index = self.indexOf(entry)
-        if index != -1: # check whether indexOf returns -1 when it can't find the entry
+        if index != -1:  # check whether indexOf returns -1 when it can't find the entry
             self.remove_at(index)
             if index == self.currentIndex:
                 self.currentIndex = -1
-
-    @pyqtSlot()
-    def clear(self):
-        self.clear()
 
     def load(self, data):
         entry_list = list(map(lambda e: model.audioentry.AudioEntry.deserialize(e, self), data))
@@ -125,4 +124,3 @@ class Playlist(QAbstractListModel):
 
     def save(self):
         return list(map(model.audioentry.AudioEntry.serialize, self.listdata))
-

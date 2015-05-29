@@ -4,7 +4,6 @@ import model.youtubeservice
 from PyQt5.QtCore import \
     QObject, \
     pyqtProperty, \
-    pyqtSignal, \
     pyqtSlot, \
     QUrl
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
