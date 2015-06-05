@@ -25,12 +25,14 @@ Window {
         anchors.fill: parent
 
         MainContent {
+            id: mainContent
             anchors.top: parent.top
             width: parent.width
             anchors.bottom: parent.bottom
             anchors.left: search.right
             //onCloseClicked: window.close()
             //onMinimizeClicked: window.showMinimized()
+            onDownloadClicked: playlistView.state = "settings"
         }
         
         Connections {
@@ -89,7 +91,7 @@ Window {
         Rectangle {
             anchors.fill: parent
             color: "black"
-            opacity: search.percent / 2
+            opacity: Math.abs(search.percent) / 2
 
             MouseArea {
                 anchors.fill: parent
@@ -164,6 +166,10 @@ Window {
                 State {
                     name: "playlist"
                     PropertyChanges { target: playlistView; x: 0 }
+                },
+                State {
+                    name: "settings"
+                    PropertyChanges { target: playlistView; x: -playlistView.width - search.width - settings.width }
                 }
             ]
 
@@ -171,7 +177,49 @@ Window {
                 NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
             }
 
-            onStateChanged: console.log("state", state)
+            //onStateChanged: console.log("state", state)
+        }
+
+        Image {
+            anchors.right: settings.left
+            anchors.top: settings.top
+            anchors.topMargin: 30
+            width: 50
+            height: 50
+            source: "/images/settings.png"
+
+            property real angle: -((-search.percent) * 180)
+
+            rotation: angle
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: playlistView.state = (playlistView.state == "content" ? "settings" : "content")
+            }
+        }
+
+        Rectangle {
+            id: settings
+            anchors.left: mainContent.right
+            height: parent.height
+            width: 350
+            color: "#242424"
+
+            ListView {
+                anchors.fill: parent
+                anchors.topMargin: 50
+                model: controller.audioList
+                delegate: Text {
+                    text: object
+                    font.pixelSize: 20
+                    color: "white"
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: controller.download(index)
+                    }
+                }
+            }
         }
     }
 

@@ -82,7 +82,7 @@ if __name__ == "__main__":
     print("Compiling resources...")
 
     root_path = "xyon"
-    resman_path = root_path + os.sep + "resource_manager.py"
+    resman_path = root_path + os.sep + "resourcemanager.py"
 
     resman = ResouceManager(resman_path)
 

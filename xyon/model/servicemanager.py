@@ -85,7 +85,7 @@ class ServiceManager(QObject):
     @queryFilter.setter
     def queryFilter(self, query_filter):
         if self._query_filter != query_filter:
-            print("query filter changed to", query_filter)
+            # print("query filter changed to", query_filter)
             self._query_filter = query_filter
             self.query_filter_changed.emit()
             self.on_query_filter_changed()

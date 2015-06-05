@@ -3,11 +3,15 @@ import model.youtubeservice
 import model.soundcloudservice
 import model.player
 import model.servicemanager
+import model.downloadmanager
+import model.downloadentry
 
 import json
 import urllib.parse
 import pickle
 import os
+
+import pafy
 
 from PyQt5.QtNetwork import *
 from PyQt5.QtMultimedia import QMediaPlayer
@@ -21,6 +25,19 @@ from PyQt5.QtCore import \
 
 from PyQt5.QtWidgets import QFileDialog, QWidget
 from PyQt5.QtGui import QCursor
+
+suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
+
+
+def humansize(nbytes):
+    if nbytes == 0:
+        return '0 B'
+    i = 0
+    while nbytes >= 1024 and i < len(suffixes) - 1:
+        nbytes /= 1024.
+        i += 1
+    f = ('%.2f' % nbytes).rstrip('0').rstrip('.')
+    return '%s %s' % (f, suffixes[i])
 
 
 class Controller(QObject):
@@ -38,6 +55,10 @@ class Controller(QObject):
 
         self._yPosition = 200
         self._xPosition = 200
+
+        self._audioList = model.qobjectlistmodel.QObjectListModel([], self)
+        self.downloader = model.downloadmanager.DownloadManager("tracks")
+        self.downloader.start()
 
     # pyqtSignals
     xPositionChanged = pyqtSignal()
@@ -155,3 +176,23 @@ class Controller(QObject):
             self.xPosition = point.x() - area_point.x()
             self.yPosition = point.y() - area_point.y()
         # print("after")
+
+    def remove_invalid_chars(self, value):
+        for c in "<>:\"/\\|?*":
+            value = value.replace(c, "")
+        return value
+
+    @pyqtSlot(model.audioentry.AudioEntry, name="downloadEntry")
+    def download_entry(self, entry):
+        print("fetching info for", entry.title)
+        self.audioList.clear()
+        video = pafy.new(entry.url)
+        stream = video.getbestaudio()
+        name = self.remove_invalid_chars(entry.title) + "." + stream.extension
+        f = open("tracks" + os.sep + name, "w+")
+        f.close()
+        self.downloader.add(model.downloadentry.DownloadEntry(stream.url, name))
+
+    @pyqtProperty(model.qobjectlistmodel.QObjectListModel, constant=True)
+    def audioList(self):
+        return self._audioList

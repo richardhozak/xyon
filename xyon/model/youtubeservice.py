@@ -36,39 +36,42 @@ class YoutubeService(model.abstractservice.AbstractService):
 
     @pyqtSlot(str, int, str, name="search")
     def search(self, query, page=1, query_filter="tracks"):
-        if not (query_filter == "tracks" or query_filter == "playlists"):
-            raise TypeError("Filter is not valid, valid options are 'tracks' or 'playlists'")
+        try:
+            if not (query_filter == "tracks" or query_filter == "playlists"):
+                raise TypeError("Filter is not valid, valid options are 'tracks' or 'playlists'")
 
-        def create_query_object(result):
-            try:
-                time_element = result.parent.parent.parent.find("span", {"class": "video-time"})
-                time = time_element.text if time_element is not None else ""
+            def create_query_object(result):
+                try:
+                    time_element = result.parent.parent.parent.find("span", {"class": "video-time"})
+                    time = time_element.text if time_element is not None else ""
 
-                href = result['href']
-                is_list = 'list' in href
-                video_id = href[9:20]
-                playlist_id = href[26:]
+                    href = result['href']
+                    is_list = 'list' in href
+                    video_id = href[9:20]
+                    playlist_id = href[26:]
 
-                url = "https://www.youtube.com/" + ("playlist?list=" + playlist_id if is_list else "watch?v=" + video_id)
-                audio_type = 'youtube_list' if is_list else 'youtube_track'
-                img = "https://img.youtube.com/vi/" + video_id + "/default.jpg"
+                    url = "https://www.youtube.com/" + ("playlist?list=" + playlist_id if is_list else "watch?v=" + video_id)
+                    audio_type = 'youtube_list' if is_list else 'youtube_track'
+                    img = "https://img.youtube.com/vi/" + video_id + "/default.jpg"
 
-                return model.audioentry.AudioEntry(url, audio_type, time, result["title"], img)
-            except:
-                print_error_info("Error while creating query object")
+                    return model.audioentry.AudioEntry(url, audio_type, time, result["title"], img)
+                except:
+                    print_error_info("Error while creating query object")
 
-        self.query_filter = query_filter
-        option = self.options[query_filter]
-        option.page = page
-        option.query = query
+            self.query_filter = query_filter
+            option = self.options[query_filter]
+            option.page = page
+            option.query = query
 
-        query_string = urllib.parse.urlencode({"search_query": query,
-                                               "page": page,
-                                               "filters": "playlist" if query_filter == "playlists" else "video"})
+            query_string = urllib.parse.urlencode({"search_query": query,
+                                                   "page": page,
+                                                   "filters": "playlist" if query_filter == "playlists" else "video"})
 
-        html_content = urllib.request.urlopen("http://www.youtube.com/results?" + query_string)
-        soup = bs4.BeautifulSoup(html_content.read().decode())
-        search_results = soup.find_all("a", {"class": "yt-uix-tile-link"})
+            html_content = urllib.request.urlopen("http://www.youtube.com/results?" + query_string)
+            soup = bs4.BeautifulSoup(html_content.read().decode())
+            search_results = soup.find_all("a", {"class": "yt-uix-tile-link"})
+        except Exception as e:
+            print(e)
 
         self.search_completed.emit(list(map(create_query_object, search_results)))
 

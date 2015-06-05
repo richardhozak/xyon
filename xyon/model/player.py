@@ -108,7 +108,7 @@ class Player(QMediaPlayer):
     @pyqtSlot()
     def next(self):
         print("next")
-        if self.playlist.currentIndex < self.playlist.count:
+        if self.playlist.currentIndex < self.playlist.count - 1:
             self.last_state = self.state()
             self.setMedia(QMediaContent())
             self.playlist.currentIndex += 1

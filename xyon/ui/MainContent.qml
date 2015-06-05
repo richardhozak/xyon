@@ -9,6 +9,7 @@ Item {
 
     signal closeClicked()
     signal minimizeClicked()
+    signal downloadClicked()
 
     function updateText(textArea, total) {
         var hours = Math.floor((total / (60 * 60 * 1000)));
@@ -284,6 +285,20 @@ Item {
                         color: "#faba00"
                         text: Math.floor(parent.value).toString() + "%" 
                         font.pixelSize: parent.height * 0.25
+                    }
+                }
+
+
+                SimpleButton {
+                    anchors.left: parent.left
+                    anchors.bottom: parent.bottom
+
+                    width: 25
+                    height: 25
+                    text: "D"
+
+                    onClicked: {
+                        controller.downloadEntry(controller.player.playlist.get(controller.player.playlist.currentIndex))
                     }
                 }
             }

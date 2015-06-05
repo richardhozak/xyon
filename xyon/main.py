@@ -3,8 +3,9 @@ import model.playlist
 import model.controller
 import model.servicemanager
 import model
-import resource_manager  # need to compile_resources.py first
+import resourcemanager  # need to compile_resources.py first
 import sys
+import os
 import codecs
 
 from PyQt5.QtCore import \
@@ -36,29 +37,34 @@ def register_type(rtype, name):
     qmlRegisterUncreatableType(rtype, "Xyon", 1, 0, name, name + " could not be registered.")
 
 if __name__ == "__main__":
+    try:
+        if not os.path.exists("tracks"):
+            os.makedirs("tracks")
 
-    # weird encoding fix, so the application won't crash when we print something bad
-    if sys.stdout.encoding != 'cp850':
-        sys.stdout = UnbufferedWriter(codecs.getwriter('cp850')(sys.stdout.buffer, 'replace'))
-    if sys.stderr.encoding != 'cp850':
-        sys.stderr = UnbufferedWriter(codecs.getwriter('cp850')(sys.stderr.buffer, 'replace'))
+        # weird encoding fix, so the application won't crash when we print something bad
+        if sys.stdout.encoding != 'cp850':
+            sys.stdout = UnbufferedWriter(codecs.getwriter('cp850')(sys.stdout.buffer, 'replace'))
+        if sys.stderr.encoding != 'cp850':
+            sys.stderr = UnbufferedWriter(codecs.getwriter('cp850')(sys.stderr.buffer, 'replace'))
 
-    resource_manager.init_resources()
+        resourcemanager.init_resources()
 
-    qInstallMessageHandler(message_handler)
+        app = QApplication(sys.argv)
 
-    app = QApplication(sys.argv)
+        qInstallMessageHandler(message_handler)
 
-    register_type(model.playlist.Playlist, "Playlist")
-    register_type(model.servicemanager.ServiceManager, "ServiceManager")
-    register_type(model.audioentry.AudioEntry, "AudioEntry")
+        register_type(model.playlist.Playlist, "Playlist")
+        register_type(model.servicemanager.ServiceManager, "ServiceManager")
+        register_type(model.audioentry.AudioEntry, "AudioEntry")
 
-    engine = QQmlApplicationEngine()
-    controller = model.controller.Controller()
+        engine = QQmlApplicationEngine()
+        controller = model.controller.Controller()
 
-    context = engine.rootContext()
-    context.setContextProperty("controller", controller)
+        context = engine.rootContext()
+        context.setContextProperty("controller", controller)
 
-    engine.load(QUrl("qrc:/ui/main.qml"))
+        engine.load(QUrl("qrc:/ui/main.qml"))
 
-    app.exec_()
+        app.exec_()
+    except Exception as e:
+        print(e)

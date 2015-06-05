@@ -18,5 +18,6 @@
         <file>volume.png</file>
         <file>title.png</file>
         <file>title_small.png</file>
+        <file>settings.png</file>
     </qresource>
 </RCC>
