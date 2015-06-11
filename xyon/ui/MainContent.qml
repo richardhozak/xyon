@@ -102,6 +102,7 @@ Item {
                     onClicked: {
                         controller.player.playIndex(index)
                     }
+                    onDoubleClicked: controller.setClipboard(track)
                     onDeleteClicked: controller.player.removeTrack(track)
                 }
             }

@@ -13,6 +13,7 @@ Item {
 
     signal clicked()
     signal deleteClicked()
+    signal doubleClicked()
 
 	width: 400
     height: visible ? 25 : 0
@@ -61,9 +62,8 @@ Item {
     	id: mouseArea
     	anchors.fill: parent
     	hoverEnabled: true
-    	onClicked: {
-    		root.clicked()
-    	}
+    	onClicked: root.clicked()
+        onDoubleClicked: root.doubleClicked()
     }
 
     Item {

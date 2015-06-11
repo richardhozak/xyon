@@ -1,20 +1,25 @@
 <RCC>
     <qresource prefix="/ui">
+        <file>ColorImage.qml</file>
+        <file>ControlButton.qml</file>
+        <file>Entry.qml</file>
+        <file>EntryPlaylist.qml</file>
         <file>main.qml</file>
         <file>MainContent.qml</file>
-        <file>Search.qml</file>
-        <file>RoundButton.qml</file>
         <file>MarqueeText.qml</file>
-        <file>SuggestionBox.qml</file>
-        <file>EntryPlaylist.qml</file>
-        <file>Entry.qml</file>
-        <file>SearchSwitch.qml</file>
-        <file>SearchResults.qml</file>
-        <file>ServiceSwitch.qml</file>
-        <file>ControlButton.qml</file>
-        <file>VolumeSlider.qml</file>
-        <file>SimpleButton.qml</file>
+        <file>PageList.qml</file>
+        <file>PagePlayer.qml</file>
+        <file>PagePlaylist.qml</file>
+        <file>PageSearch.qml</file>
+        <file>PageSettings.qml</file>
         <file>PlaylistEntry.qml</file>
-        <file>ColorImage.qml</file>
+        <file>RoundButton.qml</file>
+        <file>Search.qml</file>
+        <file>SearchResults.qml</file>
+        <file>SearchSwitch.qml</file>
+        <file>ServiceSwitch.qml</file>
+        <file>SimpleButton.qml</file>
+        <file>SuggestionBox.qml</file>
+        <file>VolumeSlider.qml</file>
     </qresource>
 </RCC>

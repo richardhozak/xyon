@@ -9,7 +9,7 @@ Window {
     id: window
     title: "Xyon"
     visible: true
-    width: 400
+    width: 400 + 100
     height: 500
     //flags: /*Qt.FramelessWindowHint | *///Qt.WindowMinimizeButtonHint //| Qt.WindowSystemMenuHint //| Qt.WA_TranslucentBackground//Qt.Dialog | Qt.CustomizeWindowHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMinimizeButtonHint | Qt.FramelessWindowHint
     flags: Qt.FramelessWindowHint | Qt.Window
@@ -328,6 +328,54 @@ Window {
                 backgroundPressedOpacity: 0.25
                 onClicked: window.close()//root.closeClicked()
             }
+        }
+    }
+    SimpleButton {
+        width: 50
+        height: 50
+        text: "<"
+        onClicked: {
+            pageList.prevPage()
+        }
+    }
+
+    SimpleButton {
+        width: 50
+        height: 50
+        text: ">"
+        anchors.left: parent.left
+        anchors.leftMargin: 50
+
+        onClicked: {
+            pageList.nextPage()
+        }
+    }
+
+/*
+    PageList {
+        id: pageList
+        anchors.fill: parent
+        anchors.topMargin: 50
+        selectedPage: "Search"
+        pages: ["Playlist", "Search", "Player", "Settings"]
+    }
+*/
+
+    PageList {
+        id: pageList
+        width: 400
+        height: parent.height - 50
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+
+        page: "Player"
+        pages: ["Playlist", "Search", "Player", "Settings"]
+
+        Rectangle {
+            anchors.fill: parent
+            color: "transparent"
+            border.width: 2
+            border.color: "black"
         }
     }
 
