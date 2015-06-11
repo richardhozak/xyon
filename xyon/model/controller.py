@@ -12,6 +12,7 @@ import pickle
 import os
 
 import pafy
+import pyperclip
 
 from PyQt5.QtNetwork import *
 from PyQt5.QtMultimedia import QMediaPlayer
@@ -196,3 +197,11 @@ class Controller(QObject):
     @pyqtProperty(model.qobjectlistmodel.QObjectListModel, constant=True)
     def audioList(self):
         return self._audioList
+
+    @pyqtSlot(model.audioentry.AudioEntry, name="setClipboard")
+    def set_clipboard(self, entry):
+        print("setting clipboard for", entry.title)
+        video = pafy.new(entry.url)
+        stream = video.getbest(preftype="mp4")
+        pyperclip.copy(stream.url)
+
