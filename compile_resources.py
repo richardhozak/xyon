@@ -57,6 +57,27 @@ def find_resources(rootpath):
     return directories
 
 
+def add_files_to_qrc(res_file):
+    dir_name = os.path.dirname(res_file)
+    res_file_name = os.path.basename(os.path.splitext(res_file)[0])
+    with open(res_file, "w") as rf:
+        rf.write("<RCC>\n")
+        rf.write("    <qresource prefix=\"/{prefix_name}\">\n".format(prefix_name=res_file_name))
+
+        for filename in os.listdir(dir_name):
+            if not filename.endswith(".qrc") and not filename.endswith(".py") \
+               and not filename.endswith(".pyc") and filename != "__pycache__":
+                rf.write("        <file>{filename}</file>\n".format(filename=filename))
+        '''
+        for dirname, dirnames, filenames in os.walk(dir_name):
+            for filename in filenames:
+                if not filename.endswith(".qrc") and not filename.endswith(".py") and not filename.endswith(".pyc"):
+                    rf.write("        <file>{filename}</file>\n".format(filename=filename))
+        '''
+        rf.write("    </qresource>\n")
+        rf.write("</RCC>\n")
+
+
 class ResouceManager():
 
     def __init__(self, resman_path):
@@ -87,6 +108,7 @@ if __name__ == "__main__":
     resman = ResouceManager(resman_path)
 
     for res_file in find_resources(root_path):
+        add_files_to_qrc(res_file)
         compile_resource(res_file)
         resman.add_resource(res_file)
 
