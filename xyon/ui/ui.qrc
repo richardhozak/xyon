@@ -4,6 +4,7 @@
         <file>ControlButton.qml</file>
         <file>Entry.qml</file>
         <file>EntryPlaylist.qml</file>
+        <file>Extensions.js</file>
         <file>main.qml</file>
         <file>MainContent.qml</file>
         <file>MarqueeText.qml</file>
