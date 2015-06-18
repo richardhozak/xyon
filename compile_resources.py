@@ -99,7 +99,7 @@ class ResouceManager():
 
         self.file.close()
 
-if __name__ == "__main__":
+def main():
     print("Compiling resources...")
 
     root_path = "xyon"
@@ -115,3 +115,6 @@ if __name__ == "__main__":
     resman.close()
 
     print("Resources compiled.")
+
+if __name__ == "__main__":
+    main()

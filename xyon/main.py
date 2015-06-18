@@ -36,8 +36,7 @@ def message_handler(type, context, msg):
 def register_type(rtype, name):
     qmlRegisterUncreatableType(rtype, "Xyon", 1, 0, name, name + " could not be registered.")
 
-
-if __name__ == "__main__":
+def main():
     try:
         if not os.path.exists("tracks"):
             os.makedirs("tracks")
@@ -69,3 +68,6 @@ if __name__ == "__main__":
         app.exec_()
     except Exception as e:
         print(e)
+
+if __name__ == "__main__":
+    main()
