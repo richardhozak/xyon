@@ -39,11 +39,11 @@ Item {
         }
     }
 
-    Image {
+    /*Image {
         anchors.fill: parent
         source: "/images/background.png"
         opacity: 0.95
-    }
+    }*/
 
     Item {
 
@@ -218,7 +218,7 @@ Item {
                     }
                 }
 
-                Rectangle {
+                /*Rectangle {
                     width: 20
                     height: width
                     radius: width
@@ -232,7 +232,7 @@ Item {
                         anchors.fill: parent
                         onClicked: controller.player.stop()
                     }
-                }
+                }*/
 
                 ControlButton {
                     height: 40
@@ -290,7 +290,7 @@ Item {
                 }
 
 
-                SimpleButton {
+                /*SimpleButton {
                     anchors.left: parent.left
                     anchors.bottom: parent.bottom
 
@@ -301,7 +301,7 @@ Item {
                     onClicked: {
                         controller.downloadEntry(controller.player.playlist.get(controller.player.playlist.currentIndex))
                     }
-                }
+                }*/
             }
         }
     }

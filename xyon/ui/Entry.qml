@@ -1,7 +1,10 @@
 import QtQuick 2.4
 
 Item {
+    id: root
     property var entry: null
+
+    signal clicked()
 
     Rectangle {
         id: typeStripe
@@ -50,6 +53,7 @@ Item {
                 hoverEnabled: true
 
                 onClicked: {
+                    root.clicked()
                     console.log("clicked", entry.type, entry.url);
                     if (entry.type == "youtube_list")
                     {

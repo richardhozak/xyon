@@ -4,7 +4,15 @@ import QtQuick 2.3
 Rectangle {
 	width: 400
 	height: 500
-	color: "green"
+	color: "transparent"
 
-	property string name: "player"
+	Image {
+		anchors.fill: parent
+		source: "/images/background.png"
+		opacity: 0.95
+	}
+
+	MainContent {
+		anchors.fill: parent
+	}
 }

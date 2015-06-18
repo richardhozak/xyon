@@ -12,7 +12,7 @@ Rectangle {
     }
 
     property bool isDisabled: false
-    signal loadPlaylistClicked
+    signal loadPlaylistClicked()
 
     SuggestionBox {
         id: searchField
@@ -22,7 +22,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.leftMargin: 10
-        anchors.topMargin: 10 + 30
+        anchors.topMargin: 10// + 30
 
         onTextAccepted: controller.serviceManager.search(text)
         onTextChanged: controller.queryCompletion(text)
@@ -90,7 +90,11 @@ Rectangle {
                 NumberAnimation { duration: 100 }
             }
 
-            onContentScrolled: controller.serviceManager.loadMore("tracks")
+            onContentScrolled: {
+                if (count != 0) {
+                    controller.serviceManager.loadMore("tracks")
+                }
+            }
 
             Connections {
                 target: controller.serviceManager.trackResults
@@ -113,7 +117,13 @@ Rectangle {
             interactive: !root.isDisabled
             model: controller.serviceManager.playlistResults
 
-            onContentScrolled: controller.serviceManager.loadMore("playlists")
+            onEntryClicked: root.loadPlaylistClicked()
+
+            onContentScrolled: {
+                if (count != 0) {
+                    controller.serviceManager.loadMore("playlists")
+                }
+            }
 
             Connections {
                 target: controller.serviceManager.playlistResults
