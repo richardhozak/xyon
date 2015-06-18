@@ -8,6 +8,7 @@ Item {
     property alias model: resultsList.model
 
     signal contentScrolled()
+    signal entryClicked(var entry)
 
     function resetViewLocation() {
         scrollView.flickableItem.contentY = 0
@@ -68,6 +69,7 @@ Item {
                 height: 50
                 width: parent.width - 20
                 entry: object
+                onClicked: root.entryClicked(object)
             }
         }
     }
