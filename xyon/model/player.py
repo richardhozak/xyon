@@ -86,6 +86,8 @@ class Player(QMediaPlayer):
     @pyqtSlot()
     def play(self):
         print("play")
+        if self.playlist.count == 0:
+            return
         if self.last_state == QMediaPlayer.StoppedState:
             self.last_state = QMediaPlayer.PlayingState
             if self.playlist.currentIndex == -1:
