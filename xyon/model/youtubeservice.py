@@ -86,7 +86,8 @@ class YoutubeService(model.abstractservice.AbstractService):
     def resolve_track_url(self, vid):
         video = pafy.new(vid)
         print("Getting audio stream link", vid)
-        audio = video.getbestaudio(preftype=("ogg" if platform.system() == "Linux" else "m4a"))
+        # audio = video.getbestaudio(preftype=("ogg" if platform.system() == "Linux" else "m4a"))
+        audio = video.getbest(preftype="mp4")
 
         if not hasattr(audio, "url_https"):
             print("Error getting audio, falling back to best video.")
