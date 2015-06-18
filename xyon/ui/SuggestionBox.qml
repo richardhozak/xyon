@@ -47,11 +47,13 @@ Item {
         }
     }
 
+
+
     TextField {
         id: searchField
         anchors.fill: parent
         font.pixelSize: 20
-        placeholderText: "Search..."
+        //placeholderText: "Search..."
         style: TextFieldStyle {
             textColor: "black"
             background: Rectangle {
@@ -171,4 +173,16 @@ Item {
             }
         }
     }
+
+
+    Text {
+        text: "Search..."
+        anchors.verticalCenter: searchField.verticalCenter
+        anchors.left: searchField.left
+        font.pixelSize: 20
+        anchors.leftMargin: 8
+        color: Qt.darker("#dbdbdb")
+        visible: searchField.text.length == 0
+    }
+
 }
