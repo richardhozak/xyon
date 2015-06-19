@@ -1,6 +1,7 @@
 import sys
 import os
 import shutil
+import platform
 from cx_Freeze import main
 
 
@@ -16,11 +17,18 @@ if __name__ == "__main__":
 
     print(sys.argv)
 
+    icon_extensions = {
+        "Windows": ".ico",
+        "Darwin": ".icns",
+        "Linux": ".png"
+    }
+
     sys.argv = [sys.argv[0]]
-    target_name = "xyon" + (".exe" if os.name == "nt" else "")
+    system = platform.system()
+    target_name = "xyon" + (".exe" if system == "Windows" else "")
     sys.argv.extend(["--target-name=" + target_name,
                      "--target-dir=release",
-                     "--icon=xyon" + os.sep + "icon.ico",
+                     "--icon=xyon" + os.sep + "icon" + icon_extensions[system],
                      "xyon" + os.sep + "main.py"])
 
     main()
