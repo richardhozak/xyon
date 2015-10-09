@@ -12,13 +12,14 @@ Window {
     width: 400
     height: 500// + 25
     //flags: Qt.ToolTip//Qt.FramelessWindowHint | Qt.Window
+    //aflags: Qt.WA_NoSystemBackground
     color: "transparent"
     minimumWidth: width
     minimumHeight: height
     maximumWidth: width
     maximumHeight: height
-    x: controller.xPosition
-    y: controller.yPosition
+    /*x: controller.xPosition
+    y: controller.yPosition*/
 
     /*SimpleButton {
         width: 25
@@ -56,4 +57,6 @@ Window {
         border.width: 1
         border.color: "#faba00"
     }*/
+
+    Component.onCompleted: controller.extendFrame()
 }

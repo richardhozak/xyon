@@ -205,3 +205,12 @@ class Controller(QObject):
         stream = video.getbest(preftype="mp4")
         pyperclip.copy(stream.url)
 
+    @pyqtSlot(name="extendFrame")
+    def extend_frame(self):
+        import win32gui
+        from ctypes import windll, c_int, byref
+        hwnd = win32gui.GetForegroundWindow()
+        if win32gui.GetWindowText(hwnd) == "Xyon":
+            print("got hwnd")
+            windll.dwmapi.DwmExtendFrameIntoClientArea(c_int(hwnd), byref(c_int(-1)))
+

@@ -11,8 +11,10 @@ import codecs
 from PyQt5.QtCore import \
     QUrl, \
     qInstallMessageHandler
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtQml import QQmlApplicationEngine, \
+from PyQt5.QtWidgets import \
+    QApplication
+from PyQt5.QtQml import \
+    QQmlApplicationEngine, \
     qmlRegisterUncreatableType
 
 
@@ -36,38 +38,32 @@ def message_handler(type, context, msg):
 def register_type(rtype, name):
     qmlRegisterUncreatableType(rtype, "Xyon", 1, 0, name, name + " could not be registered.")
 
-def main():
-    try:
-        if not os.path.exists("tracks"):
-            os.makedirs("tracks")
-
-        # weird encoding fix, so the application won't crash when we print something bad
-        if sys.stdout.encoding != 'cp850':
-            sys.stdout = UnbufferedWriter(codecs.getwriter('cp850')(sys.stdout.buffer, 'replace'))
-        if sys.stderr.encoding != 'cp850':
-            sys.stderr = UnbufferedWriter(codecs.getwriter('cp850')(sys.stderr.buffer, 'replace'))
-
-        resourcemanager.init_resources()
-
-        app = QApplication(sys.argv)
-
-        qInstallMessageHandler(message_handler)
-
-        register_type(model.playlist.Playlist, "Playlist")
-        register_type(model.servicemanager.ServiceManager, "ServiceManager")
-        register_type(model.audioentry.AudioEntry, "AudioEntry")
-
-        engine = QQmlApplicationEngine()
-        controller = model.controller.Controller()
-
-        context = engine.rootContext()
-        context.setContextProperty("controller", controller)
-
-        engine.load(QUrl("qrc:/ui/main.qml"))
-
-        app.exec_()
-    except Exception as e:
-        print(e)
-
 if __name__ == "__main__":
-    main()
+    # if not os.path.exists("tracks"):
+    #     os.makedirs("tracks")
+
+    # weird encoding fix, so the application won't crash when we print something bad
+    if sys.stdout.encoding != 'cp850':
+        sys.stdout = UnbufferedWriter(codecs.getwriter('cp850')(sys.stdout.buffer, 'replace'))
+    if sys.stderr.encoding != 'cp850':
+        sys.stderr = UnbufferedWriter(codecs.getwriter('cp850')(sys.stderr.buffer, 'replace'))
+
+    resourcemanager.init_resources()
+
+    app = QApplication(sys.argv)
+
+    qInstallMessageHandler(message_handler)
+
+    register_type(model.playlist.Playlist, "Playlist")
+    register_type(model.servicemanager.ServiceManager, "ServiceManager")
+    register_type(model.audioentry.AudioEntry, "AudioEntry")
+
+    engine = QQmlApplicationEngine()
+    controller = model.controller.Controller()
+
+    context = engine.rootContext()
+    context.setContextProperty("controller", controller)
+
+    engine.load(QUrl("qrc:/ui/main.qml"))
+
+    app.exec_()

@@ -6,11 +6,11 @@ Rectangle {
 	height: 500
 	color: "transparent"
 
-	Image {
+	/*Image {
 		anchors.fill: parent
 		source: "/images/background.png"
 		opacity: 0.95
-	}
+	}*/
 
 	MainContent {
 		anchors.fill: parent
