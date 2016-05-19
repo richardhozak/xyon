@@ -5,6 +5,7 @@ import model.player
 import model.servicemanager
 import model.downloadmanager
 import model.downloadentry
+import model.remote
 
 import json
 import urllib.parse
@@ -28,7 +29,6 @@ from PyQt5.QtWidgets import QFileDialog, QWidget
 from PyQt5.QtGui import QCursor
 
 suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
-
 
 def humansize(nbytes):
     if nbytes == 0:
@@ -60,6 +60,23 @@ class Controller(QObject):
         self._audioList = model.qobjectlistmodel.QObjectListModel([], self)
         self.downloader = model.downloadmanager.DownloadManager("tracks")
         self.downloader.start()
+
+        self.remote = model.remote.Remote(self.remote_callback)
+        self.remote.start()
+
+    def remote_callback(self, command):
+        print("Received command:", command)
+        if command == "playpause":
+            if (self.player.string_state() == "PlayingState"):
+                self.player.pause()
+            else:
+                self.player.play()
+        elif command == "next":
+            self.player.next()
+        elif command == "prev":
+            self.player.previous()
+        else:
+            print("Invalid remote command:", command)
 
     # pyqtSignals
     xPositionChanged = pyqtSignal()

@@ -37,6 +37,9 @@ class Player(QMediaPlayer):
         }
         self.last_state = QMediaPlayer.StoppedState
 
+    def string_state(self):
+        return self.states[self.state()]
+
     @pyqtProperty(model.playlist.Playlist, constant=True)
     def playlist(self):
         return self._playlist

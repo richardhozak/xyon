@@ -13,6 +13,7 @@ Window {
     height: 500// + 25
     //flags: Qt.ToolTip//Qt.FramelessWindowHint | Qt.Window
     //aflags: Qt.WA_NoSystemBackground
+    flags: Qt.FramelessWindowHint | Qt.Window
     color: "transparent"
     minimumWidth: width
     minimumHeight: height
@@ -49,7 +50,53 @@ Window {
 
         page: "Player"
         pages: ["Playlist", "Search", "Player", "Settings"]
+        //visible: false
+
+        layer.enabled: true
+        layer.effect: OpacityMask {
+            maskSource: Item {
+                width: pageList.width
+                height: pageList.height
+                Rectangle {
+                    anchors.centerIn: parent
+                    width: pageList.width
+                    height: pageList.height
+                    radius: 5//Math.min(width, height)
+                }
+            }
+        }
     }
+
+    Rectangle {
+        anchors.fill: parent
+        border.width: 1
+        border.color: "black"
+        radius: 5
+        color: "transparent"
+        opacity: 0.25
+    }
+
+    /*Rectangle {
+        id: mask
+        anchors.fill: parent
+        color: "black"
+        radius: 20
+        border.width: 20
+        visible: true
+    }*/
+
+    /*OpacityMask {
+        anchors.fill: pageList
+        source: pageList
+        maskSource: mask
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            pageList.nextPage()
+        }
+    }*/
 
     /*Rectangle {
         anchors.fill: parent

@@ -1,6 +1,8 @@
 <RCC>
     <qresource prefix="/images">
         <file>background.png</file>
+        <file>background_blur.png</file>
+        <file>background_noice.png</file>
         <file>delete.png</file>
         <file>diamond.png</file>
         <file>gradient.png</file>
