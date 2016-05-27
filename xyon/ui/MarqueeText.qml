@@ -12,18 +12,19 @@ Item {
 
     Text {
         id: scrollingText
-        color: "#dbdbdb"
+        color: "white"
         font.pixelSize: 16
+        font.weight: Font.Light
     }
 
-    Image {
+    /*Image {
         source: "/images/gradient.png"
         height: parent.height
         width: height
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
         visible: scrollingText.width > parent.width
-    }
+    }*/
 
     SequentialAnimation {
         id: animateText

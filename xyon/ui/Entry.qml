@@ -1,4 +1,5 @@
 import QtQuick 2.4
+import QtGraphicalEffects 1.0
 
 Item {
     id: root
@@ -6,7 +7,7 @@ Item {
 
     signal clicked()
 
-    Rectangle {
+    /*Rectangle {
         id: typeStripe
         width: 5
         height: parent.height
@@ -25,14 +26,14 @@ Item {
                 color = "pink";
             }
         }
-    }
+    }*/
 
     Image {
         id: thumbnailImage
         source: entry != null ? entry.img : ""
         height: parent.height
         fillMode: Image.PreserveAspectFit
-        anchors.left: typeStripe.right
+        //anchors.left: typeStripe.right
 
         Rectangle {
             anchors.fill: parent
@@ -66,6 +67,51 @@ Item {
                 }
             }
         }
+
+        /*layer.enabled: true
+        layer.effect: OpacityMask {
+            maskSource: Item {
+                width: thumbnailImage.width
+                height: thumbnailImage.height
+                Rectangle {
+                    anchors.centerIn: parent
+                    width: thumbnailImage.width
+                    height: thumbnailImage.height
+                    radius: 10
+                }
+            }
+        }*/
+
+        layer.enabled: true
+        layer.effect: OpacityMask {
+            maskSource: Item {
+                width: thumbnailImage.width
+                height: thumbnailImage.height
+                Rectangle {
+                    anchors.centerIn: parent
+                    width: parent.width
+                    height: parent.height
+                    radius: 10
+                    opacity: 0.5
+                }
+
+                Rectangle {
+                    anchors.centerIn: parent
+                    width: parent.width - 2
+                    height: parent.height - 2
+                    radius: 10
+                }
+            }
+        }
+
+        Rectangle {
+            anchors.fill: parent
+            radius: 10
+            color: "transparent"
+            border.color: "black"
+            border.width: 1
+            opacity: 0.25
+        }
     }
 
     MarqueeText {
@@ -84,23 +130,27 @@ Item {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 5
         text: entry != null ? (entry.type == "youtube_list" ? "Playlist" : entry.time) : ""
-        color: "#dbdbdb"
+        color: "white"
         font.pixelSize: 16
+        font.weight: Font.Light
 
         Rectangle {
             width: parent.width
-            height: 5
-            color: "#494949"
+            height: 4
+            color: "black"
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: -5
+            anchors.bottomMargin: -4
+            opacity: 0.25
         }
     }
     
     Rectangle {
-        width: parent.width
+        width: parent.width - thumbnailImage.width + 10
         height: 1
-        color: "#494949"
+        color: "black"
         anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        opacity: 0.25
     }
 
     MouseArea {

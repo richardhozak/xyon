@@ -19,8 +19,31 @@ Window {
     minimumHeight: height
     maximumWidth: width
     maximumHeight: height
-    /*x: controller.xPosition
-    y: controller.yPosition*/
+    x: controller.xPosition
+    y: controller.yPosition
+
+    Connections {
+        target: controller
+        onMinimizeRequested: window.showMinimized()
+    }
+
+    /*Rectangle {
+        id: fillBackground
+        anchors.fill: parent
+        layer.enabled: true
+        layer.effect: OpacityMask {
+            maskSource: Item {
+                width: fillBackground.width
+                height: fillBackground.height
+                Rectangle {
+                    anchors.centerIn: parent
+                    width: fillBackground.width
+                    height: fillBackground.height
+                    radius: 5
+                }
+            }
+        }
+    }*/
 
     /*SimpleButton {
         width: 25
@@ -43,14 +66,12 @@ Window {
         }
     }*/
     
-    PageList {
-        id: pageList
+    /*Image {
+        id: img
         anchors.fill: parent
-        //anchors.topMargin: 25
-
-        page: "Player"
-        pages: ["Playlist", "Search", "Player", "Settings"]
-        //visible: false
+        source: "/images/background_noice.png"
+        opacity: 1
+        visible: false
 
         layer.enabled: true
         layer.effect: OpacityMask {
@@ -61,11 +82,67 @@ Window {
                     anchors.centerIn: parent
                     width: pageList.width
                     height: pageList.height
-                    radius: 5//Math.min(width, height)
+                    radius: 5
+                }
+            }
+        }
+    }*/
+
+    /*Image {
+        source: "/images/parallax_background.png"
+        x: -((Math.abs(pageList.rowX) / pageList.rowWidth) * width)
+    }*/
+
+    MouseArea {
+        anchors.fill: parent
+        hoverEnabled: true
+        onPositionChanged: {
+            if (pressed) {
+                controller.changePosition(Qt.point(mouse.x, mouse.y))
+            }
+        }
+    }
+    
+    PageList {
+        id: pageList
+        height: 500
+        width: 400
+        anchors.centerIn: parent
+        page: "Player"
+        pages: ["Playlist", "Search", "Player", "Settings"]
+
+        layer.enabled: true
+        layer.effect: OpacityMask {
+            maskSource: Item {
+                width: pageList.width
+                height: pageList.height
+                Rectangle {
+                    anchors.centerIn: parent
+                    width: pageList.width
+                    height: pageList.height
+                    radius: 5
                 }
             }
         }
     }
+
+    /*Row {
+        Button {
+            width: 25
+            height: 25
+            onClicked: pageList.previousPage()
+        }
+
+        Button {
+            width: 25
+            height: 25
+            onClicked: pageList.nextPage()
+        }
+
+        Text {
+            text: pageList.page
+        }
+    }*/
 
     Rectangle {
         anchors.fill: parent
@@ -75,6 +152,28 @@ Window {
         color: "transparent"
         opacity: 0.25
     }
+
+
+
+    /*Column {
+        anchors.centerIn: parent
+        width: parent.width
+        Slider {
+            id: refSlider
+            maximumValue: 156
+            minimumValue: 0
+            width: parent.width
+        }
+
+        Slider {
+            id: valueSlider
+            maximumValue: 98
+            minimumValue: 0
+            width: parent.width
+            value: refSlider.value * (maximumValue / refSlider.maximumValue)
+        }
+    }*/
+
 
     /*Rectangle {
         id: mask

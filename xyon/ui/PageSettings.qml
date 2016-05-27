@@ -6,32 +6,53 @@ Rectangle {
 
 	width: 350
 	height: 500
-	color: "#242424"
+	color: "transparent"
 
 	signal activatePage()
 
-	Text {
-		text: "Under\nConstruction"
+	Rectangle {
+		anchors.fill: parent
 		color: "white"
-		anchors.centerIn: parent
-		font.pixelSize: 50
+		opacity: 0.1
+
+		Rectangle {
+    		anchors.fill: parent
+    		color: "transparent"
+    		border.width: 1
+    		border.color: "white"
+    	}
 	}
 
-	MouseArea {
-		width: 50
-		height: 50
-		anchors.right: parent.left
+	Column {
+		anchors.left: parent.left
+		anchors.right: parent.right
+		anchors.leftMargin: 10
+		anchors.rightMargin: 10
 		anchors.top: parent.top
+		anchors.topMargin: 10
+		spacing: 10
 
-		Image {
-			width: 50
-			height: 50
-			anchors.centerIn: parent
-			source: "/images/settings.png"
-			smooth: true
-			rotation: percentage * 360 / 2
+		SimpleGlassButton {
+			text: "Load playlist"
+			onClicked: controller.openPlaylist()
 		}
 
-		onClicked: root.activatePage()
+		SimpleGlassButton {
+			text: "Save playlist"
+			onClicked: controller.savePlaylist()
+		}
+	}
+
+
+	Image {
+		width: 25
+		height: 25
+		anchors.topMargin: 25
+		anchors.rightMargin: 5
+		anchors.right: parent.left
+		anchors.top: parent.top
+		source: "/images/settings.png"
+		mipmap: true
+		rotation: percentage * 360 / 2
 	}
 }

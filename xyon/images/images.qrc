@@ -7,8 +7,15 @@
         <file>diamond.png</file>
         <file>gradient.png</file>
         <file>icon.png</file>
+        <file>icon_playlists.png</file>
+        <file>icon_tracks.png</file>
         <file>next.png</file>
         <file>next_selected.png</file>
+        <file>parallax_background.png</file>
+        <file>parallax_background_2.png</file>
+        <file>parallax_background_3.png</file>
+        <file>parallax_background_4.png</file>
+        <file>parallax_background_5.png</file>
         <file>pause.png</file>
         <file>pause_selected.png</file>
         <file>play.png</file>
@@ -16,6 +23,7 @@
         <file>play_small.png</file>
         <file>previous.png</file>
         <file>previous_selected.png</file>
+        <file>scrolling_background.png</file>
         <file>settings.png</file>
         <file>stop.png</file>
         <file>title.png</file>

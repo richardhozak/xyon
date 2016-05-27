@@ -1,15 +1,11 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
+import QtGraphicalEffects 1.0
 
 Rectangle {
     id: root
     property real percent: 1 - (x / -width)
-
-    MouseArea {
-        anchors.fill: parent
-        hoverEnabled: true
-    }
 
     property bool isDisabled: false
     signal loadPlaylistClicked()
@@ -29,7 +25,17 @@ Rectangle {
 
         model: controller.suggestionList
         z: 1
+
+        filter: controller.serviceManager.queryFilter
+        onFilterChanged: controller.serviceManager.queryFilter = filter
     }
+
+    /*FilterSwitch {
+        height: 32
+        width: height
+        anchors.left: searchField.right
+        anchors.verticalCenter: searchField.verticalCenter
+    }*/
 
     /*ServiceSwitch {
         id: switchButton
@@ -52,7 +58,7 @@ Rectangle {
         }
     }*/
 
-    SearchSwitch {
+    /*SearchSwitch {
         id: searchSwitch
         anchors.top: searchField.bottom
         anchors.left: parent.left
@@ -61,14 +67,14 @@ Rectangle {
         anchors.rightMargin: 10
         anchors.topMargin: 10
         height: 25
-        color: root.color
+        color: "blue"//root.color
         filter: controller.serviceManager.queryFilter
         onFilterChanged: controller.serviceManager.queryFilter = filter
-    }
+    }*/
     
     Item {
         id: searchResultsContainer
-        anchors.top: searchSwitch.bottom
+        anchors.top: searchField.bottom//searchSwitch.bottom
         anchors.bottom: parent.bottom//loadMoreButton.top
         anchors.topMargin: 10
         anchors.bottomMargin: 10
@@ -105,8 +111,15 @@ Rectangle {
                     }
                 }
             }
+
         }
 
+        layer.enabled: searchField.isExpanded
+        layer.effect: GaussianBlur {
+            radius: 8
+            samples: 32
+        }
+        
         SearchResults {
             id: playlistSearchResults
             anchors.left: trackSearchResults.right
@@ -144,11 +157,11 @@ Rectangle {
         }*/
     }
 
-    MouseArea {
+    /*MouseArea {
         enabled: searchField.isExpanded
         hoverEnabled: enabled
         width: parent.width + 100
         height: parent.height
         onClicked: searchField.isExpanded = false
-    }
+    }*/
 }

@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.3
 import QtQuick.Controls.Styles 1.2
+import QtGraphicalEffects 1.0
 
 Item {
     id: root
@@ -10,6 +11,10 @@ Item {
     property alias isExpanded: searchField.focus
 
     property alias model: completionList.model
+
+    property alias filter: filterSwitch.filter
+
+    signal filterClicked()
 
     QtObject {
         id: internal
@@ -47,22 +52,26 @@ Item {
         }
     }
 
-
-
     TextField {
         id: searchField
-        anchors.fill: parent
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: filterSwitch.left
+        anchors.rightMargin: 5
         font.pixelSize: 20
+        font.weight: Font.Light
         //placeholderText: "Search..."
         style: TextFieldStyle {
-            textColor: "black"
+            textColor: "white"
             background: Rectangle {
-                radius: 2
+                radius: 3
                 implicitWidth: 100
                 implicitHeight: 24
-                border.color: "#494949"
+                border.color: "black"
                 border.width: 1
-                color: "#dbdbdb"
+                color: "black"
+                opacity: 0.25
             }
         }
 
@@ -102,87 +111,127 @@ Item {
 
         Keys.onUpPressed: decrementCurrentIndex()
         Keys.onDownPressed: incrementCurrentIndex()
+        Keys.onEscapePressed: root.isExpanded = false
+
+    }
+
+    FilterSwitch {
+        id: filterSwitch
+        height: 32
+        width: height
+        anchors.right: parent.right
+    }
+    
+    Rectangle {
+        id: completionListContainer
+        //width: searchField.width
+        anchors.left: searchField.left
+        anchors.right: filterSwitch.right
+        height: searchField.focus ? (completionList.count * 25 > 400 ? 400 : completionList.count * 25) : 0
+        anchors.top: searchField.bottom
+        anchors.topMargin: 5
+        visible: height != 0
+        color: "transparent"
 
         Rectangle {
-            id: completionListContainer
-            width: searchField.width
-            height: searchField.focus ? (completionList.count * 25 > 400 ? 400 : completionList.count * 25) : 0
-            anchors.top: searchField.bottom
-            anchors.left: searchField.left
-            visible: height != 0
+            anchors.fill: parent
+            color: "black"
+            opacity: 0.1
+        }
 
-            ScrollView {
-                anchors.fill: parent
-                visible: parent.visible
-                style: ScrollViewStyle {
-                    handle: Item {
-                        visible: parent.visible
-                        implicitWidth: 14
-                        implicitHeight: 26
-                        Rectangle {
-                            color: "#494949"
-                            anchors.fill: parent
-                            anchors.leftMargin: 4
-                            anchors.rightMargin: 4
-                        }
-                    }
-                    scrollBarBackground: Item {
-                        implicitWidth: 14
-                        implicitHeight: 26
-                    }
-                    decrementControl: Item {}
-                    incrementControl: Item {}
+        layer.enabled: true
+        layer.effect: OpacityMask {
+            maskSource: Item {
+                width: pageList.width
+                height: pageList.height
+                Rectangle {
+                    anchors.centerIn: parent
+                    width: pageList.width
+                    height: pageList.height
+                    radius: 5//Math.min(width, height)
                 }
+            }
+        }
 
-                ListView {
-                    id: completionList
-                    anchors.fill: parent
-                    model: 4
-                    currentIndex: root.currentIndex
+        ScrollView {
+            anchors.fill: parent
+            visible: parent.visible
+            style: ScrollViewStyle {
+                handle: Item {
+                    visible: parent.visible
+                    implicitWidth: 14
+                    implicitHeight: 26
+                    Rectangle {
+                        color: "#494949"
+                        anchors.fill: parent
+                        anchors.leftMargin: 4
+                        anchors.rightMargin: 4
+                    }
+                }
+                scrollBarBackground: Item {
+                    implicitWidth: 14
+                    implicitHeight: 26
+                }
+                decrementControl: Item {}
+                incrementControl: Item {}
+            }
 
-                    delegate: Rectangle {
-                        property string text: object
+            ListView {
+                id: completionList
+                anchors.fill: parent
+                currentIndex: root.currentIndex
 
+                delegate: Rectangle {
+                    property string text: object
+
+                    anchors.left: parent.left
+                    height: 25
+                    width: parent.width
+                    //color: root.currentIndex == index ? "#d6d6d6" : "#dbdbdb"
+                    color: "transparent"
+
+                    Rectangle {
+                        anchors.fill: parent
+                        color: root.currentIndex == index ? "white" : "transparent"
+                        opacity: 0.25
+                    }
+
+                    Text {
+                        text: object
+                        width: parent.width - 5
+                        anchors.verticalCenter: parent.verticalCenter
+                        font.pixelSize: parent.height * 0.65
                         anchors.left: parent.left
-                        height: 25
-                        width: parent.width
-                        color: root.currentIndex == index ? "#d6d6d6" : "#dbdbdb"
+                        anchors.leftMargin: 5
+                        color: "white"
+                    }
 
-                        Text {
-                            text: object
-                            width: parent.width - 5
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.pixelSize: parent.height * 0.65
-                            anchors.left: parent.left
-                            anchors.leftMargin: 5
-                        }
-
-                        MouseArea {
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            onContainsMouseChanged: {
-                                if (containsMouse)
-                                {
-                                    internal.setCurrentIndex(index);
-                                }
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        onContainsMouseChanged: {
+                            if (containsMouse)
+                            {
+                                internal.setCurrentIndex(index);
                             }
-                            onClicked: internal.acceptText(searchField.text)
                         }
+                        onClicked: internal.acceptText(searchField.text)
                     }
                 }
             }
         }
     }
 
-
     Text {
         text: "Search..."
         anchors.verticalCenter: searchField.verticalCenter
         anchors.left: searchField.left
         font.pixelSize: 20
+        font.weight: Font.Light
         anchors.leftMargin: 8
-        color: Qt.darker("#dbdbdb")
+        color: "white"
         visible: searchField.text.length == 0
+        opacity: 0.25
     }
 
 }

@@ -6,35 +6,40 @@ Rectangle {
 
 	width: 350
 	height: 500
-	color: "blue"
+	color: "transparent"
+
+	Rectangle {
+		anchors.fill: parent
+		color: "white"
+		opacity: 0.1
+
+		Rectangle {
+    		anchors.fill: parent
+    		color: "transparent"
+    		border.width: 1
+    		border.color: "white"
+    	}
+	}
 
 	signal changePage(string page)
 	signal activatePage()
 
 	Search {
 		anchors.fill: parent
-		color: "#242424"
+		color: "transparent"//"#242424"
 		onLoadPlaylistClicked: {
 			console.log("loadplaylistclicked")
 			root.changePage("Playlist")
 		}
 	}
 
-	MouseArea {
+	Image {
 		width: 50
 		height: 50
 		anchors.left: parent.right
 		anchors.top: parent.top
-
-		Image {
-			width: 50
-			height: 50
-			anchors.centerIn: parent
-			source: "/images/diamond.png"
-			smooth: true
-			rotation: (percentage * 360) / 2 - 90
-		}
-
-		onClicked: root.activatePage()
+		source: "/images/diamond.png"
+		smooth: true
+		rotation: (percentage * 360) / 2 - 90
 	}
 }

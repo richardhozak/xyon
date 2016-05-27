@@ -26,7 +26,7 @@ Item {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
 
-        color: root.isSelected ? "#faba00" : (root.containsMouse ? "white" : "transparent")
+        color: root.isSelected ? "black" : (root.containsMouse ? "white" : "transparent")
         opacity: 0.25
     }
     
@@ -41,7 +41,7 @@ Item {
     	ColorImage {
     		source: "/images/play_small.png"
     		anchors.fill: parent
-    		color: "aliceblue"
+    		color: "white"
     	}
     }
 
@@ -55,7 +55,7 @@ Item {
     	text: entry.title
     	elide: Text.ElideRight
         font.pixelSize: 16
-        color: "aliceblue"
+        color: "white"
     }
 
     MouseArea {
@@ -78,12 +78,69 @@ Item {
     		id: time
     		anchors.verticalCenter: parent.verticalCenter
     		text: entry.time
-    		color: "aliceblue"
+    		color: "white"
     		font.pixelSize: 16
     	}
     }
 
-	SimpleButton {
+    Item {
+        id: butt
+        width: 25
+        height: 25
+        anchors.right: parent.right
+
+        property alias containsMouse: buttMouseArea.containsMouse
+
+        Rectangle {
+            anchors.fill: parent
+            color: buttMouseArea.pressed ? "black" : "white"
+            opacity: 0.25
+        }
+
+        Canvas {
+            anchors.centerIn: parent
+            width: parent.width / 2
+            height: parent.height / 2
+            onPaint: {
+                var ctx = getContext("2d")
+                ctx.strokeStyle = "white"
+                ctx.lineWidth = 1.5
+                ctx.beginPath()
+                ctx.moveTo(0,0)
+                ctx.lineTo(canvasSize.width, canvasSize.height)
+                ctx.moveTo(canvasSize.width, 0)
+                ctx.lineTo(0, canvasSize.height)
+                ctx.closePath()
+                ctx.stroke()
+            }
+        }
+
+        MouseArea {
+            id: buttMouseArea
+            anchors.fill: parent
+            hoverEnabled: true
+            onClicked: root.deleteClicked()
+        }
+
+        states: [
+            State {
+                when: root.containsMouse
+                name: "normal"
+                AnchorChanges { target: butt; anchors.right: parent.right; anchors.left: undefined }
+            },
+            State {
+                when: !root.containsMouse
+                name: "expanded"
+                AnchorChanges { target: butt; anchors.right: undefined; anchors.left: parent.right }
+            }
+        ]
+
+        transitions: Transition {
+            AnchorAnimation { duration: 50 }
+        }
+    }
+
+	/*SimpleButton {
 		id: butt
 		width: 25
 		height: 25
@@ -93,7 +150,7 @@ Item {
 		backgroundPressedOpacity: 0.25
 		backgroundMouseOverOpacity: 0.25
 		backgroundColor: "white"
-		backgroundPressedColor: "#faba00"
+		backgroundPressedColor: "black"
 
 		onClicked: root.deleteClicked()
 
@@ -113,5 +170,5 @@ Item {
 		transitions: Transition {
 			AnchorAnimation { duration: 50 }
 		}
-	}
+	}*/
 }

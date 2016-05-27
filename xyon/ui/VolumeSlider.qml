@@ -3,46 +3,73 @@ import QtGraphicalEffects 1.0
 import QtQuick.Controls 1.3
 import QtQuick.Controls.Styles 1.3
 
-Slider {
+Row {
     id: root
 
-    width: 120
-    height: 96
+    property alias value: volumeSlider.value
 
-    maximumValue: 100
-    minimumValue: 0
+    Slider {
+        id: volumeSlider
+        //anchors.right: parent.right
+        //anchors.rightMargin: 60
+        //anchors.bottom: parent.bottom
+        //anchors.bottomMargin: 10
+        height: 15
+        width: 100
+        //anchors.horizontalCenter: parent.horizontalCenter
+        clip: true
+        stepSize: 0.1 * 0.5
+        maximumValue: 100//controller.player.duration
+        minimumValue: 0
+        value: 20//controller.player.position
+        //enabled: root.enabled//true//controller.player.seekable
 
-    style: SliderStyle {
-        groove: Item {
-            implicitWidth: root.width
-            implicitHeight: root.height
-            Item {
-                id: background
-                width: root.width
-                height: root.height
-                opacity: 0
+        style: SliderStyle {
+            groove: Item {
+                implicitWidth: volumeSlider.width
+                implicitHeight: volumeSlider.height
+                Item {
+                    height: parent.height * 0.75
+                    width: parent.width
+                    anchors.bottom: parent.bottom
 
-                Rectangle {
-                    width: styleData.handlePosition
-                    height: parent.height
-                    color: "#faba00"
+                    Rectangle {
+                        height: parent.height
+                        color: "white"
+                        width: styleData.handlePosition
+                        opacity: 0.1
+                    }
+                    
+                    Rectangle {
+                        height: 1
+                        width: parent.width
+                        anchors.bottom: parent.bottom
+                        color: "white"
+                        opacity: 0.25
+                    }
                 }
             }
+            handle: Item {
+                implicitWidth: 1
+                height: control.height - 1
 
-            Image {
-                id: mask
-                source: "/images/volume.png"
-                width: root.width
-                height: root.height
-                opacity: 0
-            }
-            
-            OpacityMask {
-                anchors.fill: background
-                source: background
-                maskSource: mask
+                Rectangle {
+                    anchors.fill: parent
+                    color: "white"
+                    opacity: 0.25
+                }
             }
         }
-        handle: Item {}
     }
+
+    Text {
+        id: text
+        width: 45
+        text: Math.floor(volumeSlider.value) + " %"
+        color: "white"
+        opacity: 0.5
+        font.weight: Font.Light
+        font.pixelSize: 15
+        horizontalAlignment: Text.AlignRight
+    }   
 }

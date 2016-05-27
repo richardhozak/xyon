@@ -1,7 +1,8 @@
 import QtQuick 2.4
 
 Item {
-
+	id: root
+	
 	property alias text: buttonText.text
 	signal clicked()
 
@@ -29,10 +30,13 @@ Item {
 	property real backgroundMouseOverOpacity: 1
 	property real backgroundPressedOpacity: 1
 
+	property int radius: 0
+
 	Rectangle {
 		anchors.fill: parent
 		color: currentBackgroundColor
 		opacity: currentBackgroundOpacity
+		radius: root.radius
 	}
 
 	Text {

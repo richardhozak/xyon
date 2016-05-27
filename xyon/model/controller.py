@@ -5,7 +5,7 @@ import model.player
 import model.servicemanager
 import model.downloadmanager
 import model.downloadentry
-import model.remote
+#import model.remote
 
 import json
 import urllib.parse
@@ -50,6 +50,7 @@ class Controller(QObject):
 
         self._serviceManager = model.servicemanager.ServiceManager(self)
         self._player = model.player.Player(self._serviceManager, self)
+        self._player.setVolume(20)
 
         self._network_manager = QNetworkAccessManager(self)
         self._network_manager.finished.connect(self.reply_finished)
@@ -61,8 +62,8 @@ class Controller(QObject):
         self.downloader = model.downloadmanager.DownloadManager("tracks")
         self.downloader.start()
 
-        self.remote = model.remote.Remote(self.remote_callback)
-        self.remote.start()
+        #self.remote = model.remote.Remote(self.remote_callback)
+        #self.remote.start()
 
     def remote_callback(self, command):
         print("Received command:", command)
@@ -81,6 +82,7 @@ class Controller(QObject):
     # pyqtSignals
     xPositionChanged = pyqtSignal()
     yPositionChanged = pyqtSignal()
+    minimizeRequested = pyqtSignal()
 
     @pyqtSlot()
     def tstarted(self):
@@ -168,9 +170,16 @@ class Controller(QObject):
         print("Loading playlist")
 
         file_name = QFileDialog.getOpenFileName(QWidget(), "Open playlist", "", "Xyon Playlist (*.xyp)")[0]
-        print(file_name)
+        
+        playlist_file = None
+        
+        try: 
+            playlist_file = open(file_name, "rb")
+        except FileNotFoundError:
+            print("File not found")
+            return
 
-        playlist_file = open(file_name, "rb")
+        print(file_name)
         data = pickle.load(playlist_file)
         playlist_file.close()
 
@@ -231,3 +240,10 @@ class Controller(QObject):
             print("got hwnd")
             windll.dwmapi.DwmExtendFrameIntoClientArea(c_int(hwnd), byref(c_int(-1)))
 
+    @pyqtSlot(name="closeApplication")
+    def close_application(self):
+        os._exit(0)
+
+    @pyqtSlot(name="minimizeApplication")
+    def minimize_application(self):
+        self.minimizeRequested.emit()

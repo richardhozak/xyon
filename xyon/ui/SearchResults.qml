@@ -43,31 +43,37 @@ Item {
 
         style: ScrollViewStyle {
             handle: Item {
-                implicitWidth: 14
+                implicitWidth: 9
                 implicitHeight: 26
                 Rectangle {
-                    color: "#494949"
+                    color: "white"
                     anchors.fill: parent
-                    anchors.leftMargin: 4
-                    anchors.rightMargin: 4
+                    //anchors.leftMargin: 8
+                    //anchors.rightMargin: 0
+                    opacity: 0.25
                 }
             }
             scrollBarBackground: Item {
-                implicitWidth: 14
+                implicitWidth: 9
                 implicitHeight: 26
+                //color: "red"
             }
             decrementControl: Item{}
             incrementControl: Item{}
+            transientScrollBars: true
         }
 
         ListView {
             id: resultsList
             anchors.fill: parent
+            spacing: 5
             delegate: Entry {
                 anchors.left: parent.left
                 anchors.leftMargin: 10
                 height: 50
-                width: parent.width - 20
+                //width: parent.width - 14
+                anchors.right: parent.right
+                anchors.rightMargin: 10
                 entry: object
                 onClicked: root.entryClicked(object)
             }

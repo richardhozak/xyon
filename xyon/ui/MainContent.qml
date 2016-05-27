@@ -45,50 +45,111 @@ Item {
         opacity: 0.95
     }*/
 
-    Item {
+    Row {
+        height: 20
+        anchors.right: parent.right
+        anchors.rightMargin: 5
+        anchors.top: parent.top
+        anchors.topMargin: 1
+        
+        Item {
+            width: 30
+            height: 20
+            
+            Rectangle {
+                anchors.fill: parent
+                color: minimizeMouseArea.containsMouse && !minimizeMouseArea.pressed ? "white" : "black"
+                opacity: 0.25
+            }
 
+            Rectangle {
+                anchors.centerIn: parent
+                anchors.verticalCenterOffset: 3
+                width: parent.width * 0.4
+                height: 1.5
+                color: "white"
+            }
+
+            MouseArea {
+                id: minimizeMouseArea
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: root.minimizeClicked()
+            }
+        }
+
+        Rectangle {
+            width: 45
+            height: 20
+            color: closeMouseArea.containsMouse && !closeMouseArea.pressed ? Qt.lighter("#C85051") : "#C85051"
+
+            Canvas {
+                anchors.centerIn: parent
+                height: parent.height / 2.5
+                width: height
+                onPaint: {
+                    var ctx = getContext("2d")
+                    ctx.strokeStyle = "white"
+                    ctx.lineWidth = 1
+                    ctx.beginPath()
+                    ctx.moveTo(0,0)
+                    ctx.lineTo(canvasSize.width, canvasSize.height)
+                    ctx.moveTo(canvasSize.width, 0)
+                    ctx.lineTo(0, canvasSize.height)
+                    ctx.closePath()
+                    ctx.stroke()
+                }
+            }
+
+            MouseArea {
+                id: closeMouseArea
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: root.closeClicked()
+            }
+        }
+    }
+
+
+    Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        height: parent.height - 50 - 30
-
+        height: parent.height - 50
 
         ScrollView {
             id: playlist
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.leftMargin: 10
-            anchors.rightMargin: 10 - 1 // some weird 1px bug
             height: parent.height / 2
 
             style: ScrollViewStyle {
-                handleOverlap: 0
-                handle: Rectangle {
-                    implicitWidth: 8
-                    implicitHeight: 20
-                    anchors.left: parent.left
-                    anchors.leftMargin: 1
-                    color: "#faba00"
+                handle: Item {
+                    implicitWidth: 9
+                    implicitHeight: 26
+                    Rectangle {
+                        color: "white"
+                        anchors.fill: parent
+                        //anchors.leftMargin: 8
+                        //anchors.rightMargin: 0
+                        opacity: 0.25
+                    }
                 }
-                scrollBarBackground: Rectangle {
-                    color: "white"
-                    implicitWidth: 10
-                    implicitHeight: 20
-                    opacity: 0.25
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    anchors.topMargin: -1
-                    anchors.bottomMargin: -1
+                scrollBarBackground: Item {
+                    implicitWidth: 9
+                    implicitHeight: 26
+                    //color: "red"
                 }
-                decrementControl: Rectangle { width: 0; height: 0 }
-                incrementControl: Rectangle { width: 0; height: 0 }
+                decrementControl: Item{}
+                incrementControl: Item{}
+                transientScrollBars: true
             }
 
             Keys.onLeftPressed: console.log("pressed")
 
             ListView {
                 anchors.fill: parent
-                anchors.rightMargin: 10 + 1 // some weird 1px bug
+                //anchors.rightMargin: 5 + 1 // some weird 1px bug
 
                 currentIndex: controller.player.playlist.currentIndex
                 highlightFollowsCurrentItem: true
@@ -97,6 +158,8 @@ Item {
                 delegate: PlaylistEntry {
                     anchors.left: parent.left
                     anchors.right: parent.right
+                    anchors.leftMargin: 10
+                    anchors.rightMargin: 10
                     entry: track
                     trackIndex: index
                     onClicked: {
@@ -128,7 +191,8 @@ Item {
                 
                 text: controller.player.playlist.currentIndex != -1 ? controller.player.playlist.get(controller.player.playlist.currentIndex).title : ""
                 font.pixelSize: 20
-                color: "aliceblue"
+                color: "white"
+                opacity: 0.5
             }
 
             Slider {
@@ -152,23 +216,44 @@ Item {
                 }
 
                 style: SliderStyle {
-                    groove: Rectangle {
+                    groove: Item {
                         implicitWidth: progressBar.width
                         implicitHeight: progressBar.height
-                        border.width: 2
-                        border.color: "#faba00"
-                        color: "transparent"
-                        radius: 3
-                        clip: true
+                        Item {
+                            height: parent.height * 0.75
+                            width: parent.width
+                            anchors.bottom: parent.bottom
 
-                        Rectangle {
-                            height: parent.height
-                            color: "#faba00"
-                            width: styleData.handlePosition
-                            radius: parent.radius
+                            Rectangle {
+                                height: parent.height
+                                color: "white"
+                                width: styleData.handlePosition
+                                //radius: parent.radius
+                                opacity: 0.1
+                            }
+                            
+                            Rectangle {
+                                height: 1
+                                width: parent.width
+                                anchors.bottom: parent.bottom
+                                color: "white"
+                                opacity: 0.25
+                            }
                         }
                     }
-                    handle: Item {}
+                    handle: Item {
+                        implicitWidth: 1
+                        //implicitHeight: parent.height
+                        height: control.height - 1
+                        
+
+
+                        Rectangle {
+                            anchors.fill: parent
+                            color: "white"
+                            opacity: 0.25
+                        }
+                    }
                 }
             }
 
@@ -178,9 +263,11 @@ Item {
                 anchors.top: progressBar.bottom
                 anchors.leftMargin: 5
                 anchors.topMargin: 5
-                color: "#faba00"
+                color: "white"
                 text: "0:00"
                 font.pixelSize: 20
+                font.weight: Font.Light
+                opacity: 0.5
             }
 
             Text {
@@ -189,9 +276,11 @@ Item {
                 anchors.top: progressBar.bottom
                 anchors.rightMargin: 5
                 anchors.topMargin: 5
-                color: "#faba00"
+                color: "white"
                 text: "4:20"
                 font.pixelSize: 20
+                font.weight: Font.Light
+                opacity: 0.5
             }
 
             Item {
@@ -199,13 +288,12 @@ Item {
                 anchors.top: progressBar.bottom
                 anchors.bottom: parent.bottom
 
-                ControlButton {
+                PlayButton {
                     id: playButton
                     height: 75
                     width: 75
                     anchors.centerIn: parent
-                    source: controller.player.state == MediaPlayer.PlayingState ? "/images/pause.png" : "/images/play.png"
-                    sourcePressed: controller.player.state == MediaPlayer.PlayingState ? "/images/pause_selected.png" : "/images/play_selected.png"
+                    playing: controller.player.state == MediaPlayer.PlayingState
                     onClicked: {
                         if (controller.player.state == MediaPlayer.PlayingState)
                         {
@@ -234,7 +322,7 @@ Item {
                     }
                 }*/
 
-                ControlButton {
+                /*ControlButton {
                     height: 40
                     width: 40
                     anchors.right: playButton.left
@@ -244,9 +332,20 @@ Item {
                     sourcePressed: "/images/previous_selected.png"
                     enabled: controller.player.playlist.currentIndex > 0
                     onClicked: controller.player.previous()
+                }*/
+
+                NextPreviousButton {
+                    height: 50
+                    width: 50
+                    anchors.right: playButton.left
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.rightMargin: 15
+                    enabled: controller.player.playlist.currentIndex > 0
+                    previous: true
+                    onClicked: controller.player.previous()
                 }
 
-                ControlButton {
+                /*ControlButton {
                     height: 40
                     width: 40
                     anchors.left: playButton.right
@@ -255,6 +354,17 @@ Item {
                     source: "/images/next.png"
                     sourcePressed: "/images/next_selected.png"
                     enabled: controller.player.playlist.currentIndex !== -1 && controller.player.playlist.currentIndex < controller.player.playlist.count - 1
+                    onClicked: controller.player.next()
+                }*/
+
+                NextPreviousButton {
+                    height: 50
+                    width: 50
+                    anchors.left: playButton.right
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.leftMargin: 15
+                    enabled: controller.player.playlist.currentIndex !== -1 && controller.player.playlist.currentIndex < controller.player.playlist.count - 1
+                    previous: false
                     onClicked: controller.player.next()
                 }
 
@@ -268,6 +378,7 @@ Item {
                     onCurrentIndexChanged: console.log("index", controller.player.playlist.currentIndex)
                 }
 
+                /*
                 VolumeSlider {
                     height: 60
                     width: 75 + 10
@@ -288,7 +399,34 @@ Item {
                         font.pixelSize: parent.height * 0.25
                     }
                 }
+                */
 
+                VolumeSlider {
+                    anchors.right: parent.right
+                    anchors.rightMargin: 10
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 10
+                    value: controller.player.volume
+                    onValueChanged: controller.player.volume = value
+                }
+                
+                /*Text {
+                    anchors.left: volumeSlider.right
+                    anchors.rightMargin: 10
+                    anchors.verticalCenter: volumeSlider.verticalCenter
+                    text: Math.floor(volumeSlider.value) + " %"
+                    color: "white"
+                    opacity: 0.5
+                    font.weight: Font.Light
+                    font.pixelSize: 15
+                }*/
+
+                /*VolumeIcon {
+                    width: 50
+                    height: 50
+                    anchors.bottom: volumeSlider.top
+                    anchors.right: volumeSlider.right
+                }*/
 
                 /*SimpleButton {
                     anchors.left: parent.left

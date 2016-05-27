@@ -5,14 +5,18 @@
         <file>Entry.qml</file>
         <file>EntryPlaylist.qml</file>
         <file>Extensions.js</file>
+        <file>FilterSwitch.qml</file>
         <file>main.qml</file>
         <file>MainContent.qml</file>
         <file>MarqueeText.qml</file>
+        <file>NextPreviousButton.qml</file>
         <file>PageList.qml</file>
+        <file>PageListOld.qml</file>
         <file>PagePlayer.qml</file>
         <file>PagePlaylist.qml</file>
         <file>PageSearch.qml</file>
         <file>PageSettings.qml</file>
+        <file>PlayButton.qml</file>
         <file>PlaylistEntry.qml</file>
         <file>RoundButton.qml</file>
         <file>Search.qml</file>
@@ -20,7 +24,11 @@
         <file>SearchSwitch.qml</file>
         <file>ServiceSwitch.qml</file>
         <file>SimpleButton.qml</file>
+        <file>SimpleGlassButton.qml</file>
         <file>SuggestionBox.qml</file>
+        <file>VolumeIcon.qml</file>
+        <file>VolumeIconNew.qml</file>
         <file>VolumeSlider.qml</file>
+        <file>VolumeSliderOld.qml</file>
     </qresource>
 </RCC>
